@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "composite": true,
+    "incremental": true,
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true
+  }
+}

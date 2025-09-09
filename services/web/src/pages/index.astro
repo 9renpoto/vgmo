@@ -1,0 +1,32 @@
+---
+import { Breadcrumbs } from "@app/ui/src/Breadcrumbs";
+import Card from "@app/ui/src/Card";
+import type { CardProps } from "@app/ui/src/Card";
+import MainLayout from "../layouts/MainLayout.astro";
+import { faker } from "@faker-js/faker";
+
+const post: CardProps = {
+  title: "Example Post",
+  authorName: "Jules",
+  authorImage: faker.image.avatar(),
+  date: "Sep 6",
+  tags: ["example", "card"],
+  coverImage: faker.image.urlLoremFlickr({ category: 'nature' }),
+  reactions: 1,
+  comments: 0,
+  readingTime: 1,
+};
+---
+
+<MainLayout title="Home">
+  <div class="space-y-4">
+    <Breadcrumbs
+      breadcrumbs={[
+        { label: "Home", href: "#" },
+        { label: "Posts", href: "#" },
+        { label: "Example Post" },
+      ]}
+    />
+    <Card {...post} />
+  </div>
+</MainLayout>

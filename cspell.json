@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "useGitignore": true,
+  "dictionaries": [
+    "css",
+    "filetypes",
+    "fonts",
+    "html",
+    "node",
+    "npm",
+    "rust",
+    "typescript"
+  ],
+  "words": ["autodocs", "Autoprefix", "lucide", "preact", "renpoto", "twind"]
+}

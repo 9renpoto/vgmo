@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    labels:
+      - "Type: Maintenance"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: npm
+    directory: "/"
+    labels:
+      - "Type: Maintenance"
+    schedule:
+      interval: "weekly"
+    groups:
+      preact:
+        patterns:
+          - "@preact*"
+          - "preact"
+      9renpoto:
+        patterns:
+          - "@9renpoto*"
+      storybook:
+        patterns:
+          - "@storybook*"
+          - "storybook"
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
