@@ -1,11 +1,11 @@
 {
-  "name": "@app/app",
   "private": true,
-  "author": "github.com/9renpoto",
+  "author": "9renpoto",
   "scripts": {
     "storybook": "npm run storybook -w @app/ui",
     "build-storybook": " npm run build-storybook -w @app/ui",
-    "test": "npm run test --workspaces"
+    "build": "npm run build --workspaces",
+    "test": "npm test --workspaces"
   },
   "workspaces": {
     "packages": [
