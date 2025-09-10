@@ -1,0 +1,9 @@
+{
+  "name": "@vgmo/crawler",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "9renpoto"
+}
