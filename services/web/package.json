@@ -1,5 +1,5 @@
 {
-  "name": "@app/web",
+  "name": "@vgmo/web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@app/ui": "0.0.1",
+    "@vgmo/ui": "0.0.1",
     "@astrojs/preact": "^4.1.0",
     "@digi4care/astro-google-analytics": "1.1.1",
     "@faker-js/faker": "^10.0.0",
