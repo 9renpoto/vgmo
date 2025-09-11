@@ -2,8 +2,12 @@
   "name": "@vgmo/crawler",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
-    "test": "node --test"
+    "build": "rm -rf lib && tsc",
+    "pretest": "npm run build",
+    "test": "node --test lib/**/*.test.js",
+    "coverage": "c8 npm test && c8 report --reporter=lcov"
   },
   "author": "9renpoto"
 }
