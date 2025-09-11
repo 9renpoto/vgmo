@@ -30,9 +30,10 @@ export const fetchFeed = (url: string): Promise<Item[]> => {
       reject(err instanceof Error ? err : new Error(err)),
     );
     feedparser.on("readable", function () {
-      let item: Item | null;
-      while ((item = this.read()) !== null) {
+      let item: Item | null = this.read();
+      while (item !== null) {
         items.push(item);
+        item = this.read();
       }
     });
     feedparser.on("end", () => {
