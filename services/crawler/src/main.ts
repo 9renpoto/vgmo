@@ -1,5 +1,5 @@
-import FeedParser, { Item } from "feedparser";
 import { Readable } from "node:stream";
+import FeedParser, { type Item } from "feedparser";
 
 /**
  * Fetches and parses an RSS feed from a given URL.
@@ -26,10 +26,12 @@ export const fetchFeed = (url: string): Promise<Item[]> => {
       })
       .catch((err) => reject(err instanceof Error ? err : new Error(err)));
 
-    feedparser.on("error", (err) => reject(err instanceof Error ? err : new Error(err)));
+    feedparser.on("error", (err) =>
+      reject(err instanceof Error ? err : new Error(err)),
+    );
     feedparser.on("readable", function () {
-      let item;
-      while ((item = this.read())) {
+      let item: Item | null;
+      while ((item = this.read()) !== null) {
         items.push(item);
       }
     });

@@ -12,5 +12,36 @@
     "rust",
     "typescript"
   ],
-  "words": ["autodocs", "Autoprefix", "lucide", "preact", "renpoto", "twind"]
+  "words": [
+    "actionlint",
+    "Aslam",
+    "autodocs",
+    "Autoprefix",
+    "chromaui",
+    "cspell",
+    "ededed",
+    "fbca",
+    "feedparser",
+    "Flickr",
+    "gibo",
+    "hadolint",
+    "jscoverage",
+    "lucide",
+    "MSVC",
+    "octocat",
+    "pids",
+    "preact",
+    "preactjs",
+    "renpoto",
+    "reviewdog",
+    "rustc",
+    "secretlint",
+    "stylelintcache",
+    "turbosnap",
+    "twind",
+    "vgmo",
+    "webdev",
+    "webperf",
+    "wscript"
+  ]
 }
