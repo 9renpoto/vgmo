@@ -2,8 +2,12 @@
   "name": "@vgmo/crawler",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "node --test"
   },
-  "author": "9renpoto"
+  "author": "9renpoto",
+  "dependencies": {
+    "feedparser": "^2.2.10"
+  }
 }
