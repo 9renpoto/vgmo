@@ -31,17 +31,9 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     {gaId && <GoogleAnalyticsNoscript id={gaId} />}
     <Header active="Home" />
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
-        <aside class="lg:col-span-3 py-6">
-          <div class="space-y-4">
-            <h2 class="text-lg font-bold">Sidebar</h2>
-            <p>This is the sidebar content.</p>
-          </div>
-        </aside>
-        <main class="lg:col-span-9 py-6">
-          <slot />
-        </main>
-      </div>
+      <main class="py-6">
+        <slot />
+      </main>
     </div>
   </body>
 </html>

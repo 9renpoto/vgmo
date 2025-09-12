@@ -7,4 +7,8 @@ const meta: Meta<typeof Header> = {
 
 export default meta;
 
-export const Basic: StoryObj<typeof Header> = {};
+export const Basic: StoryObj<typeof Header> = {
+  args: {
+    active: "Home",
+  },
+};

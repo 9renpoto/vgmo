@@ -1,4 +1,4 @@
-import { Citrus, Menu, X } from "lucide-preact";
+import { Menu, Music, X } from "lucide-preact";
 import { useState } from "preact/hooks";
 
 type Props = {
@@ -13,8 +13,8 @@ export default function Header({ active }: Props) {
     <header class="bg-white w-full py-4 px-6 md:px-8 flex flex-col md:flex-row gap-4 shadow-md sticky top-0 z-50">
       <div class="flex items-center justify-between flex-1">
         <a href="/" class="flex items-center">
-          <Citrus aria-hidden="true" />
-          <div class="text-2xl ml-1 font-bold">Sample</div>
+          <Music aria-hidden="true" />
+          <div class="text-2xl ml-1 font-bold">vgmo</div>
         </a>
         <div class="md:hidden">
           <button
@@ -41,14 +41,6 @@ export default function Header({ active }: Props) {
             </li>
           ))}
         </ul>
-        <div class="flex items-center mt-4 md:mt-0">
-          <a
-            href="/login"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto"
-          >
-            Log in
-          </a>
-        </div>
       </nav>
     </header>
   );
