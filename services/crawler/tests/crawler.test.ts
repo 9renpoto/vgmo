@@ -1,12 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import type { ConcertInfo } from "@vgmo/types";
 import * as cheerio from "cheerio";
 import type { Item } from "feedparser";
-import {
-  type ConcertInfo,
-  extractConcertInfo,
-  fetchFeed,
-} from "../src/main.ts";
+import { extractConcertInfo, fetchFeed } from "../src/main.ts";
 
 test("fetchFeed fetches and parses the RSS feed", async () => {
   const items = await fetchFeed("https://www.2083.jp/rss.xml");

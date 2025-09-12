@@ -2,20 +2,23 @@
 import { Breadcrumbs } from "@vgmo/ui/src/Breadcrumbs";
 import Card from "@vgmo/ui/src/Card";
 import type { CardProps } from "@vgmo/ui/src/Card";
+import type { ConcertWithMeta } from "../utils/concerts";
+import { listConcerts } from "../utils/concerts";
 import MainLayout from "../layouts/MainLayout.astro";
-import { faker } from "@faker-js/faker";
 
-const post: CardProps = {
-  title: "Example Post",
-  authorName: "Jules",
-  authorImage: faker.image.avatar(),
-  date: "Sep 6",
-  tags: ["example", "card"],
-  coverImage: faker.image.urlLoremFlickr({ category: 'nature' }),
-  reactions: 1,
+const toCard = (c: ConcertWithMeta): CardProps => ({
+  title: c.title,
+  authorName: c.venue,
+  authorImage: "https://placehold.co/64x64",
+  date: c.date,
+  tags: ["concert"],
+  coverImage: c.image,
+  reactions: 0,
   comments: 0,
   readingTime: 1,
-};
+});
+
+const concerts = await listConcerts();
 ---
 
 <MainLayout title="Home">
@@ -23,10 +26,24 @@ const post: CardProps = {
     <Breadcrumbs
       breadcrumbs={[
         { label: "Home", href: "#" },
-        { label: "Posts", href: "#" },
-        { label: "Example Post" },
+        { label: "演奏情報" },
       ]}
     />
-    <Card {...post} />
+    {concerts.map((c) => (
+      <div>
+        <Card {...toCard(c)} />
+        <div class="mt-2 text-xs text-gray-500">
+          <a class="underline text-blue-600" href={`/concert/${c.slug}`}>詳細を見る</a>
+          <br />
+          ソース: <a href={c.sourceUrl} target="_blank" rel="noreferrer">{c.sourceUrl}</a>
+          {c.ticketUrl && (
+            <>
+              {" | チケット: "}
+              <a href={c.ticketUrl} target="_blank" rel="noreferrer">{c.ticketUrl}</a>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
   </div>
 </MainLayout>

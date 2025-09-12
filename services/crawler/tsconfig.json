@@ -3,8 +3,9 @@
   "compilerOptions": {
     "module": "nodenext",
     "rootDir": "./",
-    "outDir": "./lib"
+    "outDir": "./lib",
+    "allowImportingTsExtensions": false
   },
-  "include": ["src", "tests"],
+  "include": ["src"],
   "references": []
 }

@@ -9,6 +9,7 @@
   },
   "author": "9renpoto",
   "dependencies": {
+    "@vgmo/types": "0.0.1",
     "cheerio": "^1.0.0-rc.12",
     "feedparser": "^2.2.10"
   },

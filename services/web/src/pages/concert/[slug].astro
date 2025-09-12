@@ -1,0 +1,69 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { Breadcrumbs } from "@vgmo/ui/src/Breadcrumbs";
+import Card from "@vgmo/ui/src/Card";
+import type { CardProps } from "@vgmo/ui/src/Card";
+import type { ConcertWithMeta } from "../../utils/concerts";
+export { getStaticPaths } from "../../utils/paths";
+
+interface Props { concert: ConcertWithMeta }
+const { concert } = Astro.props as Props;
+
+const toCard = (c: ConcertWithMeta): CardProps => ({
+  title: c.title,
+  authorName: c.venue,
+  authorImage: "https://placehold.co/64x64",
+  date: c.date,
+  tags: ["concert"],
+  coverImage: c.image,
+  reactions: 0,
+  comments: 0,
+  readingTime: 1,
+});
+
+const site = import.meta.env.PUBLIC_SITE_URL ?? Astro.site?.origin ?? "";
+const url = `${site}/concert/${concert.slug}`;
+const description = `${concert.date} @ ${concert.venue}`;
+---
+
+<MainLayout title={concert.title}>
+  <Fragment slot="head">
+    <meta property="og:title" content={concert.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={concert.image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={concert.title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={concert.image} />
+  </Fragment>
+
+  <div class="space-y-4">
+    <Breadcrumbs
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "演奏情報", href: "/" },
+        { label: concert.title },
+      ]}
+    />
+    <Card {...toCard(concert)} />
+    <div class="mt-2 text-sm text-gray-700">
+      <p>
+        日時: <strong>{concert.date}</strong>
+      </p>
+      <p>
+        会場: <strong>{concert.venue}</strong>
+      </p>
+      <p class="text-xs text-gray-500">
+        ソース: <a class="underline" href={concert.sourceUrl} target="_blank" rel="noreferrer">{concert.sourceUrl}</a>
+        {concert.ticketUrl && (
+          <>
+            {" | チケット: "}
+            <a class="underline" href={concert.ticketUrl} target="_blank" rel="noreferrer">{concert.ticketUrl}</a>
+          </>
+        )}
+      </p>
+    </div>
+  </div>
+</MainLayout>
