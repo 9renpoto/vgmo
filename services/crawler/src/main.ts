@@ -1,15 +1,7 @@
 import { Readable } from "node:stream";
+import type { ConcertInfo } from "@vgmo/types";
 import * as cheerio from "cheerio";
 import FeedParser, { type Item } from "feedparser";
-
-// Define the structure for our extracted concert information
-export interface ConcertInfo {
-  title: string;
-  date: string;
-  venue: string;
-  ticketUrl: string | null;
-  sourceUrl: string;
-}
 
 /**
  * Extracts concert information from a feed item's description HTML.
@@ -40,7 +32,7 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
   // The date is often in a `<b>` tag. Let's look for it.
   // Example format: 2025年9月13日(土)
   const dateRegex = /(\d{4}年\d{1,2}月\d{1,2}日\([月火水木金土日]\))/;
-  const textContent = $.text();
+  const textContent = $.root().text();
   const dateMatch = textContent.match(dateRegex);
   const date = dateMatch ? dateMatch[0] : "Date not found";
 
