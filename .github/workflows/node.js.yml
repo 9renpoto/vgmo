@@ -44,6 +44,8 @@ jobs:
       #     exclude: "{**/*.map,**/node_modules/**}"
 
       - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   quality:
     runs-on: ubuntu-22.04
