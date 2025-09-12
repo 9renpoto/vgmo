@@ -12,12 +12,12 @@ test("getStaticPaths exports slugs and props", async () => {
   assert.equal(paths.length, concerts.length, "paths length matches concerts");
   const expectedSlugs = new Set(concerts.map((c) => c.slug));
   for (const p of paths) {
-    assert.ok(p && p.params && p.params.slug, "path should have params.slug");
+    assert.ok(p?.params?.slug, "path should have params.slug");
     assert.ok(
       expectedSlugs.has(p.params.slug),
       "slug should exist in concerts",
     );
-    assert.ok(p.props && p.props.concert, "props.concert should be present");
+    assert.ok(p.props?.concert, "props.concert should be present");
     assert.equal(
       p.params.slug,
       p.props.concert.slug,

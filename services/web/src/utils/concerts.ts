@@ -30,7 +30,7 @@ export async function loadConcertsFromFile(
     const text = await readFile(url, "utf-8");
     const raw = JSON.parse(text) as ConcertInfo[];
     return raw.map(toMeta);
-  } catch (e) {
+  } catch (_e) {
     return [];
   }
 }

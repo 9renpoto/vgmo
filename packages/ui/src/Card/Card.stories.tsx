@@ -25,7 +25,8 @@ const defaultArgs: CardProps = {
   date: "2024年3月15日(金)",
   time: "19:00開演",
   location: "東京国際フォーラム ホールA",
-  description: "ファイナルファンタジーシリーズの名曲を東京フィルハーモニー交響楽団が演奏",
+  description:
+    "ファイナルファンタジーシリーズの名曲を東京フィルハーモニー交響楽団が演奏",
   tags: ["ファイナルファンタジー", "オーケストラ", "東京"],
   buttonText: "詳細・チケット情報",
   buttonUrl: "#",
