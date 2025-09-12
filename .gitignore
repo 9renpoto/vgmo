@@ -136,6 +136,10 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Custom rules
+services/crawler/src/*.mjs
+services/crawler/lib
+
 
 ### https://raw.github.com/github/gitignore/4488915eec0b3a45b5c63ead28f286819c0917de/Rust.gitignore
 
