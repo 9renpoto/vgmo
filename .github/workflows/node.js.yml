@@ -40,6 +40,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./services/web/coverage/lcov.info,./packages/ui/coverage/coverage-storybook.json
 
   quality:
     runs-on: ubuntu-22.04
