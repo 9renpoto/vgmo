@@ -3,14 +3,11 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import { Breadcrumbs } from "@vgmo/ui/src/Breadcrumbs";
 import Card from "@vgmo/ui/src/Card";
 import type { CardProps } from "@vgmo/ui/src/Card";
-import { getConcertBySlug, type ConcertWithMeta } from "../../utils/concerts";
+import type { ConcertWithMeta } from "../../utils/concerts";
+export { getStaticPaths } from "../../utils/paths";
 
-const { slug } = Astro.params;
-const concert = slug ? await getConcertBySlug(slug) : undefined;
-
-if (!concert) {
-  throw new Error("Concert not found");
-}
+interface Props { concert: ConcertWithMeta }
+const { concert } = Astro.props as Props;
 
 const toCard = (c: ConcertWithMeta): CardProps => ({
   title: c.title,
