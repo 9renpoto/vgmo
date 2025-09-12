@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "c8 --reporter=lcov node --test",
+    "test": "c8 --reporter=lcov node --test --experimental-strip-types",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check"
   },
   "dependencies": {
+    "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
     "@astrojs/preact": "^4.1.0",
     "@digi4care/astro-google-analytics": "1.1.1",
