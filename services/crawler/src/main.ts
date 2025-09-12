@@ -62,7 +62,7 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
     "livepocket.jp",
     "shop.gamecity.ne.jp",
   ];
-  $("a").each((i, el) => {
+  $("a").each((_i, el) => {
     const href = $(el).attr("href");
     if (href && ticketVendors.some((vendor) => href.includes(vendor))) {
       ticketUrl = href;

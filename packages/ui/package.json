@@ -5,10 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --build .",
-    "test": "test-storybook --coverage",
+    "test": "test-storybook",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "posttest": "cp coverage/storybook/coverage-storybook.json coverage/coverage-storybook.json && nyc report --reporter=lcov -t coverage --report-dir coverage"
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@storybook/addon-coverage": "^2.0.0",

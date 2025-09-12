@@ -31,7 +31,7 @@ test("detail page URL format for each concert", async () => {
 
   const slugs = new Set<string>();
   for (const c of concerts) {
-    assert.ok(c && c.title && c.date, "concert must have title and date");
+    assert.ok(c?.title && c.date, "concert must have title and date");
     const slug = slugify(`${c.date}-${c.title}`);
     assert.ok(slug.length > 0, "slug should not be empty");
     assert.equal(`/concert/${slug}`.startsWith("/concert/"), true);

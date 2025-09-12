@@ -8,7 +8,7 @@ test("astro.config includes preact integration", () => {
     "integrations should be an array",
   );
   const hasPreact = config.integrations.some(
-    (i: any) => i && i.name === "@astrojs/preact",
+    (i: { name?: string } | null | undefined) => i?.name === "@astrojs/preact",
   );
   assert.equal(hasPreact, true, "preact integration should be present");
 });
