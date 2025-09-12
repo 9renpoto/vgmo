@@ -1,6 +1,6 @@
 import { Readable } from "node:stream";
-import FeedParser, { type Item } from "feedparser";
 import * as cheerio from "cheerio";
+import FeedParser, { type Item } from "feedparser";
 
 // Define the structure for our extracted concert information
 export interface ConcertInfo {
@@ -46,7 +46,7 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
 
   // The venue is often in a link after a `<b>会場</b>` or `<b>場所</b>` tag.
   let venue = "Venue not found";
-  $("b").each((i, el) => {
+  $("b").each((_i, el) => {
     const b = $(el);
     const bText = b.text().trim();
     if (bText.includes("会場") || bText.includes("場所")) {
@@ -61,10 +61,18 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
 
   // The ticket URL is in an `<a>` tag linking to a ticket vendor.
   let ticketUrl: string | null = null;
-  const ticketVendors = ["eplus.jp", "t.pia.jp", "l-tike.com", "rakuten-ticket.jp", "cnplayguide.com", "livepocket.jp", "shop.gamecity.ne.jp"];
+  const ticketVendors = [
+    "eplus.jp",
+    "t.pia.jp",
+    "l-tike.com",
+    "rakuten-ticket.jp",
+    "cnplayguide.com",
+    "livepocket.jp",
+    "shop.gamecity.ne.jp",
+  ];
   $("a").each((i, el) => {
     const href = $(el).attr("href");
-    if (href && ticketVendors.some(vendor => href.includes(vendor))) {
+    if (href && ticketVendors.some((vendor) => href.includes(vendor))) {
       ticketUrl = href;
       return false; // exit each loop
     }
@@ -78,7 +86,6 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
     sourceUrl: item.link ?? "",
   };
 };
-
 
 /**
  * Fetches and parses an RSS feed from a given URL.
@@ -103,7 +110,9 @@ export const fetchFeed = (url: string): Promise<Item[]> => {
         // Convert web stream to Node.js stream
         Readable.fromWeb(res.body).pipe(feedparser);
       })
-      .catch((err) => reject(err instanceof Error ? err : new Error(String(err))));
+      .catch((err) =>
+        reject(err instanceof Error ? err : new Error(String(err))),
+      );
 
     feedparser.on("error", (err) =>
       reject(err instanceof Error ? err : new Error(String(err))),

@@ -5,6 +5,7 @@
     "composite": true,
     "incremental": true,
     "moduleResolution": "nodenext",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
   }
 }

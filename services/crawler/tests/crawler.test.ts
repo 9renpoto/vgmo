@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { type Item } from "feedparser";
-import { extractConcertInfo, fetchFeed, type ConcertInfo } from "../src/main.ts";
 import * as cheerio from "cheerio";
+import type { Item } from "feedparser";
+import {
+  type ConcertInfo,
+  extractConcertInfo,
+  fetchFeed,
+} from "../src/main.ts";
 
 test("fetchFeed fetches and parses the RSS feed", async () => {
   const items = await fetchFeed("https://www.2083.jp/rss.xml");
@@ -13,9 +17,9 @@ test("fetchFeed fetches and parses the RSS feed", async () => {
   const item = items[0];
   assert.ok(item.title, "Item should have a title.");
   assert.ok(item.link, "Item should have a link.");
-  assert.ok(item.pubDate, "Item should have a pubDate.");
+  assert.ok(item.pubdate, "Item should have a pubDate.");
   assert.ok(item.guid, "Item should have a guid.");
-  assert.ok(item.pubDate instanceof Date, "pubDate should be a Date object.");
+  assert.ok(item.pubdate instanceof Date, "pubDate should be a Date object.");
 });
 
 test("extractConcertInfo should parse HTML and extract concert details", () => {
@@ -47,20 +51,23 @@ test("extractConcertInfo should parse HTML and extract concert details", () => {
     // Other properties are not used by the function, so they can be empty
     summary: "",
     origlink: "",
-    permalink: "",
     date: new Date(),
     pubdate: new Date(),
     author: "",
     guid: "http://www.2083.jp/concert/20250909cityphil.html",
     comments: "",
-    image: {},
+    image: {
+      url: "",
+      title: "",
+    },
     categories: [],
     enclosures: [],
-    meta: {} as any,
+    meta: {} as unknown as any,
   };
 
   const expected: ConcertInfo = {
-    title: "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
+    title:
+      "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
     date: "2025年9月9日(火)",
     venue: "サントリーホール 大ホール",
     ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
@@ -71,10 +78,30 @@ test("extractConcertInfo should parse HTML and extract concert details", () => {
 
   assert.ok(result, "Result should not be null");
 
-  const $ = cheerio.load(mockItem.description);
-  assert.strictEqual(result.title, expected.title, "Title should be extracted correctly");
-  assert.strictEqual(result.date, expected.date, "Date should be extracted correctly");
-  assert.strictEqual(result.venue, expected.venue, "Venue should be extracted correctly");
-  assert.strictEqual(result.ticketUrl, expected.ticketUrl, "Ticket URL should be extracted correctly");
-  assert.strictEqual(result.sourceUrl, expected.sourceUrl, "Source URL should be the item's link");
+  cheerio.load(mockItem.description);
+  assert.strictEqual(
+    result.title,
+    expected.title,
+    "Title should be extracted correctly",
+  );
+  assert.strictEqual(
+    result.date,
+    expected.date,
+    "Date should be extracted correctly",
+  );
+  assert.strictEqual(
+    result.venue,
+    expected.venue,
+    "Venue should be extracted correctly",
+  );
+  assert.strictEqual(
+    result.ticketUrl,
+    expected.ticketUrl,
+    "Ticket URL should be extracted correctly",
+  );
+  assert.strictEqual(
+    result.sourceUrl,
+    expected.sourceUrl,
+    "Source URL should be the item's link",
+  );
 });
