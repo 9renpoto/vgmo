@@ -47,9 +47,15 @@ Tip: Use `-w <workspace>` for a single package, and `--workspaces` to target all
 
 ## Testing Guidelines
 - UI: Storybook Test Runner (`npm test -w @vgmo/ui`) with coverage output (nyc + Storybook JSON).
-- Web: Node test runner (`node --test`) via `npm test -w @vgmo/web`.
+- Web: Node test runner with TypeScript support using `--experimental-strip-types` via `npm test -w @vgmo/web`.
 - Crawler: Node test runner with `--experimental-strip-types` via `npm test -w @vgmo/crawler`; coverage with `npm run -w @vgmo/crawler coverage` (c8).
 - Test files: `*.test.ts`. Keep unit tests near `tests/` directories.
+
+### Web data ingestion (from crawler)
+- Web consumes `ConcertInfo[]` JSON at build/test time.
+- Default file: `services/web/public/data/concerts.json`.
+- Override with env var `CONCERTS_JSON` to point to another JSON file.
+- Shared types live in `@vgmo/types`.
 
 ## Commit & Pull Request Guidelines
 - Commits: follow Conventional Commits (e.g., `feat(ui): add Button`, `fix(crawler): ...`, `chore(spell): ...`).
