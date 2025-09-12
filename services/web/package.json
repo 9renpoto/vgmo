@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "node --test",
+    "test": "c8 --reporter=lcov node --test",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
