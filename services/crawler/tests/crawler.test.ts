@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { fetchFeed } from "../src/main.ts";
+import { type Item } from "feedparser";
+import { extractConcertInfo, fetchFeed, type ConcertInfo } from "../src/main.ts";
+import * as cheerio from "cheerio";
 
 test("fetchFeed fetches and parses the RSS feed", async () => {
   const items = await fetchFeed("https://www.2083.jp/rss.xml");
@@ -14,4 +16,65 @@ test("fetchFeed fetches and parses the RSS feed", async () => {
   assert.ok(item.pubDate, "Item should have a pubDate.");
   assert.ok(item.guid, "Item should have a guid.");
   assert.ok(item.pubDate instanceof Date, "pubDate should be a Date object.");
+});
+
+test("extractConcertInfo should parse HTML and extract concert details", () => {
+  // A mock feedparser item based on the structure of 2083.jp's RSS feed
+  const mockItem: Item = {
+    title: "Sample Concert Title",
+    description: `
+      <h3 class="subtitle">公演概要</h3>
+      <span class="concert_title">東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁</span>
+      <br><br>
+      <b>2025年9月9日(火)</b>
+      <br>
+      開場：18:00
+      <br>
+      開演：19:00
+      <br><br>
+      <b>会場</b>
+      <br>
+      <a href="http://www.suntory.co.jp/suntoryhall/map/" target="_blank">サントリーホール 大ホール</a>
+      <br><br>
+      <b>チケット</b>
+      <br>
+      S席6,000円、A席5,000円、B席4,000円
+      <br><br>
+      <a href="https://t.pia.jp/pia/event/event.do?eventCd=251234" target="_blank" class="next">チケットぴあでのチケット購入はこちら</a>
+      <br><br>
+    `,
+    link: "http://www.2083.jp/concert/20250909cityphil.html",
+    // Other properties are not used by the function, so they can be empty
+    summary: "",
+    origlink: "",
+    permalink: "",
+    date: new Date(),
+    pubdate: new Date(),
+    author: "",
+    guid: "http://www.2083.jp/concert/20250909cityphil.html",
+    comments: "",
+    image: {},
+    categories: [],
+    enclosures: [],
+    meta: {} as any,
+  };
+
+  const expected: ConcertInfo = {
+    title: "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
+    date: "2025年9月9日(火)",
+    venue: "サントリーホール 大ホール",
+    ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
+    sourceUrl: "http://www.2083.jp/concert/20250909cityphil.html",
+  };
+
+  const result = extractConcertInfo(mockItem);
+
+  assert.ok(result, "Result should not be null");
+
+  const $ = cheerio.load(mockItem.description);
+  assert.strictEqual(result.title, expected.title, "Title should be extracted correctly");
+  assert.strictEqual(result.date, expected.date, "Date should be extracted correctly");
+  assert.strictEqual(result.venue, expected.venue, "Venue should be extracted correctly");
+  assert.strictEqual(result.ticketUrl, expected.ticketUrl, "Ticket URL should be extracted correctly");
+  assert.strictEqual(result.sourceUrl, expected.sourceUrl, "Source URL should be the item's link");
 });
