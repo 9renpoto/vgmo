@@ -11,7 +11,14 @@ const config: StorybookConfig = {
 
   addons: [
     getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-coverage"),
+    {
+      name: getAbsolutePath("@storybook/addon-coverage"),
+      options: {
+        istanbul: {
+          include: ["src/**/*"],
+        },
+      },
+    },
     getAbsolutePath("@storybook/addon-docs"),
   ],
 
