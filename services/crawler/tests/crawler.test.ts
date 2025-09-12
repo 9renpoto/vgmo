@@ -59,7 +59,7 @@ test("extractConcertInfo should parse HTML and extract concert details", () => {
     },
     categories: [],
     enclosures: [],
-    meta: {} as unknown as any,
+    meta: {} as Item["meta"],
   };
 
   const expected: ConcertInfo = {
