@@ -1,77 +1,76 @@
 import type { JSX } from "preact";
+import { Calendar, Clock, MapPin, ExternalLink } from "lucide-preact";
 
 export interface CardProps {
   title: string;
-  authorName: string;
-  authorImage: string;
+  imageUrl: string;
   date: string;
+  time: string;
+  location: string;
+  description: string;
   tags: string[];
-  coverImage?: string;
-  reactions: number;
-  comments: number;
-  readingTime: number;
+  buttonText: string;
+  buttonUrl: string;
 }
 
 export default function Card(props: CardProps): JSX.Element {
   return (
-    <div class="rounded-lg border border-gray-200 bg-white shadow-md overflow-hidden">
-      {props.coverImage && (
-        <a href="/" class="block">
-          <img
-            class="w-full h-48 object-cover"
-            src={props.coverImage}
-            alt={`Cover for ${props.title}`}
-          />
-        </a>
-      )}
-      <div class="p-4 sm:p-6">
-        <div class="flex items-center mb-3">
-          <img
-            class="w-8 h-8 rounded-full mr-3"
-            src={props.authorImage}
-            alt={`Profile of ${props.authorName}`}
-          />
-          <div>
-            <p class="text-sm font-medium text-gray-900">
-              <a href="/">{props.authorName}</a>
-            </p>
-            <p class="text-xs text-gray-500">
-              <time>{props.date}</time>
-            </p>
+    <div class="max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans">
+      <div class="relative">
+        <img
+          class="w-full h-48 object-cover bg-gray-200"
+          src={props.imageUrl}
+          alt={props.title}
+        />
+        <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-300">
+          <svg class="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="p-5">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">{props.title}</h2>
+
+        <div class="space-y-3 text-gray-600 mb-4">
+          <div class="flex items-center">
+            <Calendar size={18} class="mr-3 text-gray-500" />
+            <span>{props.date}</span>
+          </div>
+          <div class="flex items-center">
+            <Clock size={18} class="mr-3 text-gray-500" />
+            <span>{props.time}</span>
+          </div>
+          <div class="flex items-center">
+            <MapPin size={18} class="mr-3 text-gray-500" />
+            <span>{props.location}</span>
           </div>
         </div>
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 leading-tight mb-3">
-          <a href="/">{props.title}</a>
-        </h3>
-        <div class="flex flex-wrap mb-4">
+
+        <p class="text-gray-700 text-base mb-5">
+          {props.description}
+        </p>
+
+        <div class="flex flex-wrap mb-5">
           {props.tags.map((tag) => (
-            <a
-              href="/"
-              class="text-xs text-gray-600 hover:text-black mr-2 mb-2 px-2 py-1 border border-gray-200 rounded-md"
+            <span
+              key={tag}
+              class="bg-fuchsia-100 text-fuchsia-600 text-sm font-semibold mr-2 mb-2 px-3 py-1 rounded-full"
             >
-              #{tag}
-            </a>
+              {tag}
+            </span>
           ))}
         </div>
-        <div class="flex items-center text-sm text-gray-500">
-          <div class="flex items-center mr-6">
-            <span>❤️</span>
-            <span class="ml-1">{props.reactions} reactions</span>
-          </div>
-          <div class="flex items-center mr-6">
-            <span>💬</span>
-            <span class="ml-1">{props.comments} comments</span>
-          </div>
-          <div class="ml-auto">
-            <span class="text-xs">{props.readingTime} min read</span>
-            <button
-              type="button"
-              class="ml-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded"
-            >
-              Save
-            </button>
-          </div>
-        </div>
+
+        <a
+          href={props.buttonUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+        >
+          {props.buttonText}
+          <ExternalLink size={20} class="ml-2" />
+        </a>
       </div>
     </div>
   );

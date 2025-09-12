@@ -6,40 +6,49 @@ const meta: Meta<typeof Card> = {
   component: Card,
   argTypes: {
     title: { control: "text" },
-    authorName: { control: "text" },
-    authorImage: { control: "text" },
+    imageUrl: { control: "text" },
     date: { control: "text" },
+    time: { control: "text" },
+    location: { control: "text" },
+    description: { control: "text" },
     tags: { control: "object" },
-    coverImage: { control: "text" },
-    reactions: { control: "number" },
-    comments: { control: "number" },
-    readingTime: { control: "number" },
+    buttonText: { control: "text" },
+    buttonUrl: { control: "text" },
   },
 };
 
 export default meta;
 
 const defaultArgs: CardProps = {
-  title: "Svelte Event Forwarding & Advanced Component Patterns",
-  authorName: "Ali Aslam",
-  authorImage:
-    "https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/3423581/0d6a184d-4390-4d86-9e67-d0c49b4753b1.png",
-  date: "Sep 6",
-  tags: ["webdev", "javascript", "svelte", "webperf"],
-  coverImage:
-    "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s6xnq2fo2yaltqez1pvx.png",
-  reactions: 42,
-  comments: 12,
-  readingTime: 7,
+  title: "ファイナルファンタジー オーケストラコンサート 2024",
+  imageUrl: "", // No image url, so it will show the placeholder
+  date: "2024年3月15日(金)",
+  time: "19:00開演",
+  location: "東京国際フォーラム ホールA",
+  description: "ファイナルファンタジーシリーズの名曲を東京フィルハーモニー交響楽団が演奏",
+  tags: ["ファイナルファンタジー", "オーケストラ", "東京"],
+  buttonText: "詳細・チケット情報",
+  buttonUrl: "#",
 };
 
-export const Basic: StoryObj<typeof Card> = {
+export const Default: StoryObj<typeof Card> = {
   args: defaultArgs,
 };
 
-export const NoCoverImage: StoryObj<typeof Card> = {
-  args: {
-    ...defaultArgs,
-    coverImage: undefined,
-  },
+export const MobileView: StoryObj = {
+  render: () => (
+    <div class="grid grid-cols-1 gap-4 p-4">
+      <Card {...defaultArgs} />
+    </div>
+  ),
+};
+
+export const DesktopView: StoryObj = {
+  render: () => (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+      <Card {...defaultArgs} title="コンサート1" />
+      <Card {...defaultArgs} title="コンサート2" />
+      <Card {...defaultArgs} title="コンサート3" />
+    </div>
+  ),
 };
