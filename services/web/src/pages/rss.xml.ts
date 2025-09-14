@@ -3,7 +3,7 @@ import type { ConcertInfo } from "packages/types/src";
 import concerts from "../../public/data/concerts.json";
 
 const parseDate = (date: string) =>
-	new Date(date.replace(/[年月日]/g, (match) => (match === "日" ? "" : "/")));
+  new Date(date.replace(/[年月日]/g, (match) => (match === "日" ? "" : "/")));
 
 export const GET = () =>
   rss({

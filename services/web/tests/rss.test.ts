@@ -26,8 +26,11 @@ test("rss.xml", () => {
       assert.strictEqual(meta.title, "vgmo");
       assert.strictEqual(meta.link, "https://vgmo.vercel.app/");
 
-      let item;
-      while ((item = this.read())) {
+      for (;;) {
+        const item: FeedParser.Item | undefined = this.read();
+        if (item === null || item === undefined) {
+          break;
+        }
         items.push(item);
       }
     });
