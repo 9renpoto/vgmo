@@ -18,9 +18,18 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta
+      name="description"
+      content="VGM-Orchestra はビデオゲーム音楽専門のオーケストラです。"
+    />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="vgmo"
+      href="/rss.xml"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <slot name="head" />
