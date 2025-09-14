@@ -23,7 +23,10 @@ export const extractOgpImageUrl = async (
     if (!response.ok) {
       return undefined;
     }
-    const html = await response.text();
+    // The target website uses Shift_JIS encoding.
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder("sjis");
+    const html = decoder.decode(buffer);
     const $ = cheerio.load(html);
     return $('meta[property="og:image"]').attr("content");
   } catch (error) {
@@ -41,7 +44,7 @@ export const extractOgpImageUrl = async (
 export const extractConcertInfo = async (
   item: Item,
 ): Promise<ConcertInfo | null> => {
-  const $ = cheerio.load(item.description, { decodeEntities: false });
+  const $ = cheerio.load(item.description);
 
   // The title is in a span with the class "concert_title"
   let title = $("span.concert_title").text().trim();
@@ -60,20 +63,29 @@ export const extractConcertInfo = async (
     return null; // Cannot proceed without a title
   }
 
-  // The date is often in a `<b>` tag. Let's look for it.
-  // Example format: 2025年9月13日(土)
-  const dateRegex = /(\d{4}年\d{1,2}月\d{1,2}日\([月火水木金土日]\))/;
+  // Date parsing
+  const dateRegex = /(\d{4})年(\d{1,2})月(\d{1,2})日/;
   const textContent = $.root().text();
   const dateMatch = textContent.match(dateRegex);
-  const date = dateMatch ? dateMatch[0] : "Date not found";
 
-  // The venue is often in a link after a `<b>会場</b>` or `<b>場所</b>` tag.
+  if (!dateMatch) {
+    console.warn(`Could not find date for item: ${title}`);
+    return null; // Skip if no date found
+  }
+
+  const [, year, month, day] = dateMatch;
+  const date = new Date(
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10),
+  ).toISOString();
+
+  // Venue extraction
   let venue = "Venue not found";
   $("b").each((_i, el) => {
     const b = $(el);
     const bText = b.text().trim();
     if (bText.includes("会場") || bText.includes("場所")) {
-      // The venue name is often in the next `a` tag's text.
       const venueLink = b.nextAll("a").first();
       if (venueLink.length > 0) {
         venue = venueLink.text().trim();
