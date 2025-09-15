@@ -149,6 +149,7 @@ export const fetchFeed = (url: string): Promise<Item[]> => {
         // Convert web stream to Node.js stream
         const textStream = res.body?.pipeThrough(new TextDecoderStream("sjis"));
         if (textStream) {
+          // biome-ignore lint/suspicious/noExplicitAny: DOM and Node.js stream types are incompatible here.
           Readable.fromWeb(textStream as any).pipe(feedparser);
         }
       })

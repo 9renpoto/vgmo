@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { ConcertInfo } from "@vgmo/types";
-import * as cheerio from "cheerio";
 import type { Item } from "feedparser";
 import { extractConcertInfo, fetchFeed } from "../src/main.ts";
 
@@ -71,10 +70,10 @@ test("extractConcertInfo should parse HTML and extract concert details", async (
     meta: {} as Item["meta"],
   };
 
-  const expected: ConcertInfo = {
+  const expected: Omit<ConcertInfo, "imageUrl"> & { imageUrl?: string } = {
     title:
       "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
-    date: new Date(2025, 8, 9).toISOString(), // Month is 0-indexed
+    date: new Date(2025, 8, 9).toISOString(),
     venue: "サントリーホール 大ホール",
     ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
     sourceUrl: "http://www.2083.jp/concert/20250909cityphil.html",

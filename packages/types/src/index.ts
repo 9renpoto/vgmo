@@ -1,5 +1,5 @@
 export interface ConcertInfo {
-  title:string;
+  title: string;
   date: string;
   venue: string;
   ticketUrl: string | null;
