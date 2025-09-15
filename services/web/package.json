@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "c8 --reporter=lcov node --test --experimental-strip-types",
+    "test": "c8 --reporter=lcov node --test --experimental-strip-types --test-reporter=junit --test-reporter-destination=junit-web.xml",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
