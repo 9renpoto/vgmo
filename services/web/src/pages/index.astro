@@ -29,21 +29,23 @@ const concerts = await listConcerts();
         { label: "演奏情報" },
       ]}
     />
-    {concerts.map((c) => (
-      <div>
-        <Card {...toCard(c)} />
-        <div class="mt-2 text-xs text-gray-500">
-          <a class="underline text-blue-600" href={`/concert/${c.slug}`}>詳細を見る</a>
-          <br />
-          ソース: <a href={c.sourceUrl} target="_blank" rel="noreferrer">{c.sourceUrl}</a>
-          {c.ticketUrl && (
-            <>
-              {" | チケット: "}
-              <a href={c.ticketUrl} target="_blank" rel="noreferrer">{c.ticketUrl}</a>
-            </>
-          )}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {concerts.map((c) => (
+        <div>
+          <Card {...toCard(c)} />
+          <div class="mt-2 text-xs text-gray-500">
+            <a class="underline text-blue-600" href={`/concert/${c.slug}`}>詳細を見る</a>
+            <br />
+            ソース: <a href={c.sourceUrl} target="_blank" rel="noreferrer">{c.sourceUrl}</a>
+            {c.ticketUrl && (
+              <>
+                {" | チケット: "}
+                <a href={c.ticketUrl} target="_blank" rel="noreferrer">{c.ticketUrl}</a>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </MainLayout>

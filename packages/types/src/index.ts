@@ -4,4 +4,5 @@ export interface ConcertInfo {
   venue: string;
   ticketUrl: string | null;
   sourceUrl: string;
+  imageUrl?: string;
 }

@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { ConcertInfo } from "@vgmo/types";
-import * as cheerio from "cheerio";
 import type { Item } from "feedparser";
 import { extractConcertInfo, fetchFeed } from "../src/main.ts";
 
@@ -19,7 +18,16 @@ test("fetchFeed fetches and parses the RSS feed", async () => {
   assert.ok(item.pubdate instanceof Date, "pubDate should be a Date object.");
 });
 
-test("extractConcertInfo should parse HTML and extract concert details", () => {
+test("extractConcertInfo should parse HTML and extract concert details", async (t) => {
+  t.mock.method(global, "fetch", () => {
+    return new Response(
+      `<html><head><meta property="og:image" content="http://example.com/ogp.jpg"></head></html>`,
+      {
+        status: 200,
+        headers: { "Content-Type": "text/html" },
+      },
+    );
+  });
   // A mock feedparser item based on the structure of 2083.jp's RSS feed
   const mockItem: Item = {
     title: "Sample Concert Title",
@@ -62,20 +70,20 @@ test("extractConcertInfo should parse HTML and extract concert details", () => {
     meta: {} as Item["meta"],
   };
 
-  const expected: ConcertInfo = {
+  const expected: Omit<ConcertInfo, "imageUrl"> & { imageUrl?: string } = {
     title:
       "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
-    date: "2025年9月9日(火)",
+    date: new Date(2025, 8, 9).toISOString(),
     venue: "サントリーホール 大ホール",
     ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
     sourceUrl: "http://www.2083.jp/concert/20250909cityphil.html",
+    imageUrl: "http://example.com/ogp.jpg",
   };
 
-  const result = extractConcertInfo(mockItem);
+  const result = await extractConcertInfo(mockItem);
 
   assert.ok(result, "Result should not be null");
 
-  cheerio.load(mockItem.description);
   assert.strictEqual(
     result.title,
     expected.title,
@@ -100,5 +108,10 @@ test("extractConcertInfo should parse HTML and extract concert details", () => {
     result.sourceUrl,
     expected.sourceUrl,
     "Source URL should be the item's link",
+  );
+  assert.strictEqual(
+    result.imageUrl,
+    expected.imageUrl,
+    "Image URL should be extracted correctly",
   );
 });

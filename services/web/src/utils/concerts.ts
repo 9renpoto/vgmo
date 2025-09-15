@@ -17,7 +17,7 @@ const slugify = (s: string): string =>
 const toMeta = (c: ConcertInfo): ConcertWithMeta => ({
   ...c,
   slug: slugify(`${c.date}-${c.title}`),
-  image: "https://placehold.co/1200x630",
+  image: c.imageUrl ?? "https://placehold.co/1200x630",
 });
 
 export async function loadConcertsFromFile(

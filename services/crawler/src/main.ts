@@ -1,7 +1,39 @@
+import { writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import { Readable } from "node:stream";
+import { fileURLToPath } from "node:url";
 import type { ConcertInfo } from "@vgmo/types";
 import * as cheerio from "cheerio";
 import FeedParser, { type Item } from "feedparser";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+/**
+ * Extracts the OGP image URL from a given URL.
+ *
+ * @param url The URL to fetch and extract the OGP image from.
+ * @returns The OGP image URL or null if not found.
+ */
+export const extractOgpImageUrl = async (
+  url: string,
+): Promise<string | undefined> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      return undefined;
+    }
+    // The target website uses Shift_JIS encoding.
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder("sjis");
+    const html = decoder.decode(buffer);
+    const $ = cheerio.load(html);
+    return $('meta[property="og:image"]').attr("content");
+  } catch (error) {
+    console.error(`Error fetching OGP image from ${url}:`, error);
+    return undefined;
+  }
+};
 
 /**
  * Extracts concert information from a feed item's description HTML.
@@ -9,7 +41,9 @@ import FeedParser, { type Item } from "feedparser";
  * @param item A feed item from feedparser.
  * @returns Extracted concert information or null if it can't be parsed.
  */
-export const extractConcertInfo = (item: Item): ConcertInfo | null => {
+export const extractConcertInfo = async (
+  item: Item,
+): Promise<ConcertInfo | null> => {
   const $ = cheerio.load(item.description);
 
   // The title is in a span with the class "concert_title"
@@ -29,20 +63,29 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
     return null; // Cannot proceed without a title
   }
 
-  // The date is often in a `<b>` tag. Let's look for it.
-  // Example format: 2025年9月13日(土)
-  const dateRegex = /(\d{4}年\d{1,2}月\d{1,2}日\([月火水木金土日]\))/;
+  // Date parsing
+  const dateRegex = /(\d{4})年(\d{1,2})月(\d{1,2})日/;
   const textContent = $.root().text();
   const dateMatch = textContent.match(dateRegex);
-  const date = dateMatch ? dateMatch[0] : "Date not found";
 
-  // The venue is often in a link after a `<b>会場</b>` or `<b>場所</b>` tag.
+  if (!dateMatch) {
+    console.warn(`Could not find date for item: ${title}`);
+    return null; // Skip if no date found
+  }
+
+  const [, year, month, day] = dateMatch;
+  const date = new Date(
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10),
+  ).toISOString();
+
+  // Venue extraction
   let venue = "Venue not found";
   $("b").each((_i, el) => {
     const b = $(el);
     const bText = b.text().trim();
     if (bText.includes("会場") || bText.includes("場所")) {
-      // The venue name is often in the next `a` tag's text.
       const venueLink = b.nextAll("a").first();
       if (venueLink.length > 0) {
         venue = venueLink.text().trim();
@@ -70,12 +113,16 @@ export const extractConcertInfo = (item: Item): ConcertInfo | null => {
     }
   });
 
+  const sourceUrl = item.link ?? "";
+  const imageUrl = await extractOgpImageUrl(sourceUrl);
+
   return {
     title,
     date,
     venue,
     ticketUrl,
-    sourceUrl: item.link ?? "",
+    sourceUrl,
+    imageUrl,
   };
 };
 
@@ -100,7 +147,11 @@ export const fetchFeed = (url: string): Promise<Item[]> => {
           return reject(new Error("Response body is empty"));
         }
         // Convert web stream to Node.js stream
-        Readable.fromWeb(res.body).pipe(feedparser);
+        const textStream = res.body?.pipeThrough(new TextDecoderStream("sjis"));
+        if (textStream) {
+          // biome-ignore lint/suspicious/noExplicitAny: DOM and Node.js stream types are incompatible here.
+          Readable.fromWeb(textStream as any).pipe(feedparser);
+        }
       })
       .catch((err) =>
         reject(err instanceof Error ? err : new Error(String(err))),
@@ -133,12 +184,26 @@ async function main() {
     const items = await fetchFeed(feedUrl);
     console.log(`Found ${items.length} items.`);
 
-    const concertInfos = items
-      .map(extractConcertInfo)
-      .filter((info): info is ConcertInfo => info !== null);
+    const concertInfos = (
+      await Promise.all(items.map(extractConcertInfo))
+    ).filter((info): info is ConcertInfo => info !== null);
 
-    console.log("Extracted Concert Information:");
-    console.log(JSON.stringify(concertInfos, null, 2));
+    // Sort by date in descending order and take the latest 3
+    const sortedConcerts = concertInfos.sort((a, b) => {
+      // A simple string comparison works here because of the YYYY年MM月DD日 format
+      return b.date.localeCompare(a.date);
+    });
+    const latestConcerts = sortedConcerts.slice(0, 3);
+
+    const outputPath = resolve(
+      __dirname,
+      "../../../services/web/public/data/concerts.json",
+    );
+    await writeFile(outputPath, JSON.stringify(latestConcerts, null, 2));
+
+    console.log(
+      `Successfully wrote ${latestConcerts.length} concerts to ${outputPath}`,
+    );
   } catch (error) {
     console.error("Error fetching or parsing feed:", error);
   }
