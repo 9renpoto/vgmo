@@ -1,4 +1,11 @@
-import { Calendar, Clock, ExternalLink, MapPin } from "lucide-preact";
+import {
+  Calendar,
+  Clock,
+  ExternalLink,
+  Info,
+  Link,
+  MapPin,
+} from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
@@ -11,6 +18,8 @@ export interface CardProps {
   tags: string[];
   buttonText: string;
   buttonUrl: string;
+  sourceName?: string;
+  sourceUrl?: string;
 }
 
 export default function Card(props: CardProps): JSX.Element {
@@ -60,6 +69,20 @@ export default function Card(props: CardProps): JSX.Element {
 
         <p class="text-gray-700 text-base mb-5">{props.description}</p>
 
+        {props.sourceUrl && (
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <Link size={16} class="mr-2" />
+            <a
+              href={props.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline hover:text-gray-700"
+            >
+              {props.sourceName || props.sourceUrl}
+            </a>
+          </div>
+        )}
+
         <div class="flex flex-wrap mb-5">
           {props.tags.map((tag) => (
             <span
@@ -71,15 +94,17 @@ export default function Card(props: CardProps): JSX.Element {
           ))}
         </div>
 
-        <a
-          href={props.buttonUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
-        >
-          {props.buttonText}
-          <ExternalLink size={20} class="ml-2" />
-        </a>
+        {props.buttonUrl && (
+          <a
+            href={props.buttonUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+          >
+            {props.buttonText}
+            <ExternalLink size={20} class="ml-2" />
+          </a>
+        )}
       </div>
     </div>
   );
