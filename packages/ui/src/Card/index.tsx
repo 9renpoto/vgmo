@@ -23,8 +23,10 @@ export interface CardProps {
 }
 
 export default function Card(props: CardProps): JSX.Element {
-  return (
-    <div class="max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans">
+  const isClickable = !!props.sourceUrl;
+
+  const CardContent = (
+    <>
       <div class="relative">
         <img
           class="w-full h-48 object-cover bg-gray-200"
@@ -72,14 +74,7 @@ export default function Card(props: CardProps): JSX.Element {
         {props.sourceUrl && (
           <div class="flex items-center text-sm text-gray-500 mb-4">
             <Link size={16} class="mr-2" />
-            <a
-              href={props.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="underline hover:text-gray-700"
-            >
-              {props.sourceName || props.sourceUrl}
-            </a>
+            <span>{props.sourceName || props.sourceUrl}</span>
           </div>
         )}
 
@@ -94,7 +89,7 @@ export default function Card(props: CardProps): JSX.Element {
           ))}
         </div>
 
-        {props.buttonUrl && (
+        {props.buttonUrl && !isClickable && (
           <a
             href={props.buttonUrl}
             target="_blank"
@@ -105,7 +100,32 @@ export default function Card(props: CardProps): JSX.Element {
             <ExternalLink size={20} class="ml-2" />
           </a>
         )}
+        {isClickable && (
+          <div class="w-full flex items-center justify-center bg-teal-500 text-white font-bold py-3 px-4 rounded-lg">
+            {props.buttonText}
+            <ExternalLink size={20} class="ml-2" />
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
+
+  const baseClasses =
+    "max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans";
+  const hoverClasses = "hover:shadow-xl transition-shadow duration-300";
+
+  if (isClickable) {
+    return (
+      <a
+        href={props.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`${baseClasses} ${hoverClasses} block`}
+      >
+        {CardContent}
+      </a>
+    );
+  }
+
+  return <div class={baseClasses}>{CardContent}</div>;
 }

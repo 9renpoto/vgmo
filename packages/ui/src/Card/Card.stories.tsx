@@ -19,7 +19,7 @@ const meta: Meta<typeof Card> = {
 
 export default meta;
 
-const defaultArgs: CardProps = {
+const baseArgs: CardProps = {
   title: "ファイナルファンタジー オーケストラコンサート 2024",
   imageUrl: "", // No image url, so it will show the placeholder
   date: "2024年3月15日(金)",
@@ -29,17 +29,29 @@ const defaultArgs: CardProps = {
     "ファイナルファンタジーシリーズの名曲を東京フィルハーモニー交響楽団が演奏",
   tags: ["ファイナルファンタジー", "オーケストラ", "東京"],
   buttonText: "詳細・チケット情報",
-  buttonUrl: "#",
+  buttonUrl: "https://example.com/ticket",
+  sourceName: "example.com",
+  sourceUrl: "https://example.com/source",
 };
 
 export const Default: StoryObj<typeof Card> = {
-  args: defaultArgs,
+  args: {
+    ...baseArgs,
+  },
+};
+
+export const NonClickable: StoryObj<typeof Card> = {
+  args: {
+    ...baseArgs,
+    sourceUrl: undefined,
+    sourceName: undefined,
+  },
 };
 
 export const MobileView: StoryObj = {
   render: () => (
     <div class="grid grid-cols-1 gap-4 p-4">
-      <Card {...defaultArgs} />
+      <Card {...baseArgs} />
     </div>
   ),
 };
@@ -47,9 +59,14 @@ export const MobileView: StoryObj = {
 export const DesktopView: StoryObj = {
   render: () => (
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
-      <Card {...defaultArgs} title="コンサート1" />
-      <Card {...defaultArgs} title="コンサート2" />
-      <Card {...defaultArgs} title="コンサート3" />
+      <Card {...baseArgs} title="コンサート1" />
+      <Card {...baseArgs} title="コンサート2" />
+      <Card
+        {...baseArgs}
+        title="コンサート3"
+        sourceUrl={undefined}
+        sourceName={undefined}
+      />
     </div>
   ),
 };
