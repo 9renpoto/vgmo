@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
@@ -126,6 +126,45 @@ export const extractConcertInfo = async (
   };
 };
 
+const concertKey = (concert: ConcertInfo): string =>
+  concert.sourceUrl && concert.sourceUrl.length > 0
+    ? concert.sourceUrl
+    : `${concert.title}-${concert.date}`;
+
+const mergeConcert = (
+  previous: ConcertInfo,
+  current: ConcertInfo,
+): ConcertInfo => ({
+  ...previous,
+  ...current,
+  imageUrl: current.imageUrl ?? previous.imageUrl,
+});
+
+export const mergeConcerts = (
+  existing: ConcertInfo[],
+  incoming: ConcertInfo[],
+): ConcertInfo[] => {
+  const merged = new Map<string, ConcertInfo>();
+
+  for (const concert of existing) {
+    merged.set(concertKey(concert), concert);
+  }
+
+  for (const concert of incoming) {
+    const key = concertKey(concert);
+    const previous = merged.get(key);
+    if (previous) {
+      merged.set(key, mergeConcert(previous, concert));
+    } else {
+      merged.set(key, concert);
+    }
+  }
+
+  return Array.from(merged.values()).sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+};
+
 /**
  * Fetches and parses an RSS feed from a given URL.
  *
@@ -188,21 +227,26 @@ async function main() {
       await Promise.all(items.map(extractConcertInfo))
     ).filter((info): info is ConcertInfo => info !== null);
 
-    // Sort by date in descending order and take the latest 3
-    const sortedConcerts = concertInfos.sort((a, b) => {
-      // A simple string comparison works here because of the YYYY年MM月DD日 format
-      return b.date.localeCompare(a.date);
-    });
-    const latestConcerts = sortedConcerts.slice(0, 3);
-
     const outputPath = resolve(
       __dirname,
       "../../../services/web/public/data/concerts.json",
     );
-    await writeFile(outputPath, JSON.stringify(latestConcerts, null, 2));
+    let existingConcerts: ConcertInfo[] = [];
+    try {
+      const previous = await readFile(outputPath, "utf-8");
+      existingConcerts = JSON.parse(previous) as ConcertInfo[];
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        console.warn("Failed to read existing concerts.json:", error);
+      }
+    }
+
+    const mergedConcerts = mergeConcerts(existingConcerts, concertInfos);
+
+    await writeFile(outputPath, JSON.stringify(mergedConcerts, null, 2));
 
     console.log(
-      `Successfully wrote ${latestConcerts.length} concerts to ${outputPath}`,
+      `Successfully wrote ${mergedConcerts.length} concerts to ${outputPath}`,
     );
   } catch (error) {
     console.error("Error fetching or parsing feed:", error);

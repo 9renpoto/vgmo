@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import type { ConcertInfo } from "@vgmo/types";
 import type { Item } from "feedparser";
-import { extractConcertInfo, fetchFeed } from "../src/main.ts";
+import { extractConcertInfo, fetchFeed, mergeConcerts } from "../src/main.ts";
 
 test("fetchFeed fetches and parses the RSS feed", async () => {
   const items = await fetchFeed("https://www.2083.jp/rss.xml");
@@ -113,5 +113,52 @@ test("extractConcertInfo should parse HTML and extract concert details", async (
     result.imageUrl,
     expected.imageUrl,
     "Image URL should be extracted correctly",
+  );
+});
+
+test("mergeConcerts accumulates without duplicates", () => {
+  const existing: ConcertInfo[] = [
+    {
+      title: "Existing Concert",
+      date: new Date("2024-01-01").toISOString(),
+      venue: "Existing Venue",
+      ticketUrl: null,
+      sourceUrl: "https://example.com/concert/1",
+      imageUrl: "https://example.com/image-old.jpg",
+    },
+  ];
+
+  const incoming: ConcertInfo[] = [
+    {
+      title: "Existing Concert",
+      date: new Date("2024-01-01").toISOString(),
+      venue: "Updated Venue",
+      ticketUrl: "https://tickets.example.com/1",
+      sourceUrl: "https://example.com/concert/1",
+      imageUrl: undefined,
+    },
+    {
+      title: "New Concert",
+      date: new Date("2024-03-01").toISOString(),
+      venue: "New Venue",
+      ticketUrl: null,
+      sourceUrl: "https://example.com/concert/2",
+      imageUrl: "https://example.com/image-new.jpg",
+    },
+  ];
+
+  const merged = mergeConcerts(existing, incoming);
+
+  assert.equal(merged.length, 2);
+  const [first, second] = merged;
+
+  assert.equal(first.sourceUrl, "https://example.com/concert/2");
+  assert.equal(second.sourceUrl, "https://example.com/concert/1");
+  assert.equal(second.venue, "Updated Venue");
+  assert.equal(second.ticketUrl, "https://tickets.example.com/1");
+  assert.equal(
+    second.imageUrl,
+    "https://example.com/image-old.jpg",
+    "keeps previous image when new is missing",
   );
 });

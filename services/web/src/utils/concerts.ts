@@ -20,6 +20,24 @@ const toMeta = (c: ConcertInfo): ConcertWithMeta => ({
   image: c.imageUrl ?? "https://placehold.co/1200x630",
 });
 
+const concertKey = (concert: ConcertInfo): string =>
+  concert.sourceUrl && concert.sourceUrl.length > 0
+    ? concert.sourceUrl
+    : `${concert.title}-${concert.date}`;
+
+const normalizeConcerts = (concerts: ConcertInfo[]): ConcertInfo[] => {
+  const unique = new Map<string, ConcertInfo>();
+  for (const concert of concerts) {
+    const key = concertKey(concert);
+    if (!unique.has(key)) {
+      unique.set(key, concert);
+    }
+  }
+  return Array.from(unique.values()).sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+};
+
 export async function loadConcertsFromFile(
   filePath?: string,
 ): Promise<ConcertWithMeta[]> {
@@ -29,7 +47,7 @@ export async function loadConcertsFromFile(
       : new URL("../../public/data/concerts.json", import.meta.url);
     const text = await readFile(url, "utf-8");
     const raw = JSON.parse(text) as ConcertInfo[];
-    return raw.map(toMeta);
+    return normalizeConcerts(raw).map(toMeta);
   } catch (_e) {
     return [];
   }
