@@ -1,4 +1,11 @@
-import { Calendar, Clock, ExternalLink, Link, MapPin } from "lucide-preact";
+import {
+  Calendar,
+  Clock,
+  ExternalLink,
+  Info,
+  Link,
+  MapPin,
+} from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
@@ -16,32 +23,10 @@ export interface CardProps {
 }
 
 export default function Card(props: CardProps): JSX.Element {
-  const handleCardClick = () => {
-    if (props.sourceUrl) {
-      window.open(props.sourceUrl, "_blank", "noopener,noreferrer");
-    }
-  };
+  const isClickable = !!props.sourceUrl;
 
-  const handleButtonClick = (e: JSX.TargetedMouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
-  };
-
-  const cardClasses = [
-    "max-w-sm",
-    "rounded-2xl",
-    "border",
-    "border-purple-200",
-    "bg-white",
-    "shadow-lg",
-    "overflow-hidden",
-    "font-sans",
-    props.sourceUrl ? "cursor-pointer" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return (
-    <div class={cardClasses} onClick={handleCardClick}>
+  const CardContent = (
+    <>
       <div class="relative">
         <img
           class="w-full h-48 object-cover bg-gray-200"
@@ -104,19 +89,43 @@ export default function Card(props: CardProps): JSX.Element {
           ))}
         </div>
 
-        {props.buttonUrl && (
+        {props.buttonUrl && !isClickable && (
           <a
             href={props.buttonUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
-            onClick={handleButtonClick}
           >
             {props.buttonText}
             <ExternalLink size={20} class="ml-2" />
           </a>
         )}
+        {isClickable && (
+          <div class="w-full flex items-center justify-center bg-teal-500 text-white font-bold py-3 px-4 rounded-lg">
+            {props.buttonText}
+            <ExternalLink size={20} class="ml-2" />
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
+
+  const baseClasses =
+    "max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans";
+  const hoverClasses = "hover:shadow-xl transition-shadow duration-300";
+
+  if (isClickable) {
+    return (
+      <a
+        href={props.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`${baseClasses} ${hoverClasses} block`}
+      >
+        {CardContent}
+      </a>
+    );
+  }
+
+  return <div class={baseClasses}>{CardContent}</div>;
 }
