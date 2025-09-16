@@ -1,67 +1,19 @@
 # Repository Guidelines
 
-## Monorepo & npm Workspaces
-- This repository is a monorepo managed with npm workspaces.
-- Workspaces: `packages/*`, `services/*` (each package has its own `package.json`).
-- Install all: `npm ci` (run at the repo root).
-- Run in a specific workspace: use `-w <name>`, e.g. `npm run -w @vgmo/ui build`.
-- Run across all workspaces: `npm run build --workspaces` / `npm test --workspaces`.
-- Add a dependency to a specific workspace: `npm i <pkg> -w @vgmo/web`.
-- Use Node LTS and execute commands from the repository root.
-
 ## Project Structure & Module Organization
-- Monorepo using npm workspaces: `packages/*` and `services/*`.
-- `packages/ui` — Preact UI library with Storybook. Source in `src`, build to `lib`, stories `*.stories.tsx`.
-- `services/web` — Astro site using the UI package. Code in `src`, tests in `tests`.
-- `services/crawler` — Node/TypeScript crawler. Code in `src`, tests in `tests`, build to `lib`.
-- Root config: `biome.json` (lint/format), `cspell.json` (spelling), `tsconfig.json`, `.pre-commit-config.yaml`.
+This monorepo uses npm workspaces. Application code lives under `packages/*` and `services/*`, each with its own `package.json`. `packages/ui` hosts the Preact component library; place source in `src`, builds in `lib`, and stories in files named `*.stories.tsx`. `services/web` is the Astro site that relies on the UI components and crawler data; store app files in `src`, tests in `tests`, and static assets in `public`. `services/crawler` provides the data ingestion pipeline; keep runtime logic in `src`, tests in `tests`, and let the build output `lib`. Shared config files (`biome.json`, `tsconfig.json`, `cspell.json`) sit at the repository root.
 
 ## Build, Test, and Development Commands
-- Install: `npm ci`
-- Build all workspaces: `npm run build`
-- Test all workspaces: `npm test`
-- UI Storybook (dev/build): `npm run storybook -w @vgmo/ui`, `npm run build-storybook -w @vgmo/ui`
-- UI tests + coverage: `npm test -w @vgmo/ui`
-- Web dev/build/preview: `npm run -w @vgmo/web dev|build|preview`
-- Crawler build/test/coverage: `npm run -w @vgmo/crawler build|test|coverage`
-
-Tip: Use `-w <workspace>` for a single package, and `--workspaces` to target all.
+Run `npm ci` at the root to install all workspaces. Build everything with `npm run build`. Execute the full test matrix via `npm test`. Target a single workspace with `npm run <script> -w <workspace>`: examples include `npm run storybook -w @vgmo/ui`, `npm run dev -w @vgmo/web`, and `npm run build -w @vgmo/crawler`. Check crawler coverage using `npm run coverage -w @vgmo/crawler`.
 
 ## Coding Style & Naming Conventions
-- Language: TypeScript; JSX via Preact (`jsx: react-jsx`, `jsxImportSource: preact`).
-- Prefer TypeScript for all new code (`.ts`/`.tsx`) over JavaScript (`.js`/`.mjs`).
-- Use strict typing (no implicit `any`); justify exceptions in PRs.
-- When JS output is required, keep sources in TS and emit JS via the build.
-- Formatter/Linter: Biome. Run locally with `biome ci .` or via pre-commit.
-- Indentation: spaces; organize imports (enabled in `biome.json`).
-- Components: PascalCase directories and files (e.g., `src/Button/`, `Button.stories.tsx`).
-- Modules: prefer `ComponentName/index.tsx` entry files; keep `src/` for sources.
-
-## Dependency Policy
-- Do not add unnecessary libraries to any `package.json`.
-- Prefer the Node.js/ECMAScript standard library first; try built‑ins before adding deps.
-- If a dependency is truly needed, prefer packages already used in the repo (reuse existing deps in the workspace or another workspace) before introducing a new one.
-- Evaluate new deps for maintenance, security, license, size/tree‑shaking, and TypeScript support.
-- Scope dependencies to the specific workspace that needs them; only add to the root for shared tooling.
-- In PRs that add a new dependency, include a brief justification and alternatives considered.
+Write TypeScript (`.ts`/`.tsx`) and JSX via Preact (`jsx: react-jsx`, `jsxImportSource: preact`). Use spaces for indentation and PascalCase for component directories (e.g. `src/Button/Button.tsx`). Organize modules with `ComponentName/index.tsx` entry points. Apply Biome for formatting and linting (`npx biome ci .`) and respect automatic import organization.
 
 ## Testing Guidelines
-- UI: Storybook Test Runner (`npm test -w @vgmo/ui`) with coverage output (nyc + Storybook JSON).
-- Web: Node test runner with TypeScript support using `--experimental-strip-types` via `npm test -w @vgmo/web`.
-- Crawler: Node test runner with `--experimental-strip-types` via `npm test -w @vgmo/crawler`; coverage with `npm run -w @vgmo/crawler coverage` (c8).
-- Test files: `*.test.ts`. Keep unit tests near `tests/` directories.
-
-### Web data ingestion (from crawler)
-- Web consumes `ConcertInfo[]` JSON at build/test time.
-- Default file: `services/web/public/data/concerts.json`.
-- Override with env var `CONCERTS_JSON` to point to another JSON file.
-- Shared types live in `@vgmo/types`.
+Storybook Test Runner powers UI tests; run `npm test -w @vgmo/ui` for assertions and nyc coverage. The web and crawler services rely on the Node test runner with `--experimental-strip-types`; use `npm test -w @vgmo/web` or `npm test -w @vgmo/crawler`. Name tests `*.test.ts` and store them in `tests/`. Regenerate crawler output before building the web site so `services/web/public/data/concerts.json` stays current.
 
 ## Commit & Pull Request Guidelines
-- Commits: follow Conventional Commits (e.g., `feat(ui): add Button`, `fix(crawler): ...`, `chore(spell): ...`).
-- PRs: include a clear summary, link related issues, and add screenshots for UI changes. Reference Storybook/Chromatic when relevant.
-- CI: ensure Node CI passes (build + tests), Biome linting passes, and Chromatic checks (for UI) are green.
+Follow Conventional Commits (e.g. `feat(ui):`, `fix(crawler):`, `chore(root):`) and include tests when behavior changes. Pull requests should summarize the change, link issues, and attach UI screenshots or Storybook URLs when relevant. Before review, ensure `npm run build --workspaces`, `npm test --workspaces`, and `npx biome ci .` succeed on a clean working tree.
 
 ## Security & Tooling Tips
-- Enable pre-commit hooks: `pre-commit install` (runs Biome, cspell, hadolint, secretlint).
-- Do not commit secrets; secretlint will flag them. Stick to Node LTS (`lts/*`).
+Install pre-commit hooks via `pre-commit install` to run Biome, cspell, hadolint, and secretlint automatically. Never commit secrets. Prefer existing dependencies and the Node standard library; scope new ones to the workspace that needs them. Stick to the current Node LTS release and run commands from the repository root to avoid workspace resolution issues.

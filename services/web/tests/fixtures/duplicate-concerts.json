@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Existing Concert",
+    "date": "2024-02-01T00:00:00.000Z",
+    "venue": "Venue A",
+    "ticketUrl": null,
+    "sourceUrl": "https://example.com/concert/1",
+    "imageUrl": "https://example.com/old.jpg"
+  },
+  {
+    "title": "Existing Concert",
+    "date": "2024-02-01T00:00:00.000Z",
+    "venue": "Venue A Updated",
+    "ticketUrl": "https://tickets.example.com/1",
+    "sourceUrl": "https://example.com/concert/1"
+  },
+  {
+    "title": "No Source Concert",
+    "date": "2023-12-01T00:00:00.000Z",
+    "venue": "Venue B",
+    "ticketUrl": null,
+    "sourceUrl": "",
+    "imageUrl": null
+  },
+  {
+    "title": "No Source Concert",
+    "date": "2023-12-01T00:00:00.000Z",
+    "venue": "Venue B 2",
+    "ticketUrl": null,
+    "sourceUrl": ""
+  }
+]
