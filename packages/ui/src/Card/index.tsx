@@ -23,8 +23,32 @@ export interface CardProps {
 }
 
 export default function Card(props: CardProps): JSX.Element {
+  const handleCardClick = () => {
+    if (props.sourceUrl) {
+      window.open(props.sourceUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const handleButtonClick = (e: JSX.TargetedMouseEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
+  };
+
+  const cardClasses = [
+    "max-w-sm",
+    "rounded-2xl",
+    "border",
+    "border-purple-200",
+    "bg-white",
+    "shadow-lg",
+    "overflow-hidden",
+    "font-sans",
+    props.sourceUrl ? "cursor-pointer" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div class="max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans">
+    <div class={cardClasses} onClick={handleCardClick}>
       <div class="relative">
         <img
           class="w-full h-48 object-cover bg-gray-200"
@@ -72,14 +96,7 @@ export default function Card(props: CardProps): JSX.Element {
         {props.sourceUrl && (
           <div class="flex items-center text-sm text-gray-500 mb-4">
             <Link size={16} class="mr-2" />
-            <a
-              href={props.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="underline hover:text-gray-700"
-            >
-              {props.sourceName || props.sourceUrl}
-            </a>
+            <span>{props.sourceName || props.sourceUrl}</span>
           </div>
         )}
 
@@ -100,6 +117,7 @@ export default function Card(props: CardProps): JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+            onClick={handleButtonClick}
           >
             {props.buttonText}
             <ExternalLink size={20} class="ml-2" />
