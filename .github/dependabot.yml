@@ -17,9 +17,6 @@ updates:
         patterns:
           - "@preact*"
           - "preact"
-      9renpoto:
-        patterns:
-          - "@9renpoto*"
       storybook:
         patterns:
           - "@storybook*"
