@@ -14,7 +14,7 @@
     "feedparser": "^2.2.10"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35",
+    "@types/cheerio": "^1.0.0",
     "@types/feedparser": "^2.2.8"
   }
 }
