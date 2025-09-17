@@ -21,7 +21,7 @@ test("fetchFeed fetches and parses the RSS feed", async () => {
 test("extractConcertInfo should parse HTML and extract concert details", async (t) => {
   t.mock.method(global, "fetch", () => {
     return new Response(
-      '<html><head></head><body><div id="left"><img src="/images/2025/0909.jpg"></div></body></html>',
+      '<html><head></head><body><div id="left"><img src="/images/2025/0909.jpg"><img src="/images/2025/0909_2.jpg"></div></body></html>',
       {
         status: 200,
         headers: { "Content-Type": "text/html" },
@@ -77,7 +77,7 @@ test("extractConcertInfo should parse HTML and extract concert details", async (
     venue: "サントリーホール 大ホール",
     ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
     sourceUrl: "http://www.2083.jp/concert/20250909cityphil.html",
-    imageUrl: "http://www.2083.jp/images/2025/0909.jpg",
+    imageUrl: "http://www.2083.jp/images/2025/0909_2.jpg",
   };
 
   const result = await extractConcertInfo(mockItem);

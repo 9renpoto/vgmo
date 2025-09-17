@@ -28,7 +28,7 @@ export const extractPageImageUrl = async (
     const decoder = new TextDecoder("sjis");
     const html = decoder.decode(buffer);
     const $ = cheerio.load(html);
-    const imageUrl = $("#left img").first().attr("src");
+    const imageUrl = $("#left img").eq(1).attr("src");
     if (imageUrl) {
       return new URL(imageUrl, url).href;
     }
