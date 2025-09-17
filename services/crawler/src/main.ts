@@ -10,12 +10,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Extracts the OGP image URL from a given URL.
+ * Extracts the page image URL from a given URL.
  *
- * @param url The URL to fetch and extract the OGP image from.
- * @returns The OGP image URL or null if not found.
+ * @param url The URL to fetch and extract the page image from.
+ * @returns The page image URL or null if not found.
  */
-export const extractOgpImageUrl = async (
+export const extractPageImageUrl = async (
   url: string,
 ): Promise<string | undefined> => {
   try {
@@ -28,9 +28,13 @@ export const extractOgpImageUrl = async (
     const decoder = new TextDecoder("sjis");
     const html = decoder.decode(buffer);
     const $ = cheerio.load(html);
-    return $('meta[property="og:image"]').attr("content");
+    const imageUrl = $("#containerArea img").first().attr("src");
+    if (imageUrl) {
+      return new URL(imageUrl, url).href;
+    }
+    return undefined;
   } catch (error) {
-    console.error(`Error fetching OGP image from ${url}:`, error);
+    console.error(`Error fetching page image from ${url}:`, error);
     return undefined;
   }
 };
@@ -114,7 +118,7 @@ export const extractConcertInfo = async (
   });
 
   const sourceUrl = item.link ?? "";
-  const imageUrl = await extractOgpImageUrl(sourceUrl);
+  const imageUrl = await extractPageImageUrl(sourceUrl);
 
   return {
     title,
