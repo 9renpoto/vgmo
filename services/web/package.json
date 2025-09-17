@@ -22,5 +22,8 @@
     "@vgmo/ui": "0.0.1",
     "astro": "^5.13.5",
     "preact": "^10.27.1"
+  },
+  "devDependencies": {
+    "@codecov/astro-plugin": "^1.9.1"
   }
 }
