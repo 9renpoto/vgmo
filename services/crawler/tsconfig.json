@@ -1,11 +1,10 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "nodenext",
     "rootDir": "src",
     "outDir": "./lib",
-    "allowImportingTsExtensions": false
+    "module": "NodeNext"
   },
-  "include": ["src"],
-  "references": []
+  "include": ["src"]
 }
