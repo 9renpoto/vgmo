@@ -1,10 +1,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import type { ConcertInfo } from "@vgmo/types";
 import * as cheerio from "cheerio";
-import FeedParser, { type Item } from "feedparser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,41 +34,19 @@ export const extractOgpImageUrl = async (
 };
 
 /**
- * Extracts concert information from a feed item's description HTML.
- *
- * @param item A feed item from feedparser.
- * @returns Extracted concert information or null if it can't be parsed.
+ * Parses the date and venue string.
+ * e.g. "2025年9月20日(土)＠【東京都】"
+ * @param text The text to parse.
+ * @returns An object containing the date and venue, or null if parsing fails.
  */
-export const extractConcertInfo = async (
-  item: Item,
-): Promise<ConcertInfo | null> => {
-  const $ = cheerio.load(item.description);
-
-  // The title is in a span with the class "concert_title"
-  let title = $("span.concert_title").text().trim();
-
-  // Fallback to the first link's text if the span is not found
-  if (!title) {
-    title = $("a[target='_blank']").first().text().trim();
-  }
-
-  // Fallback to the item's title if the above fails, stripping HTML
-  if (!title && item.title) {
-    title = item.title.replace(/<[^>]*>/g, "").trim();
-  }
-
-  if (!title) {
-    return null; // Cannot proceed without a title
-  }
-
-  // Date parsing
+const parseDateAndVenue = (
+  text: string,
+): { date: string; venue: string } | null => {
   const dateRegex = /(\d{4})年(\d{1,2})月(\d{1,2})日/;
-  const textContent = $.root().text();
-  const dateMatch = textContent.match(dateRegex);
+  const dateMatch = text.match(dateRegex);
 
   if (!dateMatch) {
-    console.warn(`Could not find date for item: ${title}`);
-    return null; // Skip if no date found
+    return null;
   }
 
   const [, year, month, day] = dateMatch;
@@ -80,50 +56,73 @@ export const extractConcertInfo = async (
     parseInt(day, 10),
   ).toISOString();
 
-  // Venue extraction
-  let venue = "Venue not found";
-  $("b").each((_i, el) => {
-    const b = $(el);
-    const bText = b.text().trim();
-    if (bText.includes("会場") || bText.includes("場所")) {
-      const venueLink = b.nextAll("a").first();
-      if (venueLink.length > 0) {
-        venue = venueLink.text().trim();
-        return false; // exit each loop
+  const venueRegex = /【(.*?)】/;
+  const venueMatch = text.match(venueRegex);
+  const venue = venueMatch ? venueMatch[1] : "Venue not found";
+
+  return { date, venue };
+};
+
+/**
+ * Scrapes concert information from the concert list page.
+ * @param url The URL of the concert list page.
+ * @returns A promise that resolves to an array of concert information.
+ */
+export const scrapeConcertPage = async (
+  url: string,
+): Promise<ConcertInfo[]> => {
+  const concertInfos: ConcertInfo[] = [];
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch page: ${response.statusText}`);
+    }
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder("sjis");
+    const html = decoder.decode(buffer);
+    const $ = cheerio.load(html);
+
+    const concertPromises: Promise<void>[] = [];
+
+    $("ul#concertlist li").each((_i, el) => {
+      const element = $(el);
+      const link = element.find("dt a");
+      const sourceUrl = link.attr("href");
+      const title = link.text().trim();
+      const dtText = element.find("dt").text().trim();
+
+      if (!sourceUrl || !title) {
+        return; // Skip if essential info is missing
       }
-    }
-  });
 
-  // The ticket URL is in an `<a>` tag linking to a ticket vendor.
-  let ticketUrl: string | null = null;
-  const ticketVendors = [
-    "eplus.jp",
-    "t.pia.jp",
-    "l-tike.com",
-    "rakuten-ticket.jp",
-    "cnplayguide.com",
-    "livepocket.jp",
-    "shop.gamecity.ne.jp",
-  ];
-  $("a").each((_i, el) => {
-    const href = $(el).attr("href");
-    if (href && ticketVendors.some((vendor) => href.includes(vendor))) {
-      ticketUrl = href;
-      return false; // exit each loop
-    }
-  });
+      const dateAndVenue = parseDateAndVenue(dtText);
+      if (!dateAndVenue) {
+        console.warn(`Could not parse date/venue for: ${title}`);
+        return; // Skip if date is not parsable
+      }
 
-  const sourceUrl = item.link ?? "";
-  const imageUrl = await extractOgpImageUrl(sourceUrl);
+      const { date, venue } = dateAndVenue;
 
-  return {
-    title,
-    date,
-    venue,
-    ticketUrl,
-    sourceUrl,
-    imageUrl,
-  };
+      const promise = extractOgpImageUrl(sourceUrl).then((imageUrl) => {
+        concertInfos.push({
+          title,
+          date,
+          venue,
+          ticketUrl: null, // Not available on the list page
+          sourceUrl,
+          imageUrl,
+        });
+      });
+      concertPromises.push(promise);
+    });
+
+    await Promise.all(concertPromises);
+  } catch (error) {
+    console.error("Error scraping concert page:", error);
+  }
+
+  return concertInfos;
 };
 
 const concertKey = (concert: ConcertInfo): string =>
@@ -166,66 +165,15 @@ export const mergeConcerts = (
 };
 
 /**
- * Fetches and parses an RSS feed from a given URL.
- *
- * @param url The URL of the RSS feed.
- * @returns A promise that resolves to an array of feed items.
- */
-export const fetchFeed = (url: string): Promise<Item[]> => {
-  const items: Item[] = [];
-
-  return new Promise((resolve, reject) => {
-    const feedparser = new FeedParser({});
-
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          return reject(new Error(`Failed to fetch feed: ${res.statusText}`));
-        }
-        if (!res.body) {
-          return reject(new Error("Response body is empty"));
-        }
-        // Convert web stream to Node.js stream
-        const textStream = res.body?.pipeThrough(new TextDecoderStream("sjis"));
-        if (textStream) {
-          // biome-ignore lint/suspicious/noExplicitAny: DOM and Node.js stream types are incompatible here.
-          Readable.fromWeb(textStream as any).pipe(feedparser);
-        }
-      })
-      .catch((err) =>
-        reject(err instanceof Error ? err : new Error(String(err))),
-      );
-
-    feedparser.on("error", (err) =>
-      reject(err instanceof Error ? err : new Error(String(err))),
-    );
-    feedparser.on("readable", function () {
-      let item: Item | null = this.read();
-      while (item !== null) {
-        items.push(item);
-        item = this.read();
-      }
-    });
-    feedparser.on("end", () => {
-      resolve(items);
-    });
-  });
-};
-
-/**
  * Main function to run the crawler.
  */
 async function main() {
-  const feedUrl = "https://www.2083.jp/rss.xml";
-  console.log(`Fetching feed from ${feedUrl}...`);
+  const pageUrl = "https://www.2083.jp/concert/";
+  console.log(`Scraping concerts from ${pageUrl}...`);
 
   try {
-    const items = await fetchFeed(feedUrl);
-    console.log(`Found ${items.length} items.`);
-
-    const concertInfos = (
-      await Promise.all(items.map(extractConcertInfo))
-    ).filter((info): info is ConcertInfo => info !== null);
+    const concertInfos = await scrapeConcertPage(pageUrl);
+    console.log(`Found ${concertInfos.length} concerts.`);
 
     const outputPath = resolve(
       __dirname,
@@ -249,7 +197,7 @@ async function main() {
       `Successfully wrote ${mergedConcerts.length} concerts to ${outputPath}`,
     );
   } catch (error) {
-    console.error("Error fetching or parsing feed:", error);
+    console.error("Error in crawler main function:", error);
   }
 }
 
