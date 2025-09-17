@@ -1,118 +1,113 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { ConcertInfo } from "@vgmo/types";
-import type { Item } from "feedparser";
-import { extractConcertInfo, fetchFeed, mergeConcerts } from "../src/main.ts";
+import iconv from "iconv-lite";
+import { mergeConcerts, scrapeConcertPage } from "../src/main.ts";
 
-test("fetchFeed fetches and parses the RSS feed", async () => {
-  const items = await fetchFeed("https://www.2083.jp/rss.xml");
+test("scrapeConcertPage should parse HTML and extract concert details", async (t) => {
+  const mockHtml = `
+    <html>
+      <head></head>
+      <body>
+        <div id="concert">
+          <ul id="concertlist">
+            <li>
+              <dl class="detail">
+                <dt>2025年10月12日(日)＠【東京】<br />
+                  <a href="https://www.2083.jp/concert/concert-1.html">Concert One</a>
+                </dt>
+                <dd>Description one</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="detail">
+                <dt>2025年11月15日(土)＠【大阪】<br />
+                  <a href="https://www.2083.jp/concert/concert-2.html">Concert Two</a>
+                </dt>
+                <dd>Description two</dd>
+              </dl>
+            </li>
+            <li>
+              <dl class="detail">
+                <dt>2025年12月20日(土)＠Venue not found<br />
+                  <a href="https://www.2083.jp/concert/concert-3.html">Concert Three</a>
+                </dt>
+                <dd>Description three</dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </body>
+    </html>
+  `;
+  const sjisBuffer = iconv.encode(mockHtml, "sjis");
 
-  assert.ok(Array.isArray(items), "The result should be an array.");
-  assert.ok(items.length > 0, "The array of items should not be empty.");
-
-  const item = items[0];
-  assert.ok(item.title, "Item should have a title.");
-  assert.ok(item.link, "Item should have a link.");
-  assert.ok(item.pubdate, "Item should have a pubDate.");
-  assert.ok(item.guid, "Item should have a guid.");
-  assert.ok(item.pubdate instanceof Date, "pubDate should be a Date object.");
-});
-
-test("extractConcertInfo should parse HTML and extract concert details", async (t) => {
-  t.mock.method(global, "fetch", () => {
-    return new Response(
-      `<html><head><meta property="og:image" content="http://example.com/ogp.jpg"></head></html>`,
-      {
+  // Mock the fetch responses
+  t.mock.method(global, "fetch", (url: string) => {
+    if (url.includes("concert-1.html")) {
+      return Promise.resolve(
+        new Response(
+          `<html><head><meta property="og:image" content="https://example.com/image1.jpg"></head></html>`,
+          { status: 200, headers: { "Content-Type": "text/html" } },
+        ),
+      );
+    }
+    if (url.includes("concert-2.html")) {
+      return Promise.resolve(
+        new Response(
+          `<html><head><meta property="og:image" content="https://example.com/image2.jpg"></head></html>`,
+          { status: 200, headers: { "Content-Type": "text/html" } },
+        ),
+      );
+    }
+    if (url.includes("concert-3.html")) {
+      return Promise.resolve(
+        new Response(
+          `<html><head></head></html>`, // No OGP image
+          { status: 200, headers: { "Content-Type": "text/html" } },
+        ),
+      );
+    }
+    // The main page fetch
+    return Promise.resolve(
+      new Response(sjisBuffer, {
         status: 200,
-        headers: { "Content-Type": "text/html" },
-      },
+        headers: { "Content-Type": "text/html; charset=sjis" },
+      }),
     );
   });
-  // A mock feedparser item based on the structure of 2083.jp's RSS feed
-  const mockItem: Item = {
-    title: "Sample Concert Title",
-    description: `
-      <h3 class="subtitle">公演概要</h3>
-      <span class="concert_title">東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁</span>
-      <br><br>
-      <b>2025年9月9日(火)</b>
-      <br>
-      開場：18:00
-      <br>
-      開演：19:00
-      <br><br>
-      <b>会場</b>
-      <br>
-      <a href="http://www.suntory.co.jp/suntoryhall/map/" target="_blank">サントリーホール 大ホール</a>
-      <br><br>
-      <b>チケット</b>
-      <br>
-      S席6,000円、A席5,000円、B席4,000円
-      <br><br>
-      <a href="https://t.pia.jp/pia/event/event.do?eventCd=251234" target="_blank" class="next">チケットぴあでのチケット購入はこちら</a>
-      <br><br>
-    `,
-    link: "http://www.2083.jp/concert/20250909cityphil.html",
-    // Other properties are not used by the function, so they can be empty
-    summary: "",
-    origlink: "",
-    date: new Date(),
-    pubdate: new Date(),
-    author: "",
-    guid: "http://www.2083.jp/concert/20250909cityphil.html",
-    comments: "",
-    image: {
-      url: "",
-      title: "",
-    },
-    categories: [],
-    enclosures: [],
-    meta: {} as Item["meta"],
-  };
 
-  const expected: Omit<ConcertInfo, "imageUrl"> & { imageUrl?: string } = {
-    title:
-      "東京シティ・フィルのドラゴンクエスト すぎやまこういち 交響組曲「ドラゴンクエストⅤ」天空の花嫁",
-    date: new Date(2025, 8, 9).toISOString(),
-    venue: "サントリーホール 大ホール",
-    ticketUrl: "https://t.pia.jp/pia/event/event.do?eventCd=251234",
-    sourceUrl: "http://www.2083.jp/concert/20250909cityphil.html",
-    imageUrl: "http://example.com/ogp.jpg",
-  };
+  const results = await scrapeConcertPage("https://www.2083.jp/concert/");
 
-  const result = await extractConcertInfo(mockItem);
+  assert.strictEqual(results.length, 3, "Should find three concerts");
 
-  assert.ok(result, "Result should not be null");
+  const concert1 = results.find((c) => c.title === "Concert One");
+  assert.ok(concert1, "Concert One should be found");
+  assert.strictEqual(concert1.date, new Date("2025-10-12").toISOString());
+  assert.strictEqual(concert1.venue, "東京");
+  assert.strictEqual(
+    concert1.sourceUrl,
+    "https://www.2083.jp/concert/concert-1.html",
+  );
+  assert.strictEqual(concert1.imageUrl, "https://example.com/image1.jpg");
 
+  const concert2 = results.find((c) => c.title === "Concert Two");
+  assert.ok(concert2, "Concert Two should be found");
+  assert.strictEqual(concert2.date, new Date("2025-11-15").toISOString());
+  assert.strictEqual(concert2.venue, "大阪");
   assert.strictEqual(
-    result.title,
-    expected.title,
-    "Title should be extracted correctly",
+    concert2.sourceUrl,
+    "https://www.2083.jp/concert/concert-2.html",
   );
+  assert.strictEqual(concert2.imageUrl, "https://example.com/image2.jpg");
+
+  const concert3 = results.find((c) => c.title === "Concert Three");
+  assert.ok(concert3, "Concert Three should be found");
+  assert.strictEqual(concert3.venue, "Venue not found");
   assert.strictEqual(
-    result.date,
-    expected.date,
-    "Date should be extracted correctly",
-  );
-  assert.strictEqual(
-    result.venue,
-    expected.venue,
-    "Venue should be extracted correctly",
-  );
-  assert.strictEqual(
-    result.ticketUrl,
-    expected.ticketUrl,
-    "Ticket URL should be extracted correctly",
-  );
-  assert.strictEqual(
-    result.sourceUrl,
-    expected.sourceUrl,
-    "Source URL should be the item's link",
-  );
-  assert.strictEqual(
-    result.imageUrl,
-    expected.imageUrl,
-    "Image URL should be extracted correctly",
+    concert3.imageUrl,
+    undefined,
+    "Image URL should be undefined for concert 3",
   );
 });
 
