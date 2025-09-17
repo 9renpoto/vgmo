@@ -21,7 +21,7 @@ test("fetchFeed fetches and parses the RSS feed", async () => {
 test("extractConcertInfo should parse HTML and extract concert details", async (t) => {
   t.mock.method(global, "fetch", () => {
     return new Response(
-      '<html><head></head><body><div id="containerArea"><img src="/images/2025/0909.jpg"></div></body></html>',
+      '<html><head></head><body><div id="left"><img src="/images/2025/0909.jpg"></div></body></html>',
       {
         status: 200,
         headers: { "Content-Type": "text/html" },
