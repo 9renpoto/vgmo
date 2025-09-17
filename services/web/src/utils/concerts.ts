@@ -33,9 +33,11 @@ const normalizeConcerts = (concerts: ConcertInfo[]): ConcertInfo[] => {
       unique.set(key, concert);
     }
   }
-  return Array.from(unique.values()).sort((a, b) =>
-    b.date.localeCompare(a.date),
-  );
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Array.from(unique.values())
+    .filter((c) => new Date(c.date) >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
 };
 
 export async function loadConcertsFromFile(
