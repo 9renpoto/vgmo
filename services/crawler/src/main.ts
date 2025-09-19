@@ -8,12 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Extracts the OGP image URL from a given URL.
+ * Extracts the main concert image URL by selecting an <img> inside a <center> element within #left.
  *
- * @param url The URL to fetch and extract the OGP image from.
- * @returns The OGP image URL or null if not found.
+ * @param url The URL to fetch and extract the image from.
+ * @returns The image URL or undefined if not found.
  */
-export const extractOgpImageUrl = async (
+export const extractConcertImageUrl = async (
   url: string,
 ): Promise<string | undefined> => {
   try {
@@ -26,9 +26,28 @@ export const extractOgpImageUrl = async (
     const decoder = new TextDecoder("sjis");
     const html = decoder.decode(buffer);
     const $ = cheerio.load(html);
-    return $('meta[property="og:image"]').attr("content");
+    const pageHost = new URL(url).host;
+    const centeredImages = $("#left center img");
+
+    for (const element of centeredImages.toArray()) {
+      const src = $(element).attr("src");
+      if (!src) {
+        continue;
+      }
+      try {
+        const resolvedUrl = new URL(src, url);
+        // Prefer images that live on the same domain as the concert page.
+        if (resolvedUrl.host === pageHost) {
+          return resolvedUrl.href;
+        }
+      } catch (error) {
+        console.warn(`Invalid image URL detected on ${url}:`, src, error);
+      }
+    }
+
+    return undefined;
   } catch (error) {
-    console.error(`Error fetching OGP image from ${url}:`, error);
+    console.error(`Error fetching image from ${url}:`, error);
     return undefined;
   }
 };
@@ -104,7 +123,7 @@ export const scrapeConcertPage = async (
 
       const { date, venue } = dateAndVenue;
 
-      const promise = extractOgpImageUrl(sourceUrl).then((imageUrl) => {
+      const promise = extractConcertImageUrl(sourceUrl).then((imageUrl) => {
         concertInfos.push({
           title,
           date,

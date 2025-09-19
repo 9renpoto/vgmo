@@ -21,7 +21,7 @@ export default meta;
 
 const baseArgs: CardProps = {
   title: "ファイナルファンタジー オーケストラコンサート 2024",
-  imageUrl: "", // No image url, so it will show the placeholder
+  imageUrl: "https://placehold.co/600x400?text=Concert",
   date: "2024年3月15日(金)",
   time: "19:00開演",
   location: "東京国際フォーラム ホールA",
@@ -34,9 +34,20 @@ const baseArgs: CardProps = {
   sourceUrl: "https://example.com/source",
 };
 
-export const Default: StoryObj<typeof Card> = {
+const withoutImageArgs: CardProps = {
+  ...baseArgs,
+  imageUrl: "",
+};
+
+export const WithImage: StoryObj<typeof Card> = {
   args: {
     ...baseArgs,
+  },
+};
+
+export const WithoutImage: StoryObj<typeof Card> = {
+  args: {
+    ...withoutImageArgs,
   },
 };
 
@@ -52,6 +63,7 @@ export const MobileView: StoryObj = {
   render: () => (
     <div class="grid grid-cols-1 gap-4 p-4">
       <Card {...baseArgs} />
+      <Card {...withoutImageArgs} />
     </div>
   ),
 };
@@ -62,7 +74,7 @@ export const DesktopView: StoryObj = {
       <Card {...baseArgs} title="コンサート1" />
       <Card {...baseArgs} title="コンサート2" />
       <Card
-        {...baseArgs}
+        {...withoutImageArgs}
         title="コンサート3"
         sourceUrl={undefined}
         sourceName={undefined}
