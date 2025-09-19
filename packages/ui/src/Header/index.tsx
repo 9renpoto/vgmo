@@ -1,32 +1,36 @@
 import { Menu, Music, X } from "lucide-preact";
-import { useState } from "preact/hooks";
 
 type Props = {
   active: string;
 };
 
 export default function Header({ active }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
   const menus = [{ name: "Home", href: "/" }];
+  const toggleId = "header-menu-toggle";
 
   return (
     <header class="bg-white w-full py-4 px-6 md:px-8 flex flex-col md:flex-row gap-4 shadow-md sticky top-0 z-50">
-      <div class="flex items-center justify-between flex-1">
+      <div class="flex items-center justify-between">
         <a href="/" class="flex items-center">
           <Music aria-hidden="true" />
           <div class="text-2xl ml-1 font-bold">vgmo</div>
         </a>
-        <div class="md:hidden">
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            class="text-gray-500 hover:text-gray-700"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
       </div>
-      <nav class={`md:flex items-center gap-6 ${isOpen ? "block" : "hidden"}`}>
+      <input id={toggleId} type="checkbox" class="hidden peer md:hidden" />
+      <label
+        for={toggleId}
+        class="md:hidden flex items-center justify-end text-gray-500 hover:text-gray-700 cursor-pointer"
+        aria-controls="header-navigation"
+        aria-expanded={undefined}
+      >
+        <span class="sr-only">メニュー</span>
+        <Menu size={24} class="inline peer-checked:hidden" aria-hidden="true" />
+        <X size={24} class="hidden peer-checked:inline" aria-hidden="true" />
+      </label>
+      <nav
+        id="header-navigation"
+        class="hidden peer-checked:block md:flex items-center gap-6"
+      >
         <ul class="flex flex-col md:flex-row items-center gap-6">
           {menus.map((menu) => (
             <li key={menu.name}>

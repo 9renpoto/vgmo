@@ -18,15 +18,16 @@ export interface CardProps {
 export default function Card(props: CardProps): JSX.Element {
   const isClickable = !!props.sourceUrl;
 
+  const handleImageError: JSX.GenericEventHandler<HTMLImageElement> = (
+    event,
+  ) => {
+    event.currentTarget.classList.add("hidden");
+  };
+
   const CardContent = (
     <>
       <div class="relative">
-        <img
-          class="w-full h-48 object-cover bg-gray-200"
-          src={props.imageUrl}
-          alt={props.title}
-        />
-        <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-300">
+        <div class="w-full h-48 flex items-center justify-center bg-gray-300">
           <svg
             class="w-12 h-12 text-gray-400"
             fill="none"
@@ -42,6 +43,15 @@ export default function Card(props: CardProps): JSX.Element {
             />
           </svg>
         </div>
+        {props.imageUrl && props.imageUrl.trim().length > 0 && (
+          <img
+            class="absolute inset-0 w-full h-full object-cover bg-gray-200"
+            src={props.imageUrl}
+            alt={props.title}
+            loading="lazy"
+            onError={handleImageError}
+          />
+        )}
       </div>
 
       <div class="p-5">
