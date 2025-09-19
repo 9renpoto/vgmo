@@ -47,7 +47,18 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     if (url.includes("concert-1.html")) {
       return Promise.resolve(
         new Response(
-          `<html><head><meta property="og:image" content="https://example.com/image1.jpg"></head></html>`,
+          `
+            <html>
+              <body>
+                <div id="left">
+                  <img src="https://social.example.com/share.jpg" />
+                  <center>
+                    <img src="https://www.2083.jp/concert/image1.jpg" />
+                  </center>
+                </div>
+              </body>
+            </html>
+          `,
           { status: 200, headers: { "Content-Type": "text/html" } },
         ),
       );
@@ -55,7 +66,18 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     if (url.includes("concert-2.html")) {
       return Promise.resolve(
         new Response(
-          `<html><head><meta property="og:image" content="https://example.com/image2.jpg"></head></html>`,
+          `
+            <html>
+              <body>
+                <div id="left">
+                  <img src="https://social.example.com/share.jpg" />
+                  <center>
+                    <img src="./image2.jpg" />
+                  </center>
+                </div>
+              </body>
+            </html>
+          `,
           { status: 200, headers: { "Content-Type": "text/html" } },
         ),
       );
@@ -63,7 +85,18 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     if (url.includes("concert-3.html")) {
       return Promise.resolve(
         new Response(
-          `<html><head></head></html>`, // No OGP image
+          `
+            <html>
+              <body>
+                <div id="left">
+                  <img src="https://social.example.com/share.jpg" />
+                  <center>
+                    <img src="https://social.example.com/banner.jpg" />
+                  </center>
+                </div>
+              </body>
+            </html>
+          `, // No second image available
           { status: 200, headers: { "Content-Type": "text/html" } },
         ),
       );
@@ -83,23 +116,29 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const concert1 = results.find((c) => c.title === "Concert One");
   assert.ok(concert1, "Concert One should be found");
-  assert.strictEqual(concert1.date, new Date("2025-10-12").toISOString());
+  assert.strictEqual(concert1.date, new Date(2025, 9, 12).toISOString());
   assert.strictEqual(concert1.venue, "東京");
   assert.strictEqual(
     concert1.sourceUrl,
     "https://www.2083.jp/concert/concert-1.html",
   );
-  assert.strictEqual(concert1.imageUrl, "https://example.com/image1.jpg");
+  assert.strictEqual(
+    concert1.imageUrl,
+    "https://www.2083.jp/concert/image1.jpg",
+  );
 
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
-  assert.strictEqual(concert2.date, new Date("2025-11-15").toISOString());
+  assert.strictEqual(concert2.date, new Date(2025, 10, 15).toISOString());
   assert.strictEqual(concert2.venue, "大阪");
   assert.strictEqual(
     concert2.sourceUrl,
     "https://www.2083.jp/concert/concert-2.html",
   );
-  assert.strictEqual(concert2.imageUrl, "https://example.com/image2.jpg");
+  assert.strictEqual(
+    concert2.imageUrl,
+    "https://www.2083.jp/concert/image2.jpg",
+  );
 
   const concert3 = results.find((c) => c.title === "Concert Three");
   assert.ok(concert3, "Concert Three should be found");
