@@ -1,6 +1,5 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
-import { Breadcrumbs } from "@vgmo/ui/src/Breadcrumbs";
 import Card from "@vgmo/ui/src/Card";
 import type { CardProps } from "@vgmo/ui/src/Card";
 import type { ConcertWithMeta } from "../../utils/concerts";
@@ -40,13 +39,6 @@ const description = `${concert.date} @ ${concert.venue}`;
   </Fragment>
 
   <div class="space-y-4">
-    <Breadcrumbs
-      breadcrumbs={[
-        { label: "Home", href: "/" },
-        { label: "演奏情報", href: "/" },
-        { label: concert.title },
-      ]}
-    />
     <Card {...toCard(concert)} />
     <div class="mt-2 text-sm text-gray-700">
       <p>

@@ -1,4 +1,5 @@
 ---
+import Footer from "@vgmo/ui/src/Footer";
 import Header from "@vgmo/ui/src/Header";
 import TwindSetup from "../components/TwindSetup.astro";
 import {
@@ -44,5 +45,6 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         <slot />
       </main>
     </div>
+    <Footer />
   </body>
 </html>
