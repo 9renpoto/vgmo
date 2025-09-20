@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
-    "@types/cheerio": "^1.0.0",
     "typescript": "^5.9.2"
   }
 }
