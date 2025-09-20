@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function Header({ active }: Props) {
-  const menus = [{ name: "Home", href: "/" }];
+  const menus: { name: string; href: string }[] = [];
   const toggleId = "header-menu-toggle";
 
   return (
