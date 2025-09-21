@@ -53,6 +53,45 @@ export const extractConcertImageUrl = async (
 };
 
 /**
+ * Extracts the ticket purchase URL by selecting the first <a> inside a .next element within #left.
+ *
+ * @param url The URL to fetch and extract the ticket link from.
+ * @returns The ticket URL or undefined if not found.
+ */
+export const extractTicketUrl = async (
+  url: string,
+): Promise<string | undefined> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      return undefined;
+    }
+    // The target website uses Shift_JIS encoding.
+    const buffer = await response.arrayBuffer();
+    const decoder = new TextDecoder("sjis");
+    const html = decoder.decode(buffer);
+    const $ = cheerio.load(html);
+
+    const ticketLink = $("#left .next a").first();
+    const href = ticketLink.attr("href");
+
+    if (href) {
+      try {
+        const resolvedUrl = new URL(href, url);
+        return resolvedUrl.href;
+      } catch (error) {
+        console.warn(`Invalid ticket URL detected on ${url}:`, href, error);
+      }
+    }
+
+    return undefined;
+  } catch (error) {
+    console.error(`Error fetching ticket URL from ${url}:`, error);
+    return undefined;
+  }
+};
+
+/**
  * Parses the date and venue string.
  * e.g. "2025年9月20日(土)＠【東京都】"
  * @param text The text to parse.
@@ -123,12 +162,15 @@ export const scrapeConcertPage = async (
 
       const { date, venue } = dateAndVenue;
 
-      const promise = extractConcertImageUrl(sourceUrl).then((imageUrl) => {
+      const promise = Promise.all([
+        extractConcertImageUrl(sourceUrl),
+        extractTicketUrl(sourceUrl),
+      ]).then(([imageUrl, ticketUrl]) => {
         concertInfos.push({
           title,
           date,
           venue,
-          ticketUrl: null, // Not available on the list page
+          ticketUrl: ticketUrl ?? null,
           sourceUrl,
           imageUrl,
         });

@@ -55,6 +55,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
                   <center>
                     <img src="https://www.2083.jp/concert/image1.jpg" />
                   </center>
+                  <p class="next"><a href="/ticket/1"><span>チケット購入</span></a></p>
                 </div>
               </body>
             </html>
@@ -74,6 +75,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
                   <center>
                     <img src="./image2.jpg" />
                   </center>
+                  <p class="next"><a href="https://example.com/ticket/2"><span>チケット購入</span></a></p>
                 </div>
               </body>
             </html>
@@ -126,6 +128,11 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     concert1.imageUrl,
     "https://www.2083.jp/concert/image1.jpg",
   );
+  assert.strictEqual(
+    concert1.ticketUrl,
+    "https://www.2083.jp/ticket/1",
+    "Ticket URL for concert 1 should be correct",
+  );
 
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
@@ -139,6 +146,11 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     concert2.imageUrl,
     "https://www.2083.jp/concert/image2.jpg",
   );
+  assert.strictEqual(
+    concert2.ticketUrl,
+    "https://example.com/ticket/2",
+    "Ticket URL for concert 2 should be correct",
+  );
 
   const concert3 = results.find((c) => c.title === "Concert Three");
   assert.ok(concert3, "Concert Three should be found");
@@ -147,6 +159,11 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     concert3.imageUrl,
     undefined,
     "Image URL should be undefined for concert 3",
+  );
+  assert.strictEqual(
+    concert3.ticketUrl,
+    null,
+    "Ticket URL for concert 3 should be null",
   );
 });
 
