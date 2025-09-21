@@ -1,5 +1,7 @@
 # vgmo
 
+[![codecov](https://codecov.io/gh/9renpoto/vgmo/graph/badge.svg?token=k4zcp3DlWp)](https://codecov.io/gh/9renpoto/vgmo)
+
 Monorepo managed with npm workspaces containing:
 - `packages/ui`: Preact UI component library with Storybook and tests
 - `services/web`: Astro website using the UI package
