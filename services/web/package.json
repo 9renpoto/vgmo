@@ -20,7 +20,7 @@
     "@twind/preset-tailwind": "^1.1.4",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^5.13.5",
+    "astro": "^5.13.10",
     "preact": "^10.27.1"
   },
   "devDependencies": {
