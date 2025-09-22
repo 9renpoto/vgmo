@@ -13,10 +13,11 @@ export default function Footer() {
       ],
     },
     {
-      title: "Community",
+      title: "Links",
       children: [
         { name: "Forum", href: "#" },
         { name: "Discord", href: "#" },
+        { name: "お問い合わせ", href: "https://github.com/9renpoto/.59-node/issues" },
       ],
     },
   ];
