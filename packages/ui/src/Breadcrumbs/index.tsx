@@ -1,5 +1,3 @@
-import { tw } from "@twind/core";
-
 type Breadcrumb = {
   label: string;
   href?: string;
@@ -12,22 +10,19 @@ type Props = {
 export const Breadcrumbs = ({ breadcrumbs }: Props) => {
   return (
     <nav aria-label="breadcrumb">
-      <ol className={tw("flex space-x-2")}>
+      <ol class="flex space-x-2">
         {breadcrumbs.map((breadcrumb, index) => (
           <li
             key={`${breadcrumb.label}-${breadcrumb.href}`}
-            className={tw("flex items-center")}
+            class="flex items-center"
           >
-            {index > 0 && <span className={tw("mx-2")}>/</span>}
+            {index > 0 && <span class="mx-2">/</span>}
             {breadcrumb.href ? (
-              <a
-                href={breadcrumb.href}
-                className={tw("text-blue-600 hover:underline")}
-              >
+              <a href={breadcrumb.href} class="text-blue-600 hover:underline">
                 {breadcrumb.label}
               </a>
             ) : (
-              <span className={tw("text-gray-500")}>{breadcrumb.label}</span>
+              <span class="text-gray-500">{breadcrumb.label}</span>
             )}
           </li>
         ))}

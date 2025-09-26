@@ -21,7 +21,7 @@ npm ci
 
 ## Development Notes
 - Components are organized as `src/ComponentName/` with `index.tsx` and `ComponentName.stories.tsx`
-- Styling via Twind (`twind.config.ts`)
+- Styling via Tailwind CSS (`tailwind.config.ts` + `src/styles/tailwind.css`)
 
 ## Contributing
 Please read the repository contributing guide at `../../.github/CONTRIBUTING.md` and follow Conventional Commits.

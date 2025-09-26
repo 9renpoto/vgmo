@@ -1,7 +1,7 @@
 ---
 import Footer from "@vgmo/ui/src/Footer";
 import Header from "@vgmo/ui/src/Header";
-import TwindSetup from "../components/TwindSetup.astro";
+import "../styles/tailwind.css";
 import {
   GoogleAnalytics,
   GoogleAnalyticsNoscript,
@@ -50,7 +50,6 @@ const menus = [
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <slot name="head" />
-    <TwindSetup />
     {gaId && <GoogleAnalytics id={gaId} />}
   </head>
   <body class="bg-gray-100">

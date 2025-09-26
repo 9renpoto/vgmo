@@ -1,8 +1,5 @@
 import type { Preview } from "@storybook/preact-vite";
-import { install } from "@twind/core";
-import config from "../twind.config";
-
-install(config);
+import "../src/styles/tailwind.css";
 
 const preview: Preview = {
   parameters: {
