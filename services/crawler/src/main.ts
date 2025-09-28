@@ -65,7 +65,7 @@ export const extractTicketUrl = async (
   const html = decoder.decode(buffer);
   const $ = cheerio.load(html);
 
-  const finders: Array<() => cheerio.Cheerio> = [
+  const finders: Array<() => ReturnType<typeof $>> = [
     () => $("#left .next a").first(),
     () => $("#left a.next"),
     () =>
