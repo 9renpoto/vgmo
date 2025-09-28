@@ -1,4 +1,5 @@
 {
+  "name": "vgmo",
   "private": true,
   "author": "9renpoto",
   "scripts": {
@@ -13,9 +14,7 @@
       "services/*"
     ]
   },
-  "dependencies": {
-    "feedparser": "^2.2.10"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.12.12",
     "@typescript/native-preview": "7.0.0-dev.20250910.1",

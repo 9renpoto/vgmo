@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc --build .",
+    "build": "tsgo --build .",
     "test": "node -e \"process.exit(0)\""
   }
 }
