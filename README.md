@@ -5,7 +5,7 @@
 Monorepo managed with npm workspaces containing:
 - `packages/ui`: Preact UI component library with Storybook and tests
 - `services/web`: Astro website using the UI package
-- `services/crawler`: Node/TypeScript crawler service
+- `services/crawler`: Node/TypeScript crawler service (runs directly with `node --experimental-strip-types`)
 
 ## Table of Contents
 - Requirements
@@ -21,7 +21,7 @@ Monorepo managed with npm workspaces containing:
 - License
 
 ## Requirements
-- Node.js 20+ recommended
+- Node.js 20.6+ recommended (needed for the native TypeScript `tsgo` compiler)
   - For `services/crawler` tests using `--experimental-strip-types`, Node.js 22+ is required
 - npm (bundled with Node)
 - Git
@@ -41,14 +41,16 @@ pre-commit install
 ```
 
 ## Quick Start
-- Build all workspaces: `npm run build`
+- Build all workspaces with `tsgo`: `npm run build`
 - Run the website (Astro) in dev: `npm run -w @vgmo/web dev`
 - Open Storybook for UI: `npm run -w @vgmo/ui storybook`
+- Run the crawler without compiling: `npm run crawl`
 
 ## Development
-- Use Node LTS (20+) and run commands at the repo root
+- Use Node LTS (20.6+) and run commands at the repo root
 - Add dependencies to a specific workspace with `-w`, e.g. `npm i <pkg> -w @vgmo/web`
 - Keep changes scoped to a single workspace when possible
+- The TypeScript toolchain uses the native preview compiler (`tsgo`), so `npm run build -w <workspace>` delegates to `tsgo --build`
 
 ## Workspaces
 - This repository is a monorepo managed by npm workspaces
@@ -61,6 +63,7 @@ pre-commit install
 - UI package: `npm test -w @vgmo/ui` (Storybook test runner + coverage)
 - Web service: `npm test -w @vgmo/web` (Node test runner)
 - Crawler service: `npm test -w @vgmo/crawler` (Node test runner; Node 22+ for `--experimental-strip-types`)
+- Crawler runtime: `npm run crawl` (invokes `node --experimental-strip-types src/main.ts` directly)
 
 ## Linting & Formatting
 - Biome is used for linting/formatting. Run: `biome ci .`
@@ -68,9 +71,9 @@ pre-commit install
 - Pre-commit hooks run Biome, cspell, hadolint, and secretlint
 
 ## Project Structure
-- `packages/ui/` — Preact components, stories in `src/**/Component.stories.tsx`, build to `lib/`
+- `packages/ui/` — Preact components, stories in `src/**/Component.stories.tsx`, build to `lib/` via `tsgo`
 - `services/web/` — Astro app, pages/layouts/components under `src/`, tests in `tests/`
-- `services/crawler/` — Node/TypeScript crawler, source in `src/`, tests in `tests/`, build to `lib/`
+- `services/crawler/` — Node/TypeScript crawler, source in `src/`, tests in `tests/`, build to `lib/` with `tsgo`; runtime entry at `src/main.ts`
 - Config: `biome.json`, `cspell.json`, `tsconfig.json`, `.pre-commit-config.yaml`
 
 ## Contributing
