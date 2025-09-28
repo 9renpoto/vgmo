@@ -6,7 +6,8 @@
     "storybook": "npm run storybook -w @vgmo/ui",
     "build-storybook": " npm run build-storybook -w @vgmo/ui",
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces"
+    "test": "npm test --workspaces",
+    "crawl": "npm run crawl -w @vgmo/crawler"
   },
   "workspaces": {
     "packages": [
