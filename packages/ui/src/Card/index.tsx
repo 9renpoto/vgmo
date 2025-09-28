@@ -16,7 +16,7 @@ export interface CardProps {
 }
 
 export default function Card(props: CardProps): JSX.Element {
-  const isClickable = !!props.sourceUrl;
+  const isClickable = !!props.sourceUrl && !props.buttonUrl;
 
   const handleImageError: JSX.GenericEventHandler<HTMLImageElement> = (
     event,
@@ -24,8 +24,8 @@ export default function Card(props: CardProps): JSX.Element {
     event.currentTarget.classList.add("hidden");
   };
 
-  const CardContent = (
-    <>
+  const CardBody = (
+    <div class="flex-grow">
       <div class="relative">
         <div class="w-full h-48 flex items-center justify-center bg-gray-300">
           <svg
@@ -81,7 +81,7 @@ export default function Card(props: CardProps): JSX.Element {
           </div>
         )}
 
-        <div class="flex flex-wrap mb-5">
+        <div class="flex flex-wrap">
           {props.tags.map((tag) => (
             <span
               key={tag}
@@ -91,30 +91,35 @@ export default function Card(props: CardProps): JSX.Element {
             </span>
           ))}
         </div>
+      </div>
+    </div>
+  );
 
-        {props.buttonUrl && !isClickable && (
-          <a
-            href={props.buttonUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
-          >
-            {props.buttonText}
-            <ExternalLink size={20} class="ml-2" />
-          </a>
-        )}
-        {isClickable && (
+  const CardActions = (
+    <div class="p-5 pt-0">
+      {props.buttonUrl ? (
+        <a
+          href={props.buttonUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+        >
+          {props.buttonText}
+          <ExternalLink size={20} class="ml-2" />
+        </a>
+      ) : (
+        isClickable && (
           <div class="w-full flex items-center justify-center bg-teal-500 text-white font-bold py-3 px-4 rounded-lg">
             {props.buttonText}
             <ExternalLink size={20} class="ml-2" />
           </div>
-        )}
-      </div>
-    </>
+        )
+      )}
+    </div>
   );
 
   const baseClasses =
-    "max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans";
+    "max-w-sm rounded-2xl border border-purple-200 bg-white shadow-lg overflow-hidden font-sans flex flex-col";
   const hoverClasses = "hover:shadow-xl transition-shadow duration-300";
 
   if (isClickable) {
@@ -125,10 +130,16 @@ export default function Card(props: CardProps): JSX.Element {
         rel="noopener noreferrer"
         class={`${baseClasses} ${hoverClasses} block`}
       >
-        {CardContent}
+        {CardBody}
+        {CardActions}
       </a>
     );
   }
 
-  return <div class={baseClasses}>{CardContent}</div>;
+  return (
+    <div class={baseClasses}>
+      {CardBody}
+      {CardActions}
+    </div>
+  );
 }
