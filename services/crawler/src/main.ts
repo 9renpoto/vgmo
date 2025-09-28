@@ -65,19 +65,33 @@ export const extractTicketUrl = async (
   const html = decoder.decode(buffer);
   const $ = cheerio.load(html);
 
-  const ticketLink = $("#left .next a").first();
-  const href = ticketLink.attr("href");
+  const finders: Array<() => cheerio.Cheerio> = [
+    () => $("#left .next a").first(),
+    () => $("#left a.next"),
+    () =>
+      $("#left a").filter((_index, element) => {
+        const text = $(element).text().trim().toLowerCase();
+        return text.includes("チケット") || text.includes("ticket");
+      }),
+    () => $("#left a[href*='ticket']"),
+  ];
 
-  if (!href) {
-    return undefined;
+  for (const finder of finders) {
+    const candidate = finder();
+    const href = candidate.attr("href");
+    if (!href) {
+      continue;
+    }
+
+    if (!URL.canParse(href, url)) {
+      console.warn(`Invalid ticket URL detected on ${url}:`, href);
+      continue;
+    }
+
+    return new URL(href, url).href;
   }
 
-  if (!URL.canParse(href, url)) {
-    console.warn(`Invalid ticket URL detected on ${url}:`, href);
-    return undefined;
-  }
-
-  return new URL(href, url).href;
+  return undefined;
 };
 
 /**

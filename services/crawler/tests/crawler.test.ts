@@ -35,6 +35,14 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
                 <dd>Description three</dd>
               </dl>
             </li>
+            <li>
+              <dl class="detail">
+                <dt>2025年12月28日(日)＠【東京】<br />
+                  <a href="https://www.2083.jp/concert/concert-4.html">Concert Four</a>
+                </dt>
+                <dd>Description four</dd>
+              </dl>
+            </li>
           </ul>
         </div>
       </body>
@@ -103,6 +111,22 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
         ),
       );
     }
+    if (url.includes("concert-4.html")) {
+      return Promise.resolve(
+        new Response(
+          `
+            <html>
+              <body>
+                <div id="left">
+                  <p><a href="https://tickets.example.org/buy/online" target="_blank" class="next">⇒オンラインチケットでのチケット購入はこちら</a></p>
+                </div>
+              </body>
+            </html>
+          `,
+          { status: 200, headers: { "Content-Type": "text/html" } },
+        ),
+      );
+    }
     // The main page fetch
     return Promise.resolve(
       new Response(sjisBuffer, {
@@ -114,7 +138,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const results = await scrapeConcertPage("https://www.2083.jp/concert/");
 
-  assert.strictEqual(results.length, 3, "Should find three concerts");
+  assert.strictEqual(results.length, 4, "Should find four concerts");
 
   const concert1 = results.find((c) => c.title === "Concert One");
   assert.ok(concert1, "Concert One should be found");
@@ -164,6 +188,14 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     concert3.ticketUrl,
     null,
     "Ticket URL for concert 3 should be null",
+  );
+
+  const concert4 = results.find((c) => c.title === "Concert Four");
+  assert.ok(concert4, "Concert Four should be found");
+  assert.strictEqual(
+    concert4.ticketUrl,
+    "https://tickets.example.org/buy/online",
+    "Ticket URL for concert 4 should pick the external ticket site",
   );
 });
 
