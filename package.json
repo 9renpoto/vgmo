@@ -1,11 +1,13 @@
 {
+  "name": "vgmo",
   "private": true,
   "author": "9renpoto",
   "scripts": {
     "storybook": "npm run storybook -w @vgmo/ui",
     "build-storybook": " npm run build-storybook -w @vgmo/ui",
     "build": "npm run build --workspaces",
-    "test": "npm test --workspaces"
+    "test": "npm test --workspaces",
+    "crawl": "npm run crawl -w @vgmo/crawler"
   },
   "workspaces": {
     "packages": [
@@ -13,9 +15,7 @@
       "services/*"
     ]
   },
-  "dependencies": {
-    "feedparser": "^2.2.10"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.12.12",
     "@typescript/native-preview": "7.0.0-dev.20250910.1",

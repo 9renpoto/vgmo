@@ -4,7 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc --build .",
+    "build": "tsgo --build .",
     "test": "test-storybook --coverage --junit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ConcertInfo } from "@vgmo/types";
@@ -16,40 +16,82 @@ const __dirname = dirname(__filename);
 export const extractConcertImageUrl = async (
   url: string,
 ): Promise<string | undefined> => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      return undefined;
-    }
-    // The target website uses Shift_JIS encoding.
-    const buffer = await response.arrayBuffer();
-    const decoder = new TextDecoder("sjis");
-    const html = decoder.decode(buffer);
-    const $ = cheerio.load(html);
-    const pageHost = new URL(url).host;
-    const centeredImages = $("#left center img");
-
-    for (const element of centeredImages.toArray()) {
-      const src = $(element).attr("src");
-      if (!src) {
-        continue;
-      }
-      try {
-        const resolvedUrl = new URL(src, url);
-        // Prefer images that live on the same domain as the concert page.
-        if (resolvedUrl.host === pageHost) {
-          return resolvedUrl.href;
-        }
-      } catch (error) {
-        console.warn(`Invalid image URL detected on ${url}:`, src, error);
-      }
-    }
-
-    return undefined;
-  } catch (error) {
-    console.error(`Error fetching image from ${url}:`, error);
+  const response = await fetch(url);
+  if (!response.ok) {
     return undefined;
   }
+  // The target website uses Shift_JIS encoding.
+  const buffer = await response.arrayBuffer();
+  const decoder = new TextDecoder("sjis");
+  const html = decoder.decode(buffer);
+  const $ = cheerio.load(html);
+  const pageHost = new URL(url).host;
+  const centeredImages = $("#left center img");
+
+  for (const element of centeredImages.toArray()) {
+    const src = $(element).attr("src");
+    if (!src || !URL.canParse(src, url)) {
+      if (src) {
+        console.warn(`Invalid image URL detected on ${url}:`, src);
+      }
+      continue;
+    }
+    const resolvedUrl = new URL(src, url);
+    // Prefer images that live on the same domain as the concert page.
+    if (resolvedUrl.host === pageHost) {
+      return resolvedUrl.href;
+    }
+  }
+
+  return undefined;
+};
+
+/**
+ * Extracts the ticket purchase URL by selecting the first <a> inside a .next element within #left.
+ *
+ * @param url The URL to fetch and extract the ticket link from.
+ * @returns The ticket URL or undefined if not found.
+ */
+export const extractTicketUrl = async (
+  url: string,
+): Promise<string | undefined> => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return undefined;
+  }
+  // The target website uses Shift_JIS encoding.
+  const buffer = await response.arrayBuffer();
+  const decoder = new TextDecoder("sjis");
+  const html = decoder.decode(buffer);
+  const $ = cheerio.load(html);
+
+  const finders: Array<() => ReturnType<typeof $>> = [
+    () => $("#left .next a").first(),
+    () => $("#left a.next"),
+    () =>
+      $("#left a").filter((_index, element) => {
+        const text = $(element).text().trim().toLowerCase();
+        return text.includes("チケット") || text.includes("ticket");
+      }),
+    () => $("#left a[href*='ticket']"),
+  ];
+
+  for (const finder of finders) {
+    const candidate = finder();
+    const href = candidate.attr("href");
+    if (!href) {
+      continue;
+    }
+
+    if (!URL.canParse(href, url)) {
+      console.warn(`Invalid ticket URL detected on ${url}:`, href);
+      continue;
+    }
+
+    return new URL(href, url).href;
+  }
+
+  return undefined;
 };
 
 /**
@@ -92,54 +134,53 @@ export const scrapeConcertPage = async (
 ): Promise<ConcertInfo[]> => {
   const concertInfos: ConcertInfo[] = [];
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch page: ${response.statusText}`);
-    }
-    const buffer = await response.arrayBuffer();
-    const decoder = new TextDecoder("sjis");
-    const html = decoder.decode(buffer);
-    const $ = cheerio.load(html);
-
-    const concertPromises: Promise<void>[] = [];
-
-    $("ul#concertlist li").each((_i, el) => {
-      const element = $(el);
-      const link = element.find("dt a");
-      const sourceUrl = link.attr("href");
-      const title = link.text().trim();
-      const dtText = element.find("dt").text().trim();
-
-      if (!sourceUrl || !title) {
-        return; // Skip if essential info is missing
-      }
-
-      const dateAndVenue = parseDateAndVenue(dtText);
-      if (!dateAndVenue) {
-        console.warn(`Could not parse date/venue for: ${title}`);
-        return; // Skip if date is not parsable
-      }
-
-      const { date, venue } = dateAndVenue;
-
-      const promise = extractConcertImageUrl(sourceUrl).then((imageUrl) => {
-        concertInfos.push({
-          title,
-          date,
-          venue,
-          ticketUrl: null, // Not available on the list page
-          sourceUrl,
-          imageUrl,
-        });
-      });
-      concertPromises.push(promise);
-    });
-
-    await Promise.all(concertPromises);
-  } catch (error) {
-    console.error("Error scraping concert page:", error);
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch page: ${response.statusText}`);
   }
+  const buffer = await response.arrayBuffer();
+  const decoder = new TextDecoder("sjis");
+  const html = decoder.decode(buffer);
+  const $ = cheerio.load(html);
+
+  const concertPromises: Promise<void>[] = [];
+
+  $("ul#concertlist li").each((_i, el) => {
+    const element = $(el);
+    const link = element.find("dt a");
+    const sourceUrl = link.attr("href");
+    const title = link.text().trim();
+    const dtText = element.find("dt").text().trim();
+
+    if (!sourceUrl || !title) {
+      return; // Skip if essential info is missing
+    }
+
+    const dateAndVenue = parseDateAndVenue(dtText);
+    if (!dateAndVenue) {
+      console.warn(`Could not parse date/venue for: ${title}`);
+      return; // Skip if date is not parsable
+    }
+
+    const { date, venue } = dateAndVenue;
+
+    const promise = Promise.all([
+      extractConcertImageUrl(sourceUrl),
+      extractTicketUrl(sourceUrl),
+    ]).then(([imageUrl, ticketUrl]) => {
+      concertInfos.push({
+        title,
+        date,
+        venue,
+        ticketUrl: ticketUrl ?? null,
+        sourceUrl,
+        imageUrl,
+      });
+    });
+    concertPromises.push(promise);
+  });
+
+  await Promise.all(concertPromises);
 
   return concertInfos;
 };
@@ -183,6 +224,27 @@ export const mergeConcerts = (
   );
 };
 
+const readExistingConcerts = async (
+  outputPath: string,
+): Promise<ConcertInfo[]> => {
+  const accessible = await access(outputPath).then(
+    () => true,
+    (error: NodeJS.ErrnoException) => {
+      if (error.code === "ENOENT") {
+        return false;
+      }
+      throw error;
+    },
+  );
+
+  if (!accessible) {
+    return [];
+  }
+
+  const previous = await readFile(outputPath, "utf-8");
+  return JSON.parse(previous) as ConcertInfo[];
+};
+
 /**
  * Main function to run the crawler.
  */
@@ -190,34 +252,22 @@ async function main() {
   const pageUrl = "https://www.2083.jp/concert/";
   console.log(`Scraping concerts from ${pageUrl}...`);
 
-  try {
-    const concertInfos = await scrapeConcertPage(pageUrl);
-    console.log(`Found ${concertInfos.length} concerts.`);
+  const concertInfos = await scrapeConcertPage(pageUrl);
+  console.log(`Found ${concertInfos.length} concerts.`);
 
-    const outputPath = resolve(
-      __dirname,
-      "../../../services/web/public/data/concerts.json",
-    );
-    let existingConcerts: ConcertInfo[] = [];
-    try {
-      const previous = await readFile(outputPath, "utf-8");
-      existingConcerts = JSON.parse(previous) as ConcertInfo[];
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
-        console.warn("Failed to read existing concerts.json:", error);
-      }
-    }
+  const outputPath = resolve(
+    __dirname,
+    "../../../services/web/public/data/concerts.json",
+  );
 
-    const mergedConcerts = mergeConcerts(existingConcerts, concertInfos);
+  const existingConcerts = await readExistingConcerts(outputPath);
+  const mergedConcerts = mergeConcerts(existingConcerts, concertInfos);
 
-    await writeFile(outputPath, JSON.stringify(mergedConcerts, null, 2));
+  await writeFile(outputPath, JSON.stringify(mergedConcerts, null, 2));
 
-    console.log(
-      `Successfully wrote ${mergedConcerts.length} concerts to ${outputPath}`,
-    );
-  } catch (error) {
-    console.error("Error in crawler main function:", error);
-  }
+  console.log(
+    `Successfully wrote ${mergedConcerts.length} concerts to ${outputPath}`,
+  );
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
