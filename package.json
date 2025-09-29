@@ -18,7 +18,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "@typescript/native-preview": "7.0.0-dev.20250927.1",
+    "@typescript/native-preview": "7.0.0-dev.20250929.1",
     "c8": "^10.1.2"
   }
 }
