@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: 'lts/*'
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -42,4 +42,4 @@ jobs:
           files: |
             services/web/public/data/concerts.json
           assignees: 'jules-bot'
-          reviewers: 'jules-bot'
+          reviewers: '9renpoto'
