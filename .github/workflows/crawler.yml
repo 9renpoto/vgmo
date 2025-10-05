@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BRANCH_NAME: chore/update-concerts
-      COMMIT_MESSAGE: feat(data): update concert information
+      COMMIT_MESSAGE: 'feat(data): update concert information'
       PR_TITLE: Automated Concert Data Update
       PR_BODY: >-
         The crawler found new concert information. This PR updates the `concerts.json` file.
@@ -76,4 +76,3 @@ jobs:
               --assignee jules-bot \
               --reviewer 9renpoto
           fi
-
