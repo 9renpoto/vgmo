@@ -5,15 +5,14 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "dependencies"
-      - "ci"
+      - "Type: Maintenance"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
     labels:
-      - "dependencies"
+      - "Type: Maintenance"
     groups:
       tailwind:
         patterns:
