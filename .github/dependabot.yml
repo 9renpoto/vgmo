@@ -1,27 +1,36 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
+  - package-ecosystem: "github-actions"
     directory: "/"
-    labels:
-      - "Type: Maintenance"
     schedule:
       interval: "weekly"
-  - package-ecosystem: npm
-    directory: "/"
     labels:
       - "Type: Maintenance"
+
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "Type: Maintenance"
     groups:
-      preact:
+      tailwind:
         patterns:
-          - "@preact*"
-          - "preact"
-      storybook:
-        patterns:
-          - "@storybook*"
-          - "storybook"
+          - "tailwindcss"
+          - "autoprefixer"
+          - "postcss"
+          - "@astrojs/tailwind"
       astro:
         patterns:
           - "astro"
           - "@astrojs/*"
+          - "@codecov/astro-plugin"
+      preact:
+        patterns:
+          - "preact"
+          - "lucide-preact"
+          - "@testing-library/preact"
+      storybook:
+        patterns:
+          - "storybook"
+          - "@storybook/*"
