@@ -8,13 +8,16 @@ Thank you for contributing! This repository is a monorepo managed with npm works
 ## Prerequisites
 - Node.js 20+ (Node 22+ required to run crawler tests with `--experimental-strip-types`)
 - npm and Git installed
-- Optional: Docker (enables the `secretlint` pre-commit hook)
+- [lefthook](https://github.com/evilmartians/lefthook)
+- [biome](https://biomejs.dev/)
 
 ## Setup
 ```sh
 npm ci
-pre-commit install
+lefthook install
 ```
+
+To ensure code quality, please run `biome check --apply .` before committing.
 
 ## Branching, Commits, and PRs
 - Use feature branches (e.g., `feat/ui-button`, `fix/web-login`).
