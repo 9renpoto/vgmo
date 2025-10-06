@@ -64,7 +64,7 @@ jobs:
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               --add-label automated \
-              --add-assignee jules-bot \
+              --add-assignee 9renpoto \
               --add-reviewer 9renpoto
           else
             gh pr create \
@@ -73,6 +73,6 @@ jobs:
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               --label automated \
-              --assignee jules-bot \
+              --assignee 9renpoto \
               --reviewer 9renpoto
           fi
