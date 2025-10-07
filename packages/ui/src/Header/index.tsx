@@ -17,7 +17,11 @@ export default function Header({ active, menus = [] }: Props) {
         </a>
         {menus.length > 0 && (
           <>
-            <input id={toggleId} type="checkbox" class="hidden peer md:hidden" />
+            <input
+              id={toggleId}
+              type="checkbox"
+              class="hidden peer md:hidden"
+            />
             <label
               for={toggleId}
               class="md:hidden flex items-center justify-end text-gray-500 hover:text-gray-700 cursor-pointer"
