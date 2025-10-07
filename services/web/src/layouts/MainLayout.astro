@@ -52,14 +52,16 @@ const menus = [
     <slot name="head" />
     {gaId && <GoogleAnalytics id={gaId} />}
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-100 flex flex-col min-h-screen">
     {gaId && <GoogleAnalyticsNoscript id={gaId} />}
     <Header active="Home" />
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <main class="py-6">
         <slot />
       </main>
     </div>
-    <Footer menus={menus} />
+    <footer class="w-full">
+      <Footer menus={menus} />
+    </footer>
   </body>
 </html>
