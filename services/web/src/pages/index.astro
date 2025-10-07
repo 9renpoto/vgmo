@@ -1,5 +1,4 @@
 ---
-import { Breadcrumbs } from "@vgmo/ui/src/Breadcrumbs";
 import Card from "@vgmo/ui/src/Card";
 import type { CardProps } from "@vgmo/ui/src/Card";
 import type { ConcertWithMeta } from "../utils/concerts";
@@ -24,15 +23,7 @@ const concerts = await listConcerts();
 ---
 
 <MainLayout title="vgmo | ゲーム音楽オーケストラまとめ">
-  <div class="space-y-4">
-    <Breadcrumbs
-      breadcrumbs={[
-        { label: "Home", href: "#" },
-        { label: "演奏情報" },
-      ]}
-    />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {concerts.map((c) => <Card {...toCard(c)} />)}
-    </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {concerts.map((c) => <Card {...toCard(c)} />)}
   </div>
 </MainLayout>
