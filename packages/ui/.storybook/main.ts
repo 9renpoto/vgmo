@@ -36,6 +36,12 @@ const config: StorybookConfig = {
         : [],
     });
   },
+
+  build: {
+    test: {
+      disabledAddons: [],
+    },
+  },
 };
 
 export default config;
