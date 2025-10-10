@@ -24,6 +24,19 @@ export default function Card(props: CardProps): JSX.Element {
     event.currentTarget.classList.add("hidden");
   };
 
+  const getHostname = (url: string | undefined): string | null => {
+    if (!url) {
+      return null;
+    }
+    try {
+      return new URL(url).hostname;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const hostname = getHostname(props.sourceUrl);
+
   const CardBody = (
     <div class="flex-grow">
       <div class="relative">
@@ -51,6 +64,24 @@ export default function Card(props: CardProps): JSX.Element {
             loading="lazy"
             onError={handleImageError}
           />
+        )}
+        {hostname && (
+          <a
+            href={props.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-bold px-2 py-1.5 rounded-lg flex items-center backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=16`}
+              alt=""
+              class="w-4 h-4 mr-1.5"
+              loading="lazy"
+              onError={handleImageError}
+            />
+            {props.sourceName || hostname}
+          </a>
         )}
       </div>
 

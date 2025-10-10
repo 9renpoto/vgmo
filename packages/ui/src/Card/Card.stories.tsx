@@ -45,6 +45,15 @@ export const WithImage: StoryObj<typeof Card> = {
   },
 };
 
+export const WithSourceLink: StoryObj<typeof Card> = {
+  args: {
+    ...baseArgs,
+    buttonUrl: "",
+    sourceName: "Game Watch",
+    sourceUrl: "https://game.watch.impress.co.jp/",
+  },
+};
+
 export const WithoutImage: StoryObj<typeof Card> = {
   args: {
     ...withoutImageArgs,
