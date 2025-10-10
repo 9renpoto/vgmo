@@ -105,13 +105,6 @@ export default function Card(props: CardProps): JSX.Element {
 
         <p class="text-gray-700 text-base mb-5">{props.description}</p>
 
-        {props.sourceUrl && (
-          <div class="flex items-center text-sm text-gray-500 mb-4">
-            <Link size={16} class="mr-2" />
-            <span>{props.sourceName || props.sourceUrl}</span>
-          </div>
-        )}
-
         <div class="flex flex-wrap">
           {props.tags.map((tag) => (
             <span
