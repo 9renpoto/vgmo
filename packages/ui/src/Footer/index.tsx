@@ -19,9 +19,12 @@ export default function Footer({ menus }: Props) {
         <div class="flex-1">
           <div class="flex items-center gap-1">
             <Citrus class="inline-block" aria-hidden="true" />
-            <div class="font-bold text-2xl">Sample</div>
+            <div class="font-bold text-2xl">vgmo</div>
           </div>
-          <div class="text-gray-500">Full Stack Framework</div>
+          <div class="text-gray-500">
+            A service that provides information about video game music
+            concerts.
+          </div>
         </div>
 
         {menus.map((item) => (
