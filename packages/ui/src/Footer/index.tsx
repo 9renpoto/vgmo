@@ -22,8 +22,7 @@ export default function Footer({ menus }: Props) {
             <div class="font-bold text-2xl">vgmo</div>
           </div>
           <div class="text-gray-500">
-            A service that provides information about video game music
-            concerts.
+            A service that provides information about video game music concerts.
           </div>
         </div>
 
