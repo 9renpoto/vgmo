@@ -1,4 +1,4 @@
-import { Calendar, Clock, ExternalLink, Link, MapPin } from "lucide-preact";
+import { Calendar, Clock, ExternalLink, MapPin } from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
@@ -30,7 +30,7 @@ export default function Card(props: CardProps): JSX.Element {
     }
     try {
       return new URL(url).hostname;
-    } catch (e) {
+    } catch (_e) {
       return null;
     }
   };
