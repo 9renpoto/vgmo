@@ -1,5 +1,4 @@
 import preact from "@astrojs/preact";
-import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import codecovAstroPlugin from "@codecov/astro-plugin";
 import { defineConfig } from "astro/config";
@@ -7,7 +6,6 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [
     preact(),
-    react(),
     tailwind(),
     codecovAstroPlugin({
       enableBundleAnalysis: true,
