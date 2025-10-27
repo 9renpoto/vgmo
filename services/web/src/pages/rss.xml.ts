@@ -14,7 +14,7 @@ export const GET = () =>
       link: concert.sourceUrl,
       title: concert.title,
       pubDate: parseDate(concert.date),
-      description: `${concert.date} ${concert.venue}`,
+      description: concert.title,
     })),
     customData: `<language>ja</language>`,
   });

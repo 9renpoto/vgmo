@@ -95,14 +95,12 @@ export const extractTicketUrl = async (
 };
 
 /**
- * Parses the date and venue string.
+ * Parses the date string.
  * e.g. "2025年9月20日(土)＠【東京都】"
  * @param text The text to parse.
- * @returns An object containing the date and venue, or null if parsing fails.
+ * @returns An ISO date string, or null if parsing fails.
  */
-const parseDateAndVenue = (
-  text: string,
-): { date: string; venue: string } | null => {
+const parseDate = (text: string): string | null => {
   const dateRegex = /(\d{4})年(\d{1,2})月(\d{1,2})日/;
   const dateMatch = text.match(dateRegex);
 
@@ -111,17 +109,11 @@ const parseDateAndVenue = (
   }
 
   const [, year, month, day] = dateMatch;
-  const date = new Date(
+  return new Date(
     parseInt(year, 10),
     parseInt(month, 10) - 1,
     parseInt(day, 10),
   ).toISOString();
-
-  const venueRegex = /【(.*?)】/;
-  const venueMatch = text.match(venueRegex);
-  const venue = venueMatch ? venueMatch[1] : "Venue not found";
-
-  return { date, venue };
 };
 
 /**
@@ -156,13 +148,11 @@ export const scrapeConcertPage = async (
       return; // Skip if essential info is missing
     }
 
-    const dateAndVenue = parseDateAndVenue(dtText);
-    if (!dateAndVenue) {
-      console.warn(`Could not parse date/venue for: ${title}`);
+    const date = parseDate(dtText);
+    if (!date) {
+      console.warn(`Could not parse date for: ${title}`);
       return; // Skip if date is not parsable
     }
-
-    const { date, venue } = dateAndVenue;
 
     const promise = Promise.all([
       extractConcertImageUrl(sourceUrl),
@@ -171,7 +161,6 @@ export const scrapeConcertPage = async (
       concertInfos.push({
         title,
         date,
-        venue,
         ticketUrl: ticketUrl ?? null,
         sourceUrl,
         imageUrl,

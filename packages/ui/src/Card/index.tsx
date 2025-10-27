@@ -6,7 +6,6 @@ export interface CardProps {
   imageUrl: string;
   date: string;
   time: string;
-  location: string;
   description: string;
   tags: string[];
   buttonText: string;
@@ -96,10 +95,6 @@ export default function Card(props: CardProps): JSX.Element {
           <div class="flex items-center">
             <Clock size={18} class="mr-3 text-gray-500" />
             <span>{props.time}</span>
-          </div>
-          <div class="flex items-center">
-            <MapPin size={18} class="mr-3 text-gray-500" />
-            <span>{props.location}</span>
           </div>
         </div>
 
