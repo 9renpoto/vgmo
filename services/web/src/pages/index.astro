@@ -10,8 +10,6 @@ const toCard = (c: ConcertWithMeta): CardProps => ({
   imageUrl: c.image,
   date: new Date(c.date).toLocaleDateString("ja-JP"),
   time: c.startTime,
-  description: c.memo || `開場: ${c.openingTime || "N/A"}`,
-  tags: c.bands || [],
   buttonText: "チケットサイトへ",
   buttonUrl: c.ticketUrl,
   sourceName: new URL(c.sourceUrl).hostname,

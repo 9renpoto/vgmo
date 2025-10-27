@@ -28,7 +28,7 @@ npm ci
 - Web reads concerts from a JSON file at build time.
 - Default path: `public/data/concerts.json` (array of `ConcertInfo` from `@vgmo/types`).
 - You can override the path with env `CONCERTS_JSON` (absolute or relative file URL).
-- Shape: `[{ title, date, venue, ticketUrl, sourceUrl }]`.
+- Shape: `[{ title, date, ticketUrl, sourceUrl }]`.
 - Slugs and OGP image are derived in `src/lib/concerts.ts`.
 
 Example `public/data/concerts.json`:
@@ -37,7 +37,6 @@ Example `public/data/concerts.json`:
   {
     "title": "...",
     "date": "2025年9月9日(火)",
-    "venue": "サントリーホール 大ホール",
     "ticketUrl": "https://...",
     "sourceUrl": "http://..."
   }
