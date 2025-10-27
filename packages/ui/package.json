@@ -25,6 +25,6 @@
   },
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "lucide-preact": "^0.546.0"
+    "lucide-preact": "^0.548.0"
   }
 }
