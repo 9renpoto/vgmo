@@ -9,7 +9,6 @@ const meta: Meta<typeof Card> = {
     imageUrl: { control: "text" },
     date: { control: "text" },
     time: { control: "text" },
-    location: { control: "text" },
     description: { control: "text" },
     tags: { control: "object" },
     buttonText: { control: "text" },
@@ -24,7 +23,6 @@ const baseArgs: CardProps = {
   imageUrl: "https://placehold.co/600x400?text=Concert",
   date: "2024年3月15日(金)",
   time: "19:00開演",
-  location: "東京国際フォーラム ホールA",
   description:
     "ファイナルファンタジーシリーズの名曲を東京フィルハーモニー交響楽団が演奏",
   tags: ["ファイナルファンタジー", "オーケストラ", "東京"],
