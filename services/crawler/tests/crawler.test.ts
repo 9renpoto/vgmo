@@ -143,7 +143,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
   const concert1 = results.find((c) => c.title === "Concert One");
   assert.ok(concert1, "Concert One should be found");
   assert.strictEqual(concert1.date, new Date(2025, 9, 12).toISOString());
-  assert.strictEqual(concert1.venue, "東京");
   assert.strictEqual(
     concert1.sourceUrl,
     "https://www.2083.jp/concert/concert-1.html",
@@ -161,7 +160,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
   assert.strictEqual(concert2.date, new Date(2025, 10, 15).toISOString());
-  assert.strictEqual(concert2.venue, "大阪");
   assert.strictEqual(
     concert2.sourceUrl,
     "https://www.2083.jp/concert/concert-2.html",
@@ -178,7 +176,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const concert3 = results.find((c) => c.title === "Concert Three");
   assert.ok(concert3, "Concert Three should be found");
-  assert.strictEqual(concert3.venue, "Venue not found");
   assert.strictEqual(
     concert3.imageUrl,
     undefined,
@@ -204,7 +201,6 @@ test("mergeConcerts accumulates without duplicates", () => {
     {
       title: "Existing Concert",
       date: new Date("2024-01-01").toISOString(),
-      venue: "Existing Venue",
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/1",
       imageUrl: "https://example.com/image-old.jpg",
@@ -215,7 +211,6 @@ test("mergeConcerts accumulates without duplicates", () => {
     {
       title: "Existing Concert",
       date: new Date("2024-01-01").toISOString(),
-      venue: "Updated Venue",
       ticketUrl: "https://tickets.example.com/1",
       sourceUrl: "https://example.com/concert/1",
       imageUrl: undefined,
@@ -223,7 +218,6 @@ test("mergeConcerts accumulates without duplicates", () => {
     {
       title: "New Concert",
       date: new Date("2024-03-01").toISOString(),
-      venue: "New Venue",
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/2",
       imageUrl: "https://example.com/image-new.jpg",
@@ -237,7 +231,6 @@ test("mergeConcerts accumulates without duplicates", () => {
 
   assert.equal(first.sourceUrl, "https://example.com/concert/2");
   assert.equal(second.sourceUrl, "https://example.com/concert/1");
-  assert.equal(second.venue, "Updated Venue");
   assert.equal(second.ticketUrl, "https://tickets.example.com/1");
   assert.equal(
     second.imageUrl,

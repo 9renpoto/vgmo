@@ -10,7 +10,6 @@ const { concert } = Astro.props as Props;
 
 const toCard = (c: ConcertWithMeta): CardProps => ({
   title: c.title,
-  authorName: c.venue,
   authorImage: "https://placehold.co/64x64",
   date: c.date,
   tags: ["concert"],
@@ -22,7 +21,7 @@ const toCard = (c: ConcertWithMeta): CardProps => ({
 
 const site = import.meta.env.PUBLIC_SITE_URL ?? Astro.site?.origin ?? "";
 const url = `${site}/concert/${concert.slug}`;
-const description = `${concert.date} @ ${concert.venue}`;
+const description = concert.title;
 ---
 
 <MainLayout title={concert.title}>
@@ -43,9 +42,6 @@ const description = `${concert.date} @ ${concert.venue}`;
     <div class="mt-2 text-sm text-gray-700">
       <p>
         日時: <strong>{concert.date}</strong>
-      </p>
-      <p>
-        会場: <strong>{concert.venue}</strong>
       </p>
       <p class="text-xs text-gray-500">
         ソース: <a class="underline" href={concert.sourceUrl} target="_blank" rel="noreferrer">{concert.sourceUrl}</a>
