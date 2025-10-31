@@ -5,74 +5,38 @@ on:
   schedule:
     - cron: '0 0 * * 0' # every Sunday at midnight
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   crawl:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     env:
       BRANCH_NAME: chore/update-concerts
-      COMMIT_MESSAGE: 'feat(data): update concert information'
-      PR_TITLE: Automated Concert Data Update
-      PR_BODY: >-
-        The crawler found new concert information. This PR updates the `concerts.json` file.
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
-      - name: Cache npm dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'npm'
       - name: Install dependencies
         run: npm ci
       - name: Run crawler
         run: npm run crawl
-      - name: Check for changes
-        id: git_changes
-        run: |
-          if git status --porcelain | grep -q .; then
-            echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_changes=false" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Commit changes
-        if: steps.git_changes.outputs.has_changes == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B "$BRANCH_NAME"
-          # The crawler generates concerts.json; track it explicitly.
-          git add services/web/public/data/concerts.json
-          git commit -m "$COMMIT_MESSAGE"
-      - name: Push changes
-        if: steps.git_changes.outputs.has_changes == 'true'
-        run: git push --force-with-lease origin "$BRANCH_NAME"
-      - name: Create or update pull request
-        if: steps.git_changes.outputs.has_changes == 'true'
-        run: |
-          if gh pr view "$BRANCH_NAME" >/dev/null 2>&1; then
-            gh pr edit "$BRANCH_NAME" \
-              --title "$PR_TITLE" \
-              --body "$PR_BODY" \
-              --add-label automated \
-              --add-assignee 9renpoto \
-              --add-reviewer 9renpoto
-          else
-            gh pr create \
-              --base main \
-              --head "$BRANCH_NAME" \
-              --title "$PR_TITLE" \
-              --body "$PR_BODY" \
-              --label automated \
-              --assignee 9renpoto \
-              --reviewer 9renpoto
-          fi
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.BRANCH_NAME }}
+          commit-message: 'feat(data): update concert information'
+          title: Automated Concert Data Update
+          body: >-
+            The crawler found new concert information. This PR updates the `concerts.json` file.
+          labels: automated
+          assignees: 9renpoto
+          reviewers: 9renpoto
+          add-paths: |
+            services/web/public/data/concerts.json
