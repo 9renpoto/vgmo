@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsgo --build .",
-    "test": "test-storybook --coverage --junit",
+    "test": "vitest",
+    "test-storybook": "vitest --project=storybook",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -14,7 +15,6 @@
     "@storybook/addon-docs": "^10.0.6",
     "@storybook/addon-links": "^10.0.6",
     "@storybook/preact-vite": "^10.0.6",
-    "@storybook/test-runner": "^0.24.1",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/preact": "^3.2.4",
     "autoprefixer": "^10.4.20",
@@ -23,7 +23,9 @@
     "tailwindcss": "^3.4.14",
     "vite": "^7.2.2",
     "vite-plugin-turbosnap": "^1.0.3",
-    "@vitest/coverage-v8": "^4.0.8"
+    "@vitest/coverage-v8": "^4.0.8",
+    "@storybook/addon-vitest": "^10.0.6",
+    "@vitest/browser-playwright": "^4.0.8"
   },
   "typings": "lib/index.d.ts",
   "dependencies": {
