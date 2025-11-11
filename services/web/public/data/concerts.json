@@ -42,6 +42,13 @@
     "imageUrl": "https://www.2083.jp/img/hatena.gif"
   },
   {
+    "title": "UNDERTALE 10th Anniversary Concert",
+    "date": "2025-12-27T00:00:00.000Z",
+    "ticketUrl": "https://undertale10thconcert.com/",
+    "sourceUrl": "https://www.2083.jp/concert/20250913undertale.html",
+    "imageUrl": "https://www.2083.jp/concert/img/20250913undertale_img.jpg"
+  },
+  {
     "title": "テイルズ オブ オーケストラコンサート ～30th Anniversary～",
     "date": "2025-12-21T00:00:00.000Z",
     "ticketUrl": "https://to-orchestra.tales-ch.jp/",
@@ -110,13 +117,6 @@
     "ticketUrl": "https://www.cityphil.jp/ticket/buyticket/",
     "sourceUrl": "https://www.2083.jp/concert/20251103cityphil.html",
     "imageUrl": "https://www.2083.jp/concert/img/20251103cityphil_img.jpg"
-  },
-  {
-    "title": "UNDERTALE 10th Anniversary Concert",
-    "date": "2025-11-03T00:00:00.000Z",
-    "ticketUrl": "https://undertale10thconcert.com/",
-    "sourceUrl": "https://www.2083.jp/concert/20250913undertale.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20250913undertale_img.jpg"
   },
   {
     "title": "「ドラゴンクエスト」ウインドオーケストラコンサート",
