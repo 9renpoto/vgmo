@@ -39,7 +39,7 @@ const config: StorybookConfig = {
 
   build: {
     test: {
-      disabledAddons: [],
+      disabledAddons: ["@storybook/addon-coverage"],
     },
   },
 };
