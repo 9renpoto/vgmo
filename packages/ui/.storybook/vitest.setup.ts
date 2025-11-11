@@ -1,4 +1,4 @@
-import { setProjectAnnotations } from '@storybook/preact-vite';
-import * as previewAnnotations from './preview';
+import { setProjectAnnotations } from "@storybook/preact-vite";
+import * as previewAnnotations from "./preview";
 
-const annotations = setProjectAnnotations([previewAnnotations]);
+const _annotations = setProjectAnnotations([previewAnnotations]);

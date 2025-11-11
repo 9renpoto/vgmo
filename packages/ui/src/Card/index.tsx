@@ -1,4 +1,4 @@
-import { Calendar, Clock, ExternalLink, MapPin } from "lucide-preact";
+import { Calendar, Clock, ExternalLink } from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
