@@ -10,11 +10,11 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-coverage": "^2.0.0",
-    "@storybook/addon-docs": "^9.1.10",
-    "@storybook/addon-links": "^9.1.10",
-    "@storybook/preact-vite": "^9.1.10",
-    "@storybook/test-runner": "^0.23.0",
+    "@storybook/addon-coverage": "^3.0.0",
+    "@storybook/addon-docs": "^10.0.6",
+    "@storybook/addon-links": "^10.0.6",
+    "@storybook/preact-vite": "^10.0.6",
+    "@storybook/test-runner": "^0.24.1",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/preact": "^3.2.4",
     "autoprefixer": "^10.4.20",
