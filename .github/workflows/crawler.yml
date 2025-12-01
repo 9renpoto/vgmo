@@ -20,7 +20,7 @@ jobs:
         The crawler found new concert information. This PR updates the `concerts.json` file.
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
