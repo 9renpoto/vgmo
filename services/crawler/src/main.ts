@@ -3,6 +3,15 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ConcertInfo } from "@vgmo/types";
 import * as cheerio from "cheerio";
+import { Agent, setGlobalDispatcher } from "undici";
+
+setGlobalDispatcher(
+  new Agent({
+    connect: {
+      timeout: 120_000,
+    },
+  }),
+);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
