@@ -19,7 +19,7 @@
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
     "astro": "^5.16.6",
-    "preact": "^10.28.1"
+    "preact": "^10.28.2"
   },
   "devDependencies": {
     "@codecov/astro-plugin": "^1.9.1",
