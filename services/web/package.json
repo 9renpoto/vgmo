@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",
-    "@astrojs/rss": "^4.0.14",
+    "@astrojs/rss": "^4.0.15",
     "@astrojs/tailwind": "^5.1.0",
     "@digi4care/astro-google-analytics": "1.1.1",
     "@faker-js/faker": "^10.2.0",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^5.16.9",
+    "astro": "^5.16.11",
     "preact": "^10.28.2"
   },
   "devDependencies": {
