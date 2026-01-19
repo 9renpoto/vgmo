@@ -25,7 +25,7 @@
     "vite-plugin-turbosnap": "^1.0.3",
     "@vitest/coverage-v8": "^4.0.17",
     "@storybook/addon-vitest": "^10.1.11",
-    "@vitest/browser-playwright": "^4.0.8"
+    "@vitest/browser-playwright": "^4.0.17"
   },
   "typings": "lib/index.d.ts",
   "dependencies": {
