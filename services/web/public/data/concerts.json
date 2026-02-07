@@ -29,7 +29,7 @@
     "ticketUrl": "https://artsinnovator.com/persona-sc30/",
     "sourceUrl": "https://www.2083.jp/concert/20260411persona.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260411persona_img.jpg",
-    "prefectures": ["東京", "京都", "東京"]
+    "prefectures": ["東京", "京都"]
   },
   {
     "title": "BRA★BRA FINAL FANTASY BRASS de BRAVO 2026\nwith Siena Wind Orchestra",
@@ -37,16 +37,7 @@
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
-    "prefectures": [
-      "北海道",
-      "愛知",
-      "宮城",
-      "東京",
-      "福岡",
-      "広島",
-      "大阪",
-      "東京"
-    ]
+    "prefectures": ["北海道", "愛知", "宮城", "東京", "福岡", "広島", "大阪"]
   },
   {
     "title": "仙台フィルハーモニー管弦楽団 エンターテインメント定期 第6回\nラブライブ！School idol project\n～叶え！μ's Orchestra Dream Concert！～",

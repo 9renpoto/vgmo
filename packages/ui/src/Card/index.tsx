@@ -1,13 +1,10 @@
-import { Calendar, Clock, ExternalLink, MapPin } from "lucide-preact";
+import { Calendar, ExternalLink, MapPin } from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
   title: string;
   imageUrl: string;
   date: string;
-  time: string;
-  description: string;
-  tags: string[];
   buttonText: string;
   buttonUrl: string;
   sourceName?: string;
@@ -93,29 +90,12 @@ export default function Card(props: CardProps): JSX.Element {
             <Calendar size={18} class="mr-3 text-gray-500" />
             <span>{props.date}</span>
           </div>
-          <div class="flex items-center">
-            <Clock size={18} class="mr-3 text-gray-500" />
-            <span>{props.time}</span>
-          </div>
           {props.prefectures && props.prefectures.length > 0 && (
             <div class="flex items-center">
               <MapPin size={18} class="mr-3 text-gray-500" />
               <span>{props.prefectures.join(", ")}</span>
             </div>
           )}
-        </div>
-
-        <p class="text-gray-700 text-base mb-5">{props.description}</p>
-
-        <div class="flex flex-wrap">
-          {props.tags.map((tag) => (
-            <span
-              key={tag}
-              class="bg-fuchsia-100 text-fuchsia-600 text-sm font-semibold mr-2 mb-2 px-3 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
         </div>
       </div>
     </div>

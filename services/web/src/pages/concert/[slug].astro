@@ -12,11 +12,8 @@ const toCard = (c: ConcertWithMeta): CardProps => ({
   title: c.title,
   imageUrl: c.image,
   date: new Date(c.date).toLocaleDateString("ja-JP"),
-  time: "", // We don't have time in the crawler yet or it's not separated
-  description: "",
-  tags: [],
   buttonText: "チケットサイトへ",
-  buttonUrl: c.ticketUrl,
+  buttonUrl: c.ticketUrl || "",
   sourceName: new URL(c.sourceUrl).hostname,
   sourceUrl: c.sourceUrl,
   prefectures: c.prefectures,

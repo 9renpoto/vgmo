@@ -163,7 +163,9 @@ export const scrapeConcertPage = async (
       return; // Skip if date is not parsable
     }
 
-    const prefectures = [...dtText.matchAll(/【([^】]+)】/g)].map((m) => m[1]);
+    const prefectures = Array.from(
+      new Set([...dtText.matchAll(/【([^】]+)】/g)].map((m) => m[1])),
+    );
 
     const promise = Promise.all([
       extractConcertImageUrl(sourceUrl),
