@@ -1,122 +1,147 @@
 [
   {
+    "title": "メタファー：リファンタジオ オーケストラコンサート -ReSimfonio-",
+    "date": "2026-06-06T00:00:00.000Z",
+    "ticketUrl": "https://www.ticketport.co.jp/lp/metaphor_concert/",
+    "sourceUrl": "https://www.2083.jp/concert/20260606metaphor.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260606metaphor_img.jpg"
+  },
+  {
     "title": "STEINS;GATE「因果旋律のシンフォニー」",
     "date": "2026-05-31T00:00:00.000Z",
     "ticketUrl": "https://steinsgate-orchestra2026.com/matsudo/",
     "sourceUrl": "https://www.2083.jp/concert/20260531steinsgate.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260531steinsgate_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260531steinsgate_img.jpg",
+    "prefectures": ["千葉"]
   },
   {
     "title": "Music of SQUARE ENIX - Magic, Memories, and Melodies",
     "date": "2026-04-25T00:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/mos/",
     "sourceUrl": "https://www.2083.jp/concert/20260425squareenix.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260425squareenix_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260425squareenix_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "30th Anniversary Persona Symphonic Concert",
     "date": "2026-04-11T00:00:00.000Z",
     "ticketUrl": "https://artsinnovator.com/persona-sc30/",
     "sourceUrl": "https://www.2083.jp/concert/20260411persona.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260411persona_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260411persona_img.jpg",
+    "prefectures": ["東京", "京都"]
   },
   {
     "title": "BRA★BRA FINAL FANTASY BRASS de BRAVO 2026\nwith Siena Wind Orchestra",
     "date": "2026-04-05T00:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
+    "prefectures": ["北海道", "愛知", "宮城", "東京", "福岡", "広島", "大阪"]
   },
   {
     "title": "仙台フィルハーモニー管弦楽団 エンターテインメント定期 第6回\nラブライブ！School idol project\n～叶え！μ's Orchestra Dream Concert！～",
     "date": "2026-03-20T00:00:00.000Z",
     "ticketUrl": "https://www.sendaiphil.jp/e6/",
     "sourceUrl": "https://www.2083.jp/concert/20260320lovelive.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260320lovelive_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260320lovelive_img.jpg",
+    "prefectures": ["宮城"]
   },
   {
     "title": "NieR:Piano Concert -Journeys 12026-",
     "date": "2026-03-12T00:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/nier/piano12026/",
     "sourceUrl": "https://www.2083.jp/concert/20260312nier.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260312nier_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260312nier_img.jpg",
+    "prefectures": ["宮城", "福岡", "大阪", "愛知", "東京"]
   },
   {
     "title": "BIOHAZARD 30th Anniversary Concerts -Symphony of Legacy-",
     "date": "2026-03-07T00:00:00.000Z",
     "ticketUrl": "https://bhre30th-concerts.com/s/bhre/",
     "sourceUrl": "https://www.2083.jp/concert/20260307biohazard.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260307biohazard_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260307biohazard_img.jpg",
+    "prefectures": ["埼玉"]
   },
   {
     "title": "N響 ドラゴンクエスト・コンサート ～導かれし者たち～",
     "date": "2026-02-27T00:00:00.000Z",
     "ticketUrl": "https://www.nhkso.or.jp/concert/special/",
     "sourceUrl": "https://www.2083.jp/concert/20260227dq_nhkso.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260227dq_nhkso_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260227dq_nhkso_img.jpg",
+    "prefectures": ["東京", "千葉"]
   },
   {
     "title": "DEATH STRANDING Strands of Harmony World Tour",
     "date": "2026-02-23T00:00:00.000Z",
     "ticketUrl": "https://www.deathstrandingconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260223deathstranding.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260223deathstranding_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260223deathstranding_img.jpg",
+    "prefectures": ["神奈川", "大阪"]
   },
   {
     "title": "UNDERTALE 10th Anniversary Concert",
     "date": "2026-02-23T00:00:00.000Z",
     "ticketUrl": "https://undertale10thconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20250913undertale.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20250913undertale_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20250913undertale_img.jpg",
+    "prefectures": ["広島", "北海道"]
   },
   {
     "title": "KENJI ITO CONCERT \"35th Anniversary AS A COMPOSER\" LIVE\n-gentle echo meeting＜Rock Style＞ @Omiya Sonic City",
     "date": "2026-02-21T00:00:00.000Z",
     "ticketUrl": "https://www.itoken35thlive.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260221itoken.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260221itoken_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260221itoken_img.jpg",
+    "prefectures": ["埼玉"]
   },
   {
     "title": "NJBP Live! #17 “オーケストラ・インベージョン”",
     "date": "2026-02-21T00:00:00.000Z",
     "ticketUrl": "https://njbp.org/concert/live17/",
     "sourceUrl": "https://www.2083.jp/concert/20260221njbp_taito",
-    "imageUrl": "https://www.2083.jp/concert/img/20260221njbp_taito_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260221njbp_taito_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "RIDGE RACER NIGHT 2025",
     "date": "2026-02-21T00:00:00.000Z",
     "ticketUrl": "https://shop.asobistore.jp/feature/pacman_officialstore/topics/rrn2025/",
     "sourceUrl": "https://www.2083.jp/concert/20260221ridgeracer.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260221ridgeracer_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260221ridgeracer_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "ELDEN RING SYMPHONIC ADVENTURE",
     "date": "2026-02-15T00:00:00.000Z",
     "ticketUrl": "https://eldenring-orchestra.bn-ent.net/",
     "sourceUrl": "https://www.2083.jp/concert/20260215eldenring.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260215eldenring_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260215eldenring_img.jpg",
+    "prefectures": ["神奈川"]
   },
   {
     "title": "OMORI 5周年記念コンサート 追加公演",
     "date": "2026-02-15T00:00:00.000Z",
     "ticketUrl": "https://www.omori5thconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260215OMORI.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260215OMORI_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260215OMORI_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "UNDERTALE 10th Anniversary Concert\nVALENTINE'S SPECIAL PROGRAM",
     "date": "2026-02-14T00:00:00.000Z",
     "ticketUrl": "https://undertale10thconcert.com/valentine_program.html",
     "sourceUrl": "https://www.2083.jp/concert/20260214undertale.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260214undertale_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260214undertale_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "Falcom jdk BAND LIVE 2026",
     "date": "2026-02-07T00:00:00.000Z",
     "ticketUrl": "https://www.falcom.co.jp/jdk/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260207falcomjdk.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260207falcomjdk_img.jpg"
+    "imageUrl": "https://www.2083.jp/concert/img/20260207falcomjdk_img.jpg",
+    "prefectures": ["東京"]
   },
   {
     "title": "NIKKEオーケストラコンサート「Unbreakable Memories」",
