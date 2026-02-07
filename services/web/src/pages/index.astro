@@ -16,6 +16,7 @@ const toCard = (c: ConcertWithMeta): CardProps => ({
   buttonUrl: c.ticketUrl,
   sourceName: new URL(c.sourceUrl).hostname,
   sourceUrl: c.sourceUrl,
+  prefectures: c.prefectures,
 });
 
 const concerts = await listConcerts();

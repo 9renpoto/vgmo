@@ -10,13 +10,16 @@ const { concert } = Astro.props as Props;
 
 const toCard = (c: ConcertWithMeta): CardProps => ({
   title: c.title,
-  authorImage: "https://placehold.co/64x64",
-  date: c.date,
-  tags: ["concert"],
-  coverImage: c.image,
-  reactions: 0,
-  comments: 0,
-  readingTime: 1,
+  imageUrl: c.image,
+  date: new Date(c.date).toLocaleDateString("ja-JP"),
+  time: "", // We don't have time in the crawler yet or it's not separated
+  description: "",
+  tags: [],
+  buttonText: "チケットサイトへ",
+  buttonUrl: c.ticketUrl,
+  sourceName: new URL(c.sourceUrl).hostname,
+  sourceUrl: c.sourceUrl,
+  prefectures: c.prefectures,
 });
 
 const site = import.meta.env.PUBLIC_SITE_URL ?? Astro.site?.origin ?? "";

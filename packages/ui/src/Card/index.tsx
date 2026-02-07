@@ -1,4 +1,4 @@
-import { Calendar, Clock, ExternalLink } from "lucide-preact";
+import { Calendar, Clock, ExternalLink, MapPin } from "lucide-preact";
 import type { JSX } from "preact";
 
 export interface CardProps {
@@ -12,6 +12,7 @@ export interface CardProps {
   buttonUrl: string;
   sourceName?: string;
   sourceUrl?: string;
+  prefectures?: string[];
 }
 
 export default function Card(props: CardProps): JSX.Element {
@@ -96,6 +97,12 @@ export default function Card(props: CardProps): JSX.Element {
             <Clock size={18} class="mr-3 text-gray-500" />
             <span>{props.time}</span>
           </div>
+          {props.prefectures && props.prefectures.length > 0 && (
+            <div class="flex items-center">
+              <MapPin size={18} class="mr-3 text-gray-500" />
+              <span>{props.prefectures.join(", ")}</span>
+            </div>
+          )}
         </div>
 
         <p class="text-gray-700 text-base mb-5">{props.description}</p>
