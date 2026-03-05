@@ -156,6 +156,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://www.2083.jp/ticket/1",
     "Ticket URL for concert 1 should be correct",
   );
+  assert.deepStrictEqual(concert1.prefectures, ["東京"]);
 
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
@@ -173,6 +174,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://example.com/ticket/2",
     "Ticket URL for concert 2 should be correct",
   );
+  assert.deepStrictEqual(concert2.prefectures, ["大阪"]);
 
   const concert3 = results.find((c) => c.title === "Concert Three");
   assert.ok(concert3, "Concert Three should be found");
@@ -186,6 +188,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     null,
     "Ticket URL for concert 3 should be null",
   );
+  assert.deepStrictEqual(concert3.prefectures, []);
 
   const concert4 = results.find((c) => c.title === "Concert Four");
   assert.ok(concert4, "Concert Four should be found");
@@ -194,6 +197,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://tickets.example.org/buy/online",
     "Ticket URL for concert 4 should pick the external ticket site",
   );
+  assert.deepStrictEqual(concert4.prefectures, ["東京"]);
 });
 
 test("mergeConcerts accumulates without duplicates", () => {
@@ -204,6 +208,7 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/1",
       imageUrl: "https://example.com/image-old.jpg",
+      prefectures: ["東京"],
     },
   ];
 
@@ -214,6 +219,7 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: "https://tickets.example.com/1",
       sourceUrl: "https://example.com/concert/1",
       imageUrl: undefined,
+      prefectures: ["東京"],
     },
     {
       title: "New Concert",
@@ -221,6 +227,7 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/2",
       imageUrl: "https://example.com/image-new.jpg",
+      prefectures: ["大阪"],
     },
   ];
 

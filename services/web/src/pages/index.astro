@@ -9,13 +9,11 @@ const toCard = (c: ConcertWithMeta): CardProps => ({
   title: c.title,
   imageUrl: c.image,
   date: new Date(c.date).toLocaleDateString("ja-JP"),
-  time: c.startTime,
-  description: c.memo || `開場: ${c.openingTime || "N/A"}`,
-  tags: c.bands || [],
   buttonText: "チケットサイトへ",
-  buttonUrl: c.ticketUrl,
+  buttonUrl: c.ticketUrl || "",
   sourceName: new URL(c.sourceUrl).hostname,
   sourceUrl: c.sourceUrl,
+  prefectures: c.prefectures,
 });
 
 const concerts = await listConcerts();

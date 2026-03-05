@@ -15,11 +15,11 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/tailwind": "^5.1.0",
     "@digi4care/astro-google-analytics": "1.1.1",
-    "@faker-js/faker": "^10.2.0",
+    "@faker-js/faker": "^10.3.0",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^5.17.1",
-    "preact": "^10.28.3"
+    "astro": "^5.18.0",
+    "preact": "^10.28.4"
   },
   "devDependencies": {
     "@codecov/astro-plugin": "^1.9.1",

@@ -12,23 +12,23 @@
   },
   "devDependencies": {
     "@storybook/addon-coverage": "^3.0.0",
-    "@storybook/addon-docs": "^10.2.4",
-    "@storybook/addon-links": "^10.2.4",
-    "@storybook/preact-vite": "^10.2.4",
+    "@storybook/addon-docs": "^10.2.15",
+    "@storybook/addon-links": "^10.2.15",
+    "@storybook/preact-vite": "^10.2.15",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/preact": "^3.2.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
-    "storybook": "^10.1.10",
+    "storybook": "^10.2.10",
     "tailwindcss": "^3.4.14",
     "vite": "^7.3.1",
     "vite-plugin-turbosnap": "^1.0.3",
     "@vitest/coverage-v8": "^4.0.18",
-    "@storybook/addon-vitest": "^10.2.4",
+    "@storybook/addon-vitest": "^10.2.15",
     "@vitest/browser-playwright": "^4.0.18"
   },
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "lucide-preact": "^0.563.0"
+    "lucide-preact": "^0.577.0"
   }
 }

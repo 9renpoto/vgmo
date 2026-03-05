@@ -3,5 +3,6 @@ export interface ConcertInfo {
   date: string;
   ticketUrl: string | null;
   sourceUrl: string;
+  prefectures: string[];
   imageUrl?: string;
 }
