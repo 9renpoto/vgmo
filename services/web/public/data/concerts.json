@@ -1,5 +1,13 @@
 [
   {
+    "title": "N響×ポケモン クラシックコンサートツアー",
+    "date": "2026-08-21T00:00:00.000Z",
+    "ticketUrl": "https://www.pokemon.jp/special/nhkso-pokemon2026",
+    "sourceUrl": "https://www.2083.jp/concert/20260821pokemon.html",
+    "prefectures": ["東京", "京都", "大阪", "福岡"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260821pokemon_img.jpg"
+  },
+  {
     "title": "メタファー：リファンタジオ オーケストラコンサート -ReSimfonio-",
     "date": "2026-06-06T00:00:00.000Z",
     "ticketUrl": "https://www.ticketport.co.jp/lp/metaphor_concert/",
@@ -16,12 +24,36 @@
     "prefectures": ["千葉"]
   },
   {
+    "title": "Music 4Gamer #9\n「アイカツ！シリーズ」オーケストラコンサート\n『オケカツ！』2026 -Anniversary Baton-",
+    "date": "2026-05-04T00:00:00.000Z",
+    "ticketUrl": "https://www.4gamer.net/music/",
+    "sourceUrl": "https://www.2083.jp/concert/20260504aikatsu.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260504aikatsu_img.jpg"
+  },
+  {
+    "title": "大神 20周年記念コンサート ～大神 音絵巻～",
+    "date": "2026-04-29T00:00:00.000Z",
+    "ticketUrl": "https://www.promax.co.jp/okami/",
+    "sourceUrl": "https://www.2083.jp/concert/20260429okami.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260429okami_img.jpg"
+  },
+  {
     "title": "Music of SQUARE ENIX - Magic, Memories, and Melodies",
     "date": "2026-04-25T00:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/mos/",
     "sourceUrl": "https://www.2083.jp/concert/20260425squareenix.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260425squareenix_img.jpg",
     "prefectures": ["東京"]
+  },
+  {
+    "title": "GAME SYMPHONY JAPAN 62nd Concert × クイズRPG 魔法使いと黒猫のウィズ ～13th Anniversary～",
+    "date": "2026-04-18T00:00:00.000Z",
+    "ticketUrl": "https://l-tike.com/search/?lcd=34797",
+    "sourceUrl": "https://www.2083.jp/concert/20260418magicianwiz.html",
+    "prefectures": ["神奈川"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260418magicianwiz_img.jpg"
   },
   {
     "title": "30th Anniversary Persona Symphonic Concert",
@@ -49,11 +81,11 @@
   },
   {
     "title": "NieR:Piano Concert -Journeys 12026-",
-    "date": "2026-03-12T00:00:00.000Z",
+    "date": "2026-03-16T00:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/nier/piano12026/",
     "sourceUrl": "https://www.2083.jp/concert/20260312nier.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260312nier_img.jpg",
-    "prefectures": ["宮城", "福岡", "大阪", "愛知", "東京"]
+    "prefectures": ["愛知", "東京"]
   },
   {
     "title": "BIOHAZARD 30th Anniversary Concerts -Symphony of Legacy-",
