@@ -1,5 +1,8 @@
-import assert from "node:assert/strict";
-import test from "node:test";
+import * as assert from "node:assert/strict";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { test } from "node:test";
 import { loadConcertsFromFile } from "../src/utils/concerts.ts";
 
 const FIXTURE_PATH = "../../tests/fixtures/duplicate-concerts.json";
@@ -28,4 +31,35 @@ test("loadConcertsFromFile dedupes and sorts concerts", async () => {
     "https://example.com/old.jpg",
     "retains existing image when available",
   );
+});
+
+test("loadConcertsFromFile reads default file from cwd public/data", async () => {
+  const cwd = process.cwd();
+  const workDir = await mkdtemp(join(tmpdir(), "vgmo-web-test-"));
+  const dataDir = join(workDir, "public/data");
+  const dataPath = join(dataDir, "concerts.json");
+  const payload = [
+    {
+      title: "CWD Concert",
+      date: "2099-01-01T00:00:00.000Z",
+      ticketUrl: "https://example.com/ticket",
+      sourceUrl: "https://example.com/source",
+      prefectures: ["東京"],
+      imageUrl: "https://example.com/image.jpg",
+    },
+  ];
+
+  try {
+    await mkdir(dataDir, { recursive: true });
+    await writeFile(dataPath, JSON.stringify(payload), "utf-8");
+    process.chdir(workDir);
+
+    const concerts = await loadConcertsFromFile();
+    assert.equal(concerts.length, 1);
+    assert.equal(concerts[0].title, "CWD Concert");
+    assert.equal(concerts[0].image, "https://example.com/image.jpg");
+  } finally {
+    process.chdir(cwd);
+    await rm(workDir, { recursive: true, force: true });
+  }
 });
