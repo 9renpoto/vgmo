@@ -46,7 +46,7 @@ jobs:
             "npx wait-on tcp:6006 && npm test"
       - name: Upload coverage to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./services/web/coverage/lcov.info,./packages/ui/coverage/coverage-storybook.json
