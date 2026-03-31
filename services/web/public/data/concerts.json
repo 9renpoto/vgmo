@@ -1,31 +1,63 @@
 [
   {
     "title": "N響×ポケモン クラシックコンサートツアー",
-    "date": "2026-08-21T00:00:00.000Z",
+    "date": "2026-08-20T15:00:00.000Z",
     "ticketUrl": "https://www.pokemon.jp/special/nhkso-pokemon2026",
     "sourceUrl": "https://www.2083.jp/concert/20260821pokemon.html",
     "prefectures": ["東京", "京都", "大阪", "福岡"],
     "imageUrl": "https://www.2083.jp/concert/img/20260821pokemon_img.jpg"
   },
   {
+    "title": "SONIC 35th Anniversary\nSONIC - LIVE! A Musical Odyssey of Sonic the Hedgehog",
+    "date": "2026-06-27T15:00:00.000Z",
+    "ticketUrl": "https://www.promax.co.jp/sonic-live/",
+    "sourceUrl": "https://www.2083.jp/concert/20260628sonic.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260628sonic_img.jpg"
+  },
+  {
     "title": "メタファー：リファンタジオ オーケストラコンサート -ReSimfonio-",
-    "date": "2026-06-06T00:00:00.000Z",
+    "date": "2026-06-05T15:00:00.000Z",
     "ticketUrl": "https://www.ticketport.co.jp/lp/metaphor_concert/",
     "sourceUrl": "https://www.2083.jp/concert/20260606metaphor.html",
     "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260606metaphor_img.jpg"
   },
   {
+    "title": "シャインポスト Orchestra LIVE",
+    "date": "2026-06-05T15:00:00.000Z",
+    "ticketUrl": "https://shinepost.jp/news/1094/",
+    "sourceUrl": "https://www.2083.jp/concert/20260606shinepost.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260606shinepost_img.jpg"
+  },
+  {
+    "title": "Hollow Knight Symphonic Orchestra Concert",
+    "date": "2026-06-04T15:00:00.000Z",
+    "ticketUrl": "https://www.hollowknightconcert2026.com/",
+    "sourceUrl": "https://www.2083.jp/concert/20260605hollowknight.html",
+    "prefectures": ["神奈川", "大阪"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260605hollowknight_img.jpg"
+  },
+  {
     "title": "STEINS;GATE「因果旋律のシンフォニー」",
-    "date": "2026-05-31T00:00:00.000Z",
+    "date": "2026-05-30T15:00:00.000Z",
     "ticketUrl": "https://steinsgate-orchestra2026.com/matsudo/",
     "sourceUrl": "https://www.2083.jp/concert/20260531steinsgate.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260531steinsgate_img.jpg",
     "prefectures": ["千葉"]
   },
   {
+    "title": "龍が如く THE LIVE -IKIZAMA-",
+    "date": "2026-05-15T15:00:00.000Z",
+    "ticketUrl": "https://ryu-ga-gotoku-live.com/",
+    "sourceUrl": "https://www.2083.jp/concert/20260516ryugagotoku.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260516ryugagotoku_img.jpg"
+  },
+  {
     "title": "Music 4Gamer #9\n「アイカツ！シリーズ」オーケストラコンサート\n『オケカツ！』2026 -Anniversary Baton-",
-    "date": "2026-05-04T00:00:00.000Z",
+    "date": "2026-05-03T15:00:00.000Z",
     "ticketUrl": "https://www.4gamer.net/music/",
     "sourceUrl": "https://www.2083.jp/concert/20260504aikatsu.html",
     "prefectures": ["東京"],
@@ -33,7 +65,7 @@
   },
   {
     "title": "大神 20周年記念コンサート ～大神 音絵巻～",
-    "date": "2026-04-29T00:00:00.000Z",
+    "date": "2026-04-28T15:00:00.000Z",
     "ticketUrl": "https://www.promax.co.jp/okami/",
     "sourceUrl": "https://www.2083.jp/concert/20260429okami.html",
     "prefectures": ["東京"],
@@ -41,7 +73,7 @@
   },
   {
     "title": "Music of SQUARE ENIX - Magic, Memories, and Melodies",
-    "date": "2026-04-25T00:00:00.000Z",
+    "date": "2026-04-24T15:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/mos/",
     "sourceUrl": "https://www.2083.jp/concert/20260425squareenix.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260425squareenix_img.jpg",
@@ -49,7 +81,7 @@
   },
   {
     "title": "GAME SYMPHONY JAPAN 62nd Concert × クイズRPG 魔法使いと黒猫のウィズ ～13th Anniversary～",
-    "date": "2026-04-18T00:00:00.000Z",
+    "date": "2026-04-17T15:00:00.000Z",
     "ticketUrl": "https://l-tike.com/search/?lcd=34797",
     "sourceUrl": "https://www.2083.jp/concert/20260418magicianwiz.html",
     "prefectures": ["神奈川"],
@@ -57,7 +89,7 @@
   },
   {
     "title": "30th Anniversary Persona Symphonic Concert",
-    "date": "2026-04-11T00:00:00.000Z",
+    "date": "2026-04-10T15:00:00.000Z",
     "ticketUrl": "https://artsinnovator.com/persona-sc30/",
     "sourceUrl": "https://www.2083.jp/concert/20260411persona.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260411persona_img.jpg",
@@ -65,7 +97,7 @@
   },
   {
     "title": "BRA★BRA FINAL FANTASY BRASS de BRAVO 2026\nwith Siena Wind Orchestra",
-    "date": "2026-04-05T00:00:00.000Z",
+    "date": "2026-04-04T15:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
