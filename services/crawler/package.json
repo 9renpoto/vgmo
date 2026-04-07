@@ -12,7 +12,7 @@
   "dependencies": {
     "@vgmo/types": "0.0.1",
     "cheerio": "^1.2.0",
-    "feedparser": "^2.2.10",
+    "feedparser": "^2.3.1",
     "undici": "^8.0.2"
   }
 }
