@@ -12,9 +12,9 @@
   },
   "devDependencies": {
     "@storybook/addon-coverage": "^3.0.1",
-    "@storybook/addon-docs": "^10.3.3",
-    "@storybook/addon-links": "^10.3.3",
-    "@storybook/preact-vite": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-links": "^10.3.5",
+    "@storybook/preact-vite": "^10.3.5",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/preact": "^3.2.4",
     "autoprefixer": "^10.4.20",
@@ -24,7 +24,7 @@
     "vite": "^8.0.6",
     "vite-plugin-turbosnap": "^1.0.3",
     "@vitest/coverage-v8": "^4.0.18",
-    "@storybook/addon-vitest": "^10.3.3",
+    "@storybook/addon-vitest": "^10.3.5",
     "@vitest/browser-playwright": "^4.0.18"
   },
   "typings": "lib/index.d.ts",
