@@ -21,9 +21,7 @@ updates:
       tailwind:
         patterns:
           - "tailwindcss"
-          - "autoprefixer"
-          - "postcss"
-          - "@astrojs/tailwind"
+          - "@tailwindcss/*"
       astro:
         patterns:
           - "astro"
