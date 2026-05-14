@@ -13,7 +13,6 @@
   "dependencies": {
     "@astrojs/preact": "^5.1.2",
     "@astrojs/rss": "^4.0.18",
-    "@astrojs/tailwind": "^5.1.0",
     "@digi4care/astro-google-analytics": "1.1.1",
     "@faker-js/faker": "^10.3.0",
     "@vgmo/types": "0.0.1",
@@ -22,9 +21,8 @@
     "preact": "^10.29.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.7",
     "@codecov/astro-plugin": "^2.0.1",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^4.1.7"
   }
 }
