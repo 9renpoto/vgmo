@@ -39,40 +39,16 @@ jobs:
       - name: Check for changes
         id: git_changes
         run: |
-          if git status --porcelain | grep -q .; then
+          git add services/web/public/data/concerts.json
+          if ! git diff --cached --quiet; then
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Commit changes
+      - name: Commit and push changes
         if: steps.git_changes.outputs.has_changes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B "$BRANCH_NAME"
-          # The crawler generates concerts.json; track it explicitly.
-          git add services/web/public/data/concerts.json
           git commit -m "$COMMIT_MESSAGE"
-      - name: Push changes
-        if: steps.git_changes.outputs.has_changes == 'true'
-        run: git push --force-with-lease origin "$BRANCH_NAME"
-      - name: Create or update pull request
-        if: steps.git_changes.outputs.has_changes == 'true'
-        run: |
-          if gh pr view "$BRANCH_NAME" >/dev/null 2>&1; then
-            gh pr edit "$BRANCH_NAME" \
-              --title "$PR_TITLE" \
-              --body "$PR_BODY" \
-              --add-label automated \
-              --add-assignee 9renpoto \
-              --add-reviewer 9renpoto
-          else
-            gh pr create \
-              --base main \
-              --head "$BRANCH_NAME" \
-              --title "$PR_TITLE" \
-              --body "$PR_BODY" \
-              --label automated \
-              --assignee 9renpoto \
-              --reviewer 9renpoto
-          fi
+          git push origin main
