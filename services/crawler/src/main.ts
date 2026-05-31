@@ -118,11 +118,8 @@ const parseDate = (text: string): string | null => {
   }
 
   const [, year, month, day] = dateMatch;
-  return new Date(
-    parseInt(year, 10),
-    parseInt(month, 10) - 1,
-    parseInt(day, 10),
-  ).toISOString();
+  const isoString = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T00:00:00+09:00`;
+  return new Date(isoString).toISOString();
 };
 
 /**
