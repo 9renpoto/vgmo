@@ -16,6 +16,8 @@ jobs:
       contents: read
     timeout-minutes: 10
     runs-on: ubuntu-22.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
 
     strategy:
       matrix:
@@ -35,7 +37,6 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - run: npx playwright install --with-deps
       - name: Build Storybook
         run: npm run build-storybook --quiet
       - name: Serve Storybook and run tests
