@@ -17,7 +17,7 @@
     "@faker-js/faker": "^10.4.0",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^6.3.8",
+    "astro": "^6.4.0",
     "preact": "^10.29.0"
   },
   "devDependencies": {
