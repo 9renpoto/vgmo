@@ -118,10 +118,9 @@ const parseDate = (text: string): string | null => {
   }
 
   const [, year, month, day] = dateMatch;
+  // Use JST (UTC+9) for parsing the date
   return new Date(
-    parseInt(year, 10),
-    parseInt(month, 10) - 1,
-    parseInt(day, 10),
+    `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T00:00:00+09:00`,
   ).toISOString();
 };
 
