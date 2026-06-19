@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/preact": "^5.1.5",
     "@astrojs/rss": "^4.0.18",
-    "@digi4care/astro-google-analytics": "1.1.1",
+    "@digi4care/astro-google-analytics": "2.0.1",
     "@faker-js/faker": "^10.4.0",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
