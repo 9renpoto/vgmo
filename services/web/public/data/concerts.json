@@ -4,9 +4,7 @@
     "date": "2026-12-26T15:00:00.000Z",
     "ticketUrl": "https://www.promax.co.jp/okami/",
     "sourceUrl": "https://www.2083.jp/concert/20260429okami.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260429okami_img.jpg"
   },
   {
@@ -14,12 +12,7 @@
     "date": "2026-08-20T15:00:00.000Z",
     "ticketUrl": "https://www.pokemon.jp/special/nhkso-pokemon2026",
     "sourceUrl": "https://www.2083.jp/concert/20260821pokemon.html",
-    "prefectures": [
-      "東京",
-      "京都",
-      "大阪",
-      "福岡"
-    ],
+    "prefectures": ["東京", "京都", "大阪", "福岡"],
     "imageUrl": "https://www.2083.jp/concert/img/20260821pokemon_img.jpg"
   },
   {
@@ -27,9 +20,7 @@
     "date": "2026-08-06T15:00:00.000Z",
     "ticketUrl": "https://teket.jp/17754/66994",
     "sourceUrl": "https://www.2083.jp/concert/20260807famikoto.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260807famikoto_img.jpg"
   },
   {
@@ -37,9 +28,7 @@
     "date": "2026-07-24T15:00:00.000Z",
     "ticketUrl": "https://njbp.org/concert/live18/",
     "sourceUrl": "https://www.2083.jp/concert/20260725njbp_sega.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260725njbp_sega_img.jpg"
   },
   {
@@ -47,9 +36,7 @@
     "date": "2026-07-17T15:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/event/gmj/",
     "sourceUrl": "https://www.2083.jp/concert/20260718gamemusicjam.html",
-    "prefectures": [
-      "千葉"
-    ],
+    "prefectures": ["千葉"],
     "imageUrl": "https://www.2083.jp/concert/img/20260718gamemusicjam_img.jpg"
   },
   {
@@ -57,9 +44,7 @@
     "date": "2026-07-17T15:00:00.000Z",
     "ticketUrl": "https://www.jvcmusic.co.jp/another-eden/concert2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260718anothereden.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260718anothereden_img.jpg"
   },
   {
@@ -67,9 +52,7 @@
     "date": "2026-07-11T15:00:00.000Z",
     "ticketUrl": "https://teket.jp/13576/69130",
     "sourceUrl": "https://www.2083.jp/concert/20260712itoken.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260712itoken_img.jpg"
   },
   {
@@ -78,19 +61,14 @@
     "ticketUrl": "https://steinsgate-orchestra2026.com/matsudo/",
     "sourceUrl": "https://www.2083.jp/concert/20260531steinsgate.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260531steinsgate_img.jpg",
-    "prefectures": [
-      "愛知"
-    ]
+    "prefectures": ["愛知"]
   },
   {
     "title": "ペルソナ5 スペシャル・ビッグバンド・コンサート2026",
     "date": "2026-06-29T15:00:00.000Z",
     "ticketUrl": "https://www.ticketport.co.jp/lp/persona5_bigband/",
     "sourceUrl": "https://www.2083.jp/concert/20260630persona5.html",
-    "prefectures": [
-      "神奈川",
-      "広島"
-    ],
+    "prefectures": ["神奈川", "広島"],
     "imageUrl": "https://www.2083.jp/concert/img/20260630persona5_img.jpg"
   },
   {
@@ -98,9 +76,7 @@
     "date": "2026-06-27T15:00:00.000Z",
     "ticketUrl": "https://www.promax.co.jp/sonic-live/",
     "sourceUrl": "https://www.2083.jp/concert/20260628sonic.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260628sonic_img.jpg"
   },
   {
@@ -109,20 +85,14 @@
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
-    "prefectures": [
-      "広島",
-      "大阪",
-      "東京"
-    ]
+    "prefectures": ["広島", "大阪", "東京"]
   },
   {
     "title": "メタファー：リファンタジオ オーケストラコンサート -ReSimfonio-",
     "date": "2026-06-05T15:00:00.000Z",
     "ticketUrl": "https://www.ticketport.co.jp/lp/metaphor_concert/",
     "sourceUrl": "https://www.2083.jp/concert/20260606metaphor.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260606metaphor_img.jpg"
   },
   {
@@ -130,9 +100,7 @@
     "date": "2026-06-05T15:00:00.000Z",
     "ticketUrl": "https://metroberry.jp/shinepost_concert/",
     "sourceUrl": "https://www.2083.jp/concert/20260606shinepost.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260606shinepost_img.jpg"
   },
   {
@@ -140,10 +108,7 @@
     "date": "2026-06-04T15:00:00.000Z",
     "ticketUrl": "https://www.hollowknightconcert2026.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260605hollowknight.html",
-    "prefectures": [
-      "神奈川",
-      "大阪"
-    ],
+    "prefectures": ["神奈川", "大阪"],
     "imageUrl": "https://www.2083.jp/concert/img/20260605hollowknight_img.jpg"
   },
   {
@@ -151,9 +116,7 @@
     "date": "2026-05-15T15:00:00.000Z",
     "ticketUrl": "https://ryu-ga-gotoku-live.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260516ryugagotoku.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260516ryugagotoku_img.jpg"
   },
   {
@@ -161,9 +124,7 @@
     "date": "2026-05-04T00:00:00.000Z",
     "ticketUrl": "https://www.4gamer.net/music/",
     "sourceUrl": "https://www.2083.jp/concert/20260504aikatsu.html",
-    "prefectures": [
-      "東京"
-    ],
+    "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260504aikatsu_img.jpg"
   },
   {
@@ -172,18 +133,14 @@
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/mos/",
     "sourceUrl": "https://www.2083.jp/concert/20260425squareenix.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260425squareenix_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "GAME SYMPHONY JAPAN 62nd Concert × クイズRPG 魔法使いと黒猫のウィズ ～13th Anniversary～",
     "date": "2026-04-18T00:00:00.000Z",
     "ticketUrl": "https://l-tike.com/search/?lcd=34797",
     "sourceUrl": "https://www.2083.jp/concert/20260418magicianwiz.html",
-    "prefectures": [
-      "神奈川"
-    ],
+    "prefectures": ["神奈川"],
     "imageUrl": "https://www.2083.jp/concert/img/20260418magicianwiz_img.jpg"
   },
   {
@@ -192,10 +149,7 @@
     "ticketUrl": "https://artsinnovator.com/persona-sc30/",
     "sourceUrl": "https://www.2083.jp/concert/20260411persona.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260411persona_img.jpg",
-    "prefectures": [
-      "京都",
-      "東京"
-    ]
+    "prefectures": ["京都", "東京"]
   },
   {
     "title": "仙台フィルハーモニー管弦楽団 エンターテインメント定期 第6回\nラブライブ！School idol project\n～叶え！μ's Orchestra Dream Concert！～",
@@ -203,9 +157,7 @@
     "ticketUrl": "https://www.sendaiphil.jp/e6/",
     "sourceUrl": "https://www.2083.jp/concert/20260320lovelive.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260320lovelive_img.jpg",
-    "prefectures": [
-      "宮城"
-    ]
+    "prefectures": ["宮城"]
   },
   {
     "title": "NieR:Piano Concert -Journeys 12026-",
@@ -213,10 +165,7 @@
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/nier/piano12026/",
     "sourceUrl": "https://www.2083.jp/concert/20260312nier.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260312nier_img.jpg",
-    "prefectures": [
-      "愛知",
-      "東京"
-    ]
+    "prefectures": ["愛知", "東京"]
   },
   {
     "title": "BIOHAZARD 30th Anniversary Concerts -Symphony of Legacy-",
@@ -224,9 +173,7 @@
     "ticketUrl": "https://bhre30th-concerts.com/s/bhre/",
     "sourceUrl": "https://www.2083.jp/concert/20260307biohazard.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260307biohazard_img.jpg",
-    "prefectures": [
-      "埼玉"
-    ]
+    "prefectures": ["埼玉"]
   },
   {
     "title": "N響 ドラゴンクエスト・コンサート ～導かれし者たち～",
@@ -234,10 +181,7 @@
     "ticketUrl": "https://www.nhkso.or.jp/concert/special/",
     "sourceUrl": "https://www.2083.jp/concert/20260227dq_nhkso.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260227dq_nhkso_img.jpg",
-    "prefectures": [
-      "東京",
-      "千葉"
-    ]
+    "prefectures": ["東京", "千葉"]
   },
   {
     "title": "DEATH STRANDING Strands of Harmony World Tour",
@@ -245,10 +189,7 @@
     "ticketUrl": "https://www.deathstrandingconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260223deathstranding.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260223deathstranding_img.jpg",
-    "prefectures": [
-      "神奈川",
-      "大阪"
-    ]
+    "prefectures": ["神奈川", "大阪"]
   },
   {
     "title": "UNDERTALE 10th Anniversary Concert",
@@ -256,10 +197,7 @@
     "ticketUrl": "https://undertale10thconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20250913undertale.html",
     "imageUrl": "https://www.2083.jp/concert/img/20250913undertale_img.jpg",
-    "prefectures": [
-      "広島",
-      "北海道"
-    ]
+    "prefectures": ["広島", "北海道"]
   },
   {
     "title": "KENJI ITO CONCERT \"35th Anniversary AS A COMPOSER\" LIVE\n-gentle echo meeting＜Rock Style＞ @Omiya Sonic City",
@@ -267,9 +205,7 @@
     "ticketUrl": "https://www.itoken35thlive.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260221itoken.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260221itoken_img.jpg",
-    "prefectures": [
-      "埼玉"
-    ]
+    "prefectures": ["埼玉"]
   },
   {
     "title": "NJBP Live! #17 “オーケストラ・インベージョン”",
@@ -277,9 +213,7 @@
     "ticketUrl": "https://njbp.org/concert/live17/",
     "sourceUrl": "https://www.2083.jp/concert/20260221njbp_taito",
     "imageUrl": "https://www.2083.jp/concert/img/20260221njbp_taito_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "RIDGE RACER NIGHT 2025",
@@ -287,9 +221,7 @@
     "ticketUrl": "https://shop.asobistore.jp/feature/pacman_officialstore/topics/rrn2025/",
     "sourceUrl": "https://www.2083.jp/concert/20260221ridgeracer.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260221ridgeracer_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "ELDEN RING SYMPHONIC ADVENTURE",
@@ -297,9 +229,7 @@
     "ticketUrl": "https://eldenring-orchestra.bn-ent.net/",
     "sourceUrl": "https://www.2083.jp/concert/20260215eldenring.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260215eldenring_img.jpg",
-    "prefectures": [
-      "神奈川"
-    ]
+    "prefectures": ["神奈川"]
   },
   {
     "title": "OMORI 5周年記念コンサート 追加公演",
@@ -307,9 +237,7 @@
     "ticketUrl": "https://www.omori5thconcert.com/",
     "sourceUrl": "https://www.2083.jp/concert/20260215OMORI.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260215OMORI_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "UNDERTALE 10th Anniversary Concert\nVALENTINE'S SPECIAL PROGRAM",
@@ -317,9 +245,7 @@
     "ticketUrl": "https://undertale10thconcert.com/valentine_program.html",
     "sourceUrl": "https://www.2083.jp/concert/20260214undertale.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260214undertale_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "Falcom jdk BAND LIVE 2026",
@@ -327,9 +253,7 @@
     "ticketUrl": "https://www.falcom.co.jp/jdk/2026/",
     "sourceUrl": "https://www.2083.jp/concert/20260207falcomjdk.html",
     "imageUrl": "https://www.2083.jp/concert/img/20260207falcomjdk_img.jpg",
-    "prefectures": [
-      "東京"
-    ]
+    "prefectures": ["東京"]
   },
   {
     "title": "NIKKEオーケストラコンサート「Unbreakable Memories」",
