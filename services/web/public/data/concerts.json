@@ -8,12 +8,28 @@
     "imageUrl": "https://www.2083.jp/concert/img/20260429okami_img.jpg"
   },
   {
+    "title": "「三國志」40周年記念コンサート ～シブサワ・コウ45周年のしらべ～",
+    "date": "2026-12-11T15:00:00.000Z",
+    "ticketUrl": "https://www.gamecity.ne.jp/sangokushi40th/jp/concert/",
+    "sourceUrl": "https://www.2083.jp/concert/20261212sangokushi.html",
+    "prefectures": ["神奈川／動画配信"],
+    "imageUrl": "https://www.2083.jp/concert/img/20261212sangokushi_img.jpg"
+  },
+  {
     "title": "N響×ポケモン クラシックコンサートツアー",
     "date": "2026-08-20T15:00:00.000Z",
     "ticketUrl": "https://www.pokemon.jp/special/nhkso-pokemon2026",
     "sourceUrl": "https://www.2083.jp/concert/20260821pokemon.html",
     "prefectures": ["東京", "京都", "大阪", "福岡"],
     "imageUrl": "https://www.2083.jp/concert/img/20260821pokemon_img.jpg"
+  },
+  {
+    "title": "ダンガンロンパ ORCHESTRA CONCERT -希望と絶望の調べ-",
+    "date": "2026-08-10T15:00:00.000Z",
+    "ticketUrl": "https://dangan15th-concert.com/",
+    "sourceUrl": "https://www.2083.jp/concert/20260811danganronpa.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260811danganronpa_img.jpg"
   },
   {
     "title": "ファミ箏 第5回演奏会",
@@ -64,6 +80,14 @@
     "prefectures": ["愛知"]
   },
   {
+    "title": "BRA★BRA FINAL FANTASY BRASS de BRAVO 2026\nwith Siena Wind Orchestra",
+    "date": "2026-07-03T15:00:00.000Z",
+    "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
+    "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
+    "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
+    "prefectures": ["東京"]
+  },
+  {
     "title": "ペルソナ5 スペシャル・ビッグバンド・コンサート2026",
     "date": "2026-06-29T15:00:00.000Z",
     "ticketUrl": "https://www.ticketport.co.jp/lp/persona5_bigband/",
@@ -78,14 +102,6 @@
     "sourceUrl": "https://www.2083.jp/concert/20260628sonic.html",
     "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260628sonic_img.jpg"
-  },
-  {
-    "title": "BRA★BRA FINAL FANTASY BRASS de BRAVO 2026\nwith Siena Wind Orchestra",
-    "date": "2026-06-26T15:00:00.000Z",
-    "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/brabraff/tour/2026/",
-    "sourceUrl": "https://www.2083.jp/concert/20260405brabraff.html",
-    "imageUrl": "https://www.2083.jp/concert/img/20260405brabraff_img.jpg",
-    "prefectures": ["広島", "大阪", "東京"]
   },
   {
     "title": "メタファー：リファンタジオ オーケストラコンサート -ReSimfonio-",
