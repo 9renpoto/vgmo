@@ -18,7 +18,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.1",
     "@types/node": "^25.6.0",
-    "@typescript/native-preview": "7.0.0-dev.20260616.1",
+    "@typescript/native-preview": "7.0.0-dev.20260624.1",
     "c8": "^11.0.0",
     "vitest": "^4.1.5"
   }
