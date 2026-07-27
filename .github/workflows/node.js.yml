@@ -37,20 +37,15 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Build Storybook
-        run: npm run build-storybook --quiet
-      - name: Serve Storybook and run tests
-        continue-on-error: true
-        run: |
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server packages/ui/storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:6006 && npm test"
+      - name: Run tests
+        run: npm test
+
       - name: Upload coverage to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./services/web/coverage/lcov.info,./packages/ui/coverage/coverage-storybook.json
+          files: ./services/web/coverage/lcov.info,./packages/ui/coverage/lcov.info
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@0fa95f0e1eeaafde2c782583b36b28ad0d8c77d3 # v1.2.1

@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
-import { defineConfig, defineProject, mergeConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
 
 import viteConfig from "./vite.config";
 
@@ -13,25 +13,36 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      reporters: ["default", "junit"],
+      outputFile: path.join(dirname, "junit.xml"),
+      coverage: {
+        exclude: ["src/**/*.stories.{ts,tsx}"],
+        include: ["src/**/*.{ts,tsx}"],
+        provider: "v8",
+        reporter: ["text", "json", "lcov"],
+        reportsDirectory: path.join(dirname, "coverage"),
+      },
       projects: [
-        defineProject({
+        {
+          extends: true,
+          optimizeDeps: {
+            include: ["@testing-library/dom", "preact/jsx-dev-runtime"],
+          },
           plugins: [
             storybookTest({
               configDir: path.join(dirname, ".storybook"),
-              storybookScript: "npm run storybook -- --no-open",
             }),
           ],
           test: {
             name: "storybook",
             browser: {
               enabled: true,
-              provider: playwright({}),
               headless: true,
+              provider: playwright({}),
               instances: [{ browser: "chromium" }],
             },
-            setupFiles: ["./.storybook/vitest.setup.ts"],
           },
-        }),
+        },
       ],
     },
   }),
