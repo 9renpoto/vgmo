@@ -1,6 +1,6 @@
 # @vgmo/ui
 
-Preact UI component library used by the vgmo monorepo, with Storybook and Storybook Test Runner for coverage.
+Preact UI component library used by the vgmo monorepo, with Storybook and Vitest browser tests with coverage.
 
 ## Requirements
 - Node.js 20+

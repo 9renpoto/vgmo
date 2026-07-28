@@ -33,7 +33,7 @@ To ensure code quality, please run `biome check --apply .` before committing.
 - Add dependency to a workspace: `npm i <pkg> -w <name>`
 
 ## Testing
-- UI: `npm test -w @vgmo/ui` (Storybook test runner + coverage)
+- UI: `npm test -w @vgmo/ui` (Storybook Vitest browser tests + coverage)
 - Web: `npm test -w @vgmo/web`
 - Crawler: `npm test -w @vgmo/crawler` (Node 22+)
 
@@ -43,4 +43,3 @@ To ensure code quality, please run `biome check --apply .` before committing.
 
 ## License
 By contributing, you agree that your contributions are licensed under the MIT License (see `LICENSE`).
-
