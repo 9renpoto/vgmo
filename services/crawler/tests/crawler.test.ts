@@ -142,7 +142,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const concert1 = results.find((c) => c.title === "Concert One");
   assert.ok(concert1, "Concert One should be found");
-  assert.strictEqual(concert1.date, new Date(2025, 9, 12).toISOString());
+  assert.strictEqual(concert1.date, "2025-10-11T15:00:00.000Z");
   assert.strictEqual(
     concert1.sourceUrl,
     "https://www.2083.jp/concert/concert-1.html",
@@ -160,7 +160,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
-  assert.strictEqual(concert2.date, new Date(2025, 10, 15).toISOString());
+  assert.strictEqual(concert2.date, "2025-11-14T15:00:00.000Z");
   assert.strictEqual(
     concert2.sourceUrl,
     "https://www.2083.jp/concert/concert-2.html",
