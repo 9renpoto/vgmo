@@ -22,7 +22,7 @@ Monorepo managed with npm workspaces containing:
 - License
 
 ## Requirements
-- Node.js 20.6+ recommended. This project uses the native TypeScript compiler (`@typescript/native-preview`), aliased as `tsgo`.
+- Node.js 20.6+ recommended. This project uses TypeScript 7 and its `tsc` compiler.
 - For `services/crawler` tests using the `--experimental-strip-types` flag, Node.js 22+ is required.
 - npm (bundled with Node).
 - Git.
@@ -50,7 +50,7 @@ npx lefthook install
 - Use an LTS version of Node.js (20.6+) and run all commands from the repository root.
 - Add dependencies to a specific workspace using the `-w` flag (e.g., `npm install <package> -w @vgmo/web`).
 - Keep changes scoped to a single workspace whenever possible.
-- This project uses `@typescript/native-preview` (aliased as `tsgo`) for compiling TypeScript. Running `npm run build -w <workspace>` delegates to `tsgo --build`.
+- This project uses TypeScript 7 for compiling TypeScript. Running `npm run build -w <workspace>` delegates to `tsc --build`.
 
 ## Workspaces
 - This repository is a monorepo managed by npm workspaces.
