@@ -5,17 +5,15 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --build .",
-    "test": "vitest",
-    "test-storybook": "vitest --project=storybook",
+    "test": "vitest --coverage",
+    "test-storybook": "vitest --project=storybook --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-coverage": "^3.0.2",
-    "@storybook/addon-docs": "^10.5.0",
-    "@storybook/addon-links": "^10.5.0",
-    "@storybook/preact-vite": "^10.5.0",
-    "@storybook/testing-library": "^0.2.2",
+    "@storybook/addon-docs": "^10.5.3",
+    "@storybook/addon-links": "^10.5.3",
+    "@storybook/preact-vite": "^10.5.3",
     "@tailwindcss/vite": "^4.3.2",
     "@testing-library/preact": "^3.2.4",
     "storybook": "^10.2.10",
@@ -23,7 +21,7 @@
     "vite": "^8.1.5",
     "vite-plugin-turbosnap": "^1.0.3",
     "@vitest/coverage-v8": "^4.1.9",
-    "@storybook/addon-vitest": "^10.5.0",
+    "@storybook/addon-vitest": "^10.5.3",
     "@vitest/browser-playwright": "^4.1.10",
     "vitest": "^4.1.9"
   },
