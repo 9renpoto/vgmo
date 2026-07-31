@@ -24,6 +24,30 @@
     "imageUrl": "https://www.2083.jp/concert/img/20260925shimomura_img.jpg"
   },
   {
+    "title": "DESTINY8 THE FIRST LIVE",
+    "date": "2026-09-20T15:00:00.000Z",
+    "ticketUrl": "https://destiny8thefirstlive.com/",
+    "sourceUrl": "https://www.2083.jp/concert/20260921destiny8.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260921destiny8_img.jpg"
+  },
+  {
+    "title": "Symphonic Poem from 幻想水滸伝 Voyage",
+    "date": "2026-09-18T15:00:00.000Z",
+    "ticketUrl": "https://metroberry.jp/genso-voyage/",
+    "sourceUrl": "https://www.2083.jp/concert/20260919suikoden.html",
+    "prefectures": ["埼玉"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260919suikoden_img.jpg"
+  },
+  {
+    "title": "モンスターハンター オーケストラコンサート ～狩猟音楽祭2026～",
+    "date": "2026-08-22T15:00:00.000Z",
+    "ticketUrl": "https://www.promax.co.jp/mhoc/2026/",
+    "sourceUrl": "https://www.2083.jp/concert/20260823monsterhunter.html",
+    "prefectures": ["東京", "兵庫", "福岡", "北海道"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260823monsterhunter_img.jpg"
+  },
+  {
     "title": "N響×ポケモン クラシックコンサートツアー",
     "date": "2026-08-20T15:00:00.000Z",
     "ticketUrl": "https://www.pokemon.jp/special/nhkso-pokemon2026",
