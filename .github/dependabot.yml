@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    cooldown:
-      default-days: 7
     labels:
       - "Type: Maintenance"
 
@@ -13,15 +11,15 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    cooldown:
-      default-days: 7
     labels:
       - "Type: Maintenance"
     groups:
       tailwind:
         patterns:
           - "tailwindcss"
-          - "@tailwindcss/*"
+          - "autoprefixer"
+          - "postcss"
+          - "@astrojs/tailwind"
       astro:
         patterns:
           - "astro"

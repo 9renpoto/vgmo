@@ -118,9 +118,10 @@ const parseDate = (text: string): string | null => {
   }
 
   const [, year, month, day] = dateMatch;
-  // Use JST (UTC+9) for parsing the date
   return new Date(
-    `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T00:00:00+09:00`,
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10),
   ).toISOString();
 };
 
@@ -162,10 +163,6 @@ export const scrapeConcertPage = async (
       return; // Skip if date is not parsable
     }
 
-    const prefectures = Array.from(
-      new Set([...dtText.matchAll(/【([^】]+)】/g)].map((m) => m[1])),
-    );
-
     const promise = Promise.all([
       extractConcertImageUrl(sourceUrl),
       extractTicketUrl(sourceUrl),
@@ -175,7 +172,6 @@ export const scrapeConcertPage = async (
         date,
         ticketUrl: ticketUrl ?? null,
         sourceUrl,
-        prefectures,
         imageUrl,
       });
     });

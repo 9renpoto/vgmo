@@ -1,6 +1,6 @@
 # @vgmo/ui
 
-Preact UI component library used by the vgmo monorepo, with Storybook and Vitest browser tests with coverage.
+Preact UI component library used by the vgmo monorepo, with Storybook and Storybook Test Runner for coverage.
 
 ## Requirements
 - Node.js 20+
@@ -21,7 +21,7 @@ npm ci
 
 ## Development Notes
 - Components are organized as `src/ComponentName/` with `index.tsx` and `ComponentName.stories.tsx`
-- Styling via Tailwind CSS (`src/styles/tailwind.css`)
+- Styling via Tailwind CSS (`tailwind.config.ts` + `src/styles/tailwind.css`)
 
 ## Contributing
 Please read the repository contributing guide at `../../.github/CONTRIBUTING.md` and follow Conventional Commits.

@@ -11,8 +11,15 @@ const config: StorybookConfig = {
 
   addons: [
     getAbsolutePath("@storybook/addon-links"),
+    {
+      name: getAbsolutePath("@storybook/addon-coverage"),
+      options: {
+        istanbul: {
+          include: ["src/**/*"],
+        },
+      },
+    },
     getAbsolutePath("@storybook/addon-docs"),
-    getAbsolutePath("@storybook/addon-vitest"),
   ],
 
   framework: {
@@ -28,6 +35,12 @@ const config: StorybookConfig = {
         ? [turbosnap({ rootDir: config.root ?? process.cwd() })]
         : [],
     });
+  },
+
+  build: {
+    test: {
+      disabledAddons: ["@storybook/addon-coverage"],
+    },
   },
 };
 

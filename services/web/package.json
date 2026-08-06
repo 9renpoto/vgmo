@@ -11,18 +11,20 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/preact": "^6.0.1",
-    "@astrojs/rss": "^4.0.19",
-    "@digi4care/astro-google-analytics": "2.0.1",
-    "@faker-js/faker": "^10.5.0",
+    "@astrojs/preact": "^4.1.3",
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/tailwind": "^5.1.0",
+    "@digi4care/astro-google-analytics": "1.1.1",
+    "@faker-js/faker": "^10.2.0",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^7.1.4",
-    "preact": "^10.29.0"
+    "astro": "^5.16.9",
+    "preact": "^10.28.2"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@codecov/astro-plugin": "^2.0.1",
-    "tailwindcss": "^4.1.7"
+    "@codecov/astro-plugin": "^1.9.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.14"
   }
 }

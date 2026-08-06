@@ -142,7 +142,7 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
 
   const concert1 = results.find((c) => c.title === "Concert One");
   assert.ok(concert1, "Concert One should be found");
-  assert.strictEqual(concert1.date, "2025-10-11T15:00:00.000Z");
+  assert.strictEqual(concert1.date, new Date(2025, 9, 12).toISOString());
   assert.strictEqual(
     concert1.sourceUrl,
     "https://www.2083.jp/concert/concert-1.html",
@@ -156,11 +156,10 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://www.2083.jp/ticket/1",
     "Ticket URL for concert 1 should be correct",
   );
-  assert.deepStrictEqual(concert1.prefectures, ["東京"]);
 
   const concert2 = results.find((c) => c.title === "Concert Two");
   assert.ok(concert2, "Concert Two should be found");
-  assert.strictEqual(concert2.date, "2025-11-14T15:00:00.000Z");
+  assert.strictEqual(concert2.date, new Date(2025, 10, 15).toISOString());
   assert.strictEqual(
     concert2.sourceUrl,
     "https://www.2083.jp/concert/concert-2.html",
@@ -174,7 +173,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://example.com/ticket/2",
     "Ticket URL for concert 2 should be correct",
   );
-  assert.deepStrictEqual(concert2.prefectures, ["大阪"]);
 
   const concert3 = results.find((c) => c.title === "Concert Three");
   assert.ok(concert3, "Concert Three should be found");
@@ -188,7 +186,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     null,
     "Ticket URL for concert 3 should be null",
   );
-  assert.deepStrictEqual(concert3.prefectures, []);
 
   const concert4 = results.find((c) => c.title === "Concert Four");
   assert.ok(concert4, "Concert Four should be found");
@@ -197,7 +194,6 @@ test("scrapeConcertPage should parse HTML and extract concert details", async (t
     "https://tickets.example.org/buy/online",
     "Ticket URL for concert 4 should pick the external ticket site",
   );
-  assert.deepStrictEqual(concert4.prefectures, ["東京"]);
 });
 
 test("mergeConcerts accumulates without duplicates", () => {
@@ -208,7 +204,6 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/1",
       imageUrl: "https://example.com/image-old.jpg",
-      prefectures: ["東京"],
     },
   ];
 
@@ -219,7 +214,6 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: "https://tickets.example.com/1",
       sourceUrl: "https://example.com/concert/1",
       imageUrl: undefined,
-      prefectures: ["東京"],
     },
     {
       title: "New Concert",
@@ -227,7 +221,6 @@ test("mergeConcerts accumulates without duplicates", () => {
       ticketUrl: null,
       sourceUrl: "https://example.com/concert/2",
       imageUrl: "https://example.com/image-new.jpg",
-      prefectures: ["大阪"],
     },
   ];
 

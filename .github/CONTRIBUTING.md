@@ -33,7 +33,7 @@ To ensure code quality, please run `biome check --apply .` before committing.
 - Add dependency to a workspace: `npm i <pkg> -w <name>`
 
 ## Testing
-- UI: `npm test -w @vgmo/ui` (Storybook Vitest browser tests + coverage)
+- UI: `npm test -w @vgmo/ui` (Storybook test runner + coverage)
 - Web: `npm test -w @vgmo/web`
 - Crawler: `npm test -w @vgmo/crawler` (Node 22+)
 

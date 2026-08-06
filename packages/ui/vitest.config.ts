@@ -13,16 +13,6 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      coverage: {
-        provider: "v8",
-        include: ["src/**/*.{ts,tsx}"],
-        exclude: ["src/**/*.stories.{ts,tsx}"],
-        reporter: [
-          "text",
-          ["json", { file: "coverage-storybook.json" }],
-          "html",
-        ],
-      },
       projects: [
         defineProject({
           plugins: [
@@ -39,6 +29,7 @@ export default mergeConfig(
               headless: true,
               instances: [{ browser: "chromium" }],
             },
+            setupFiles: ["./.storybook/vitest.setup.ts"],
           },
         }),
       ],

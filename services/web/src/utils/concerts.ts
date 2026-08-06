@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import { isAbsolute, join } from "node:path";
 import type { ConcertInfo } from "@vgmo/types";
 
 export type ConcertWithMeta = ConcertInfo & {
@@ -44,14 +43,16 @@ const normalizeConcerts = (concerts: ConcertInfo[]): ConcertInfo[] => {
 export async function loadConcertsFromFile(
   filePath?: string,
 ): Promise<ConcertWithMeta[]> {
-  const resolvedPath = filePath
-    ? filePath.startsWith("file:") || isAbsolute(filePath)
-      ? filePath
-      : new URL(filePath, import.meta.url)
-    : join(process.cwd(), "public/data/concerts.json");
-  const text = await readFile(resolvedPath, "utf-8");
-  const raw = JSON.parse(text) as ConcertInfo[];
-  return normalizeConcerts(raw).map(toMeta);
+  try {
+    const url = filePath
+      ? new URL(filePath, import.meta.url)
+      : new URL("../../public/data/concerts.json", import.meta.url);
+    const text = await readFile(url, "utf-8");
+    const raw = JSON.parse(text) as ConcertInfo[];
+    return normalizeConcerts(raw).map(toMeta);
+  } catch (_e) {
+    return [];
+  }
 }
 
 export async function listConcerts(): Promise<ConcertWithMeta[]> {

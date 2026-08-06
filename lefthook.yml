@@ -1,4 +1,4 @@
 pre-commit:
   commands:
     biome:
-      run: biome check --write .
+      run: biome check --apply .

@@ -21,11 +21,8 @@ on:
 jobs:
   bump:
     runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v6
 
       # - run: npm version ${{ inputs.semver }} --no-git-tag-version --workspaces --no-workspaces-update
 
@@ -35,7 +32,7 @@ jobs:
       #     echo "NEW_VERSION=$(cat < apps/web/package.json | jq -r .version)" >> "$GITHUB_OUTPUT"
 
       - name: generate new version and save to env variable
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        uses: actions/github-script@v8
         id: github_releases
         with:
           result-encoding: string
@@ -53,7 +50,7 @@ jobs:
         run: echo "NEW_VERSION=$(docker run --rm alpine/semver semver -c -i ${{ inputs.semver }} ${{ steps.github_releases.outputs.result }})" >> "$GITHUB_OUTPUT"
 
       - name: Generate release notes
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        uses: actions/github-script@v8
         id: get_release_note
         env:
           NEW_VERSION: ${{steps.get_version.outputs.NEW_VERSION}}
@@ -80,7 +77,7 @@ jobs:
       - run: rm new
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@v8
         with:
           base: main
           branch: main-${{ steps.get_version.outputs.NEW_VERSION }}
