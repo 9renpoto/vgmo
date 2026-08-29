@@ -1,8 +1,6 @@
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import type { StorybookConfig } from "@storybook/preact-vite";
-import { mergeConfig } from "vite";
-import turbosnap from "vite-plugin-turbosnap";
 
 const require = createRequire(import.meta.url);
 
@@ -18,16 +16,6 @@ const config: StorybookConfig = {
   framework: {
     name: getAbsolutePath("@storybook/preact-vite"),
     options: {},
-  },
-
-  async viteFinal(config, { configType }) {
-    const isProduction = configType === "PRODUCTION";
-
-    return mergeConfig(config, {
-      plugins: isProduction
-        ? [turbosnap({ rootDir: config.root ?? process.cwd() })]
-        : [],
-    });
   },
 };
 
