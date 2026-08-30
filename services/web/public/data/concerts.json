@@ -16,6 +16,30 @@
     "imageUrl": "https://www.2083.jp/concert/img/20261212sangokushi_img.jpg"
   },
   {
+    "title": "NJBP Live! #19 “Aretha BGM Reunion”",
+    "date": "2026-12-11T15:00:00.000Z",
+    "ticketUrl": "https://njbp.org/concert/live19/",
+    "sourceUrl": "https://www.2083.jp/concert/20261212njbp_aretha.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20261212njbp_aretha_img.jpg"
+  },
+  {
+    "title": "LOUNGE JAM - SQUARE ENIX Sessions with Ryo Miyachi the KuJenger",
+    "date": "2026-11-06T15:00:00.000Z",
+    "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/event/loungejam/",
+    "sourceUrl": "https://www.2083.jp/concert/20261107loungejam.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20261107loungejam_img.jpg"
+  },
+  {
+    "title": "GAME SYMPHONY JAPAN 63rd Concert\n× 白猫プロジェクト NEW WORLD'S ～12th Anniversary～",
+    "date": "2026-09-25T15:00:00.000Z",
+    "ticketUrl": "https://tiget.net/events/485958",
+    "sourceUrl": "https://www.2083.jp/concert/20260926shironeko.html",
+    "prefectures": ["神奈川"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260926shironeko_img.jpg"
+  },
+  {
     "title": "下村陽子 39th Anniversary Orchestra Concert: 39! ～Thank You!～",
     "date": "2026-09-24T15:00:00.000Z",
     "ticketUrl": "https://www.yoko39.jp/",
@@ -46,6 +70,14 @@
     "sourceUrl": "https://www.2083.jp/concert/20260919suikoden.html",
     "prefectures": ["埼玉"],
     "imageUrl": "https://www.2083.jp/concert/img/20260919suikoden_img.jpg"
+  },
+  {
+    "title": "Puyo Puyo 35th Anniversary LIVE -DAIRENSA!-",
+    "date": "2026-09-05T15:00:00.000Z",
+    "ticketUrl": "https://puyo.sega.jp/portal/topics/event/20260730_009060/",
+    "sourceUrl": "https://www.2083.jp/concert/20260906puyopuyo.html",
+    "prefectures": ["東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260906puyopuyo_img.jpg"
   },
   {
     "title": "N響×ポケモン クラシックコンサートツアー",
