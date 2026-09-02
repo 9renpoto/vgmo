@@ -11,14 +11,14 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "^10.5.9",
-    "@storybook/addon-links": "^10.5.9",
-    "@storybook/preact-vite": "^10.5.9",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/addon-links": "^10.5.10",
+    "@storybook/preact-vite": "^10.5.10",
     "@tailwindcss/vite": "^4.3.3",
     "storybook": "^10.2.10",
     "tailwindcss": "^4.1.7",
     "vite": "^8.2.2",
-    "@storybook/addon-vitest": "^10.5.9",
+    "@storybook/addon-vitest": "^10.5.10",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.11",
     "vitest": "^4.1.9"
