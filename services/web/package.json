@@ -16,7 +16,7 @@
     "@digi4care/astro-google-analytics": "2.0.1",
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
-    "astro": "^7.2.6",
+    "astro": "^7.2.7",
     "preact": "^10.29.0"
   },
   "devDependencies": {
