@@ -1,5 +1,13 @@
 [
   {
+    "title": "クロノ・トリガー Orchestra Concert 時を超える旋律",
+    "date": "2027-02-11T15:00:00.000Z",
+    "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/chrono/concert/30th/",
+    "sourceUrl": "https://www.2083.jp/concert/20270212chrono.html",
+    "prefectures": ["大阪"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260117chrono_img.jpg"
+  },
+  {
     "title": "大神 20周年記念コンサート ～大神 音絵巻～",
     "date": "2026-12-26T15:00:00.000Z",
     "ticketUrl": "https://www.promax.co.jp/okami/",
@@ -22,6 +30,14 @@
     "sourceUrl": "https://www.2083.jp/concert/20261212njbp_aretha.html",
     "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20261212njbp_aretha_img.jpg"
+  },
+  {
+    "title": "光吉猛修ライブツアー2026「Rolling Start」Present by SEGA SOUND STREET",
+    "date": "2026-11-14T15:00:00.000Z",
+    "ticketUrl": "https://eplus.jp/sf/word/0000129209",
+    "sourceUrl": "https://www.2083.jp/concert/20261115mitsuyoshi.html",
+    "prefectures": ["愛知", "京都", "東京"],
+    "imageUrl": "https://www.2083.jp/concert/img/20261115mitsuyoshi_img.jpg"
   },
   {
     "title": "LOUNGE JAM - SQUARE ENIX Sessions with Ryo Miyachi the KuJenger",
@@ -70,6 +86,23 @@
     "sourceUrl": "https://www.2083.jp/concert/20260919suikoden.html",
     "prefectures": ["埼玉"],
     "imageUrl": "https://www.2083.jp/concert/img/20260919suikoden_img.jpg"
+  },
+  {
+    "title": "UNDERTALE CONCERT ON 3 PIANOS",
+    "date": "2026-09-13T15:00:00.000Z",
+    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
+    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
+    "prefectures": [
+      "愛知",
+      "東京",
+      "福岡",
+      "神奈川",
+      "広島",
+      "福島",
+      "岩手",
+      "京都"
+    ],
+    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
   },
   {
     "title": "Puyo Puyo 35th Anniversary LIVE -DAIRENSA!-",
