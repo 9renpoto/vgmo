@@ -21,7 +21,7 @@
     "@storybook/addon-vitest": "^10.6.0",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.11",
-    "vitest": "^4.1.9"
+    "vitest": "^5.0.0"
   },
   "typings": "lib/index.d.ts",
   "dependencies": {
