@@ -80,29 +80,20 @@
     "imageUrl": "https://www.2083.jp/concert/img/20260921destiny8_img.jpg"
   },
   {
+    "title": "UNDERTALE CONCERT ON 3 PIANOS",
+    "date": "2026-09-20T15:00:00.000Z",
+    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
+    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
+    "prefectures": ["福岡", "神奈川", "広島", "福島", "岩手", "京都"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
+  },
+  {
     "title": "Symphonic Poem from 幻想水滸伝 Voyage",
     "date": "2026-09-18T15:00:00.000Z",
     "ticketUrl": "https://metroberry.jp/genso-voyage/",
     "sourceUrl": "https://www.2083.jp/concert/20260919suikoden.html",
     "prefectures": ["埼玉"],
     "imageUrl": "https://www.2083.jp/concert/img/20260919suikoden_img.jpg"
-  },
-  {
-    "title": "UNDERTALE CONCERT ON 3 PIANOS",
-    "date": "2026-09-13T15:00:00.000Z",
-    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
-    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
-    "prefectures": [
-      "愛知",
-      "東京",
-      "福岡",
-      "神奈川",
-      "広島",
-      "福島",
-      "岩手",
-      "京都"
-    ],
-    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
   },
   {
     "title": "Puyo Puyo 35th Anniversary LIVE -DAIRENSA!-",
