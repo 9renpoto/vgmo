@@ -33,6 +33,47 @@ test("loadConcertsFromFile dedupes and sorts concerts", async () => {
   );
 });
 
+test("loadConcertsFromFile with includePast option includes past concerts", async () => {
+  const cwd = process.cwd();
+  const workDir = await mkdtemp(join(tmpdir(), "vgmo-web-test-past-"));
+  const dataDir = join(workDir, "public/data");
+  const dataPath = join(dataDir, "concerts.json");
+  const payload = [
+    {
+      title: "Past Concert",
+      date: "2010-01-01T00:00:00.000Z",
+      ticketUrl: "https://example.com/ticket",
+      sourceUrl: "https://example.com/source1",
+      prefectures: ["大阪"],
+    },
+    {
+      title: "Future Concert",
+      date: "2099-01-01T00:00:00.000Z",
+      ticketUrl: "https://example.com/ticket",
+      sourceUrl: "https://example.com/source2",
+      prefectures: ["東京"],
+    },
+  ];
+
+  try {
+    await mkdir(dataDir, { recursive: true });
+    await writeFile(dataPath, JSON.stringify(payload), "utf-8");
+    process.chdir(workDir);
+
+    const defaultConcerts = await loadConcertsFromFile();
+    assert.equal(defaultConcerts.length, 1);
+    assert.equal(defaultConcerts[0].title, "Future Concert");
+
+    const allConcerts = await loadConcertsFromFile(undefined, { includePast: true });
+    assert.equal(allConcerts.length, 2);
+    assert.equal(allConcerts[0].title, "Past Concert");
+    assert.equal(allConcerts[1].title, "Future Concert");
+  } finally {
+    process.chdir(cwd);
+    await rm(workDir, { recursive: true, force: true });
+  }
+});
+
 test("loadConcertsFromFile reads default file from cwd public/data", async () => {
   const cwd = process.cwd();
   const workDir = await mkdtemp(join(tmpdir(), "vgmo-web-test-"));
