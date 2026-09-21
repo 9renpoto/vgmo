@@ -2,6 +2,7 @@
   "name": "@vgmo/ui",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --build .",
@@ -19,9 +20,10 @@
     "tailwindcss": "^4.1.7",
     "vite": "^8.2.2",
     "@storybook/addon-vitest": "^10.6.0",
-    "@vitest/browser-playwright": "^4.1.10",
-    "@vitest/coverage-v8": "^4.1.11",
-    "vitest": "^4.1.9"
+    "@vitest/browser-playwright": "^5.0.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "playwright": "1.56.1",
+    "vitest": "^5.0.1"
   },
   "typings": "lib/index.d.ts",
   "dependencies": {

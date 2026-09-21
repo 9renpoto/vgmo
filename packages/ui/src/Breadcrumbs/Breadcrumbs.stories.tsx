@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/preact";
-import { Breadcrumbs } from "./index";
+import { Breadcrumbs } from "./index.js";
 
 const meta: Meta<typeof Breadcrumbs> = {
   title: "Breadcrumbs",

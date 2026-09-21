@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/preact-vite";
-import Header from "./";
+import Header from "./index.js";
 
 const meta: Meta<typeof Header> = {
   component: Header,
