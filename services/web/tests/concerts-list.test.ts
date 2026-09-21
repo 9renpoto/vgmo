@@ -64,7 +64,9 @@ test("loadConcertsFromFile with includePast option includes past concerts", asyn
     assert.equal(defaultConcerts.length, 1);
     assert.equal(defaultConcerts[0].title, "Future Concert");
 
-    const allConcerts = await loadConcertsFromFile(undefined, { includePast: true });
+    const allConcerts = await loadConcertsFromFile(undefined, {
+      includePast: true,
+    });
     assert.equal(allConcerts.length, 2);
     assert.equal(allConcerts[0].title, "Past Concert");
     assert.equal(allConcerts[1].title, "Future Concert");

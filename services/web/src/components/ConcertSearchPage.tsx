@@ -1,5 +1,5 @@
-import Card from "@vgmo/ui/src/Card";
 import type { CardProps } from "@vgmo/ui/src/Card";
+import Card from "@vgmo/ui/src/Card";
 import Header from "@vgmo/ui/src/Header";
 import { useMemo, useState } from "preact/hooks";
 import type { ConcertWithMeta } from "../utils/concerts";
