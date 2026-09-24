@@ -1,5 +1,13 @@
 [
   {
+    "title": "リリア・ゲームミュージック・セレクション vol.3 伊藤賢治 with 成田勤",
+    "date": "2027-03-12T15:00:00.000Z",
+    "ticketUrl": "https://www.lilia.or.jp/event/3716",
+    "sourceUrl": "https://www.2083.jp/concert/20270313lilia.html",
+    "prefectures": ["埼玉"],
+    "imageUrl": "https://www.2083.jp/concert/img/20270313lilia_img.jpg"
+  },
+  {
     "title": "クロノ・トリガー Orchestra Concert 時を超える旋律",
     "date": "2027-02-11T15:00:00.000Z",
     "ticketUrl": "https://www.jp.square-enix.com/music/sem/page/chrono/concert/30th/",
@@ -64,6 +72,14 @@
     "imageUrl": "https://www.2083.jp/concert/img/20260925shimomura_img.jpg"
   },
   {
+    "title": "UNDERTALE CONCERT ON 3 PIANOS",
+    "date": "2026-09-23T15:00:00.000Z",
+    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
+    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
+    "prefectures": ["神奈川", "広島", "福島", "岩手", "京都"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
+  },
+  {
     "title": "モンスターハンター オーケストラコンサート ～狩猟音楽祭2026～",
     "date": "2026-09-21T15:00:00.000Z",
     "ticketUrl": "https://www.promax.co.jp/mhoc/2026/",
@@ -78,14 +94,6 @@
     "sourceUrl": "https://www.2083.jp/concert/20260921destiny8.html",
     "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260921destiny8_img.jpg"
-  },
-  {
-    "title": "UNDERTALE CONCERT ON 3 PIANOS",
-    "date": "2026-09-20T15:00:00.000Z",
-    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
-    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
-    "prefectures": ["福岡", "神奈川", "広島", "福島", "岩手", "京都"],
-    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
   },
   {
     "title": "Symphonic Poem from 幻想水滸伝 Voyage",
