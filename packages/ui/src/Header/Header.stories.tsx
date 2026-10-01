@@ -12,3 +12,17 @@ export const Basic: StoryObj<typeof Header> = {
     active: "Home",
   },
 };
+
+export const WithSearchValue: StoryObj<typeof Header> = {
+  args: {
+    active: "Home",
+    searchQuery: "FF",
+  },
+};
+
+export const WithoutSearch: StoryObj<typeof Header> = {
+  args: {
+    active: "Home",
+    showSearch: false,
+  },
+};

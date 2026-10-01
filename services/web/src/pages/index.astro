@@ -1,26 +1,11 @@
 ---
-import Card from "@vgmo/ui/src/Card";
-import type { CardProps } from "@vgmo/ui/src/Card";
-import type { ConcertWithMeta } from "../utils/concerts";
-import { listConcerts } from "../utils/concerts";
+import ConcertSearchPage from "../components/ConcertSearchPage";
 import MainLayout from "../layouts/MainLayout.astro";
+import { listConcerts } from "../utils/concerts";
 
-const toCard = (c: ConcertWithMeta): CardProps => ({
-  title: c.title,
-  imageUrl: c.image,
-  date: new Date(c.date).toLocaleDateString("ja-JP"),
-  buttonText: "チケットサイトへ",
-  buttonUrl: c.ticketUrl || "",
-  sourceName: new URL(c.sourceUrl).hostname,
-  sourceUrl: c.sourceUrl,
-  prefectures: c.prefectures,
-});
-
-const concerts = await listConcerts();
+const concerts = await listConcerts({ includePast: true });
 ---
 
-<MainLayout title="vgmo | ゲーム音楽オーケストラまとめ">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    {concerts.map((c) => <Card {...toCard(c)} />)}
-  </div>
+<MainLayout title="vgmo | ゲーム音楽オーケストラまとめ" showHeader={false}>
+  <ConcertSearchPage client:load allConcerts={concerts} />
 </MainLayout>

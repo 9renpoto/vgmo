@@ -26,7 +26,10 @@ const concertKey = (concert: ConcertInfo): string =>
     ? concert.sourceUrl
     : `${concert.title}-${concert.date}`;
 
-const normalizeConcerts = (concerts: ConcertInfo[]): ConcertInfo[] => {
+const normalizeConcerts = (
+  concerts: ConcertInfo[],
+  options?: { includePast?: boolean },
+): ConcertInfo[] => {
   const unique = new Map<string, ConcertInfo>();
   for (const concert of concerts) {
     const key = concertKey(concert);
@@ -37,12 +40,13 @@ const normalizeConcerts = (concerts: ConcertInfo[]): ConcertInfo[] => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return Array.from(unique.values())
-    .filter((c) => new Date(c.date) >= today)
+    .filter((c) => options?.includePast || new Date(c.date) >= today)
     .sort((a, b) => a.date.localeCompare(b.date));
 };
 
 export async function loadConcertsFromFile(
   filePath?: string,
+  options?: { includePast?: boolean },
 ): Promise<ConcertWithMeta[]> {
   const resolvedPath = filePath
     ? filePath.startsWith("file:") || isAbsolute(filePath)
@@ -51,12 +55,14 @@ export async function loadConcertsFromFile(
     : join(process.cwd(), "public/data/concerts.json");
   const text = await readFile(resolvedPath, "utf-8");
   const raw = JSON.parse(text) as ConcertInfo[];
-  return normalizeConcerts(raw).map(toMeta);
+  return normalizeConcerts(raw, options).map(toMeta);
 }
 
-export async function listConcerts(): Promise<ConcertWithMeta[]> {
+export async function listConcerts(options?: {
+  includePast?: boolean;
+}): Promise<ConcertWithMeta[]> {
   const file = process.env.CONCERTS_JSON ?? undefined;
-  return loadConcertsFromFile(file);
+  return loadConcertsFromFile(file, options);
 }
 
 export async function getConcertBySlug(
