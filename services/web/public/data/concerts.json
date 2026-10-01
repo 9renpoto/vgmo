@@ -56,6 +56,22 @@
     "imageUrl": "https://www.2083.jp/concert/img/20261107loungejam_img.jpg"
   },
   {
+    "title": "モンスターハンター オーケストラコンサート ～狩猟音楽祭2026～",
+    "date": "2026-10-30T15:00:00.000Z",
+    "ticketUrl": "https://www.promax.co.jp/mhoc/2026/",
+    "sourceUrl": "https://www.2083.jp/concert/20260823monsterhunter.html",
+    "prefectures": ["福岡", "北海道"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260823monsterhunter_img.jpg"
+  },
+  {
+    "title": "UNDERTALE CONCERT ON 3 PIANOS",
+    "date": "2026-10-02T15:00:00.000Z",
+    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
+    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
+    "prefectures": ["福島", "岩手", "京都"],
+    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
+  },
+  {
     "title": "GAME SYMPHONY JAPAN 63rd Concert\n× 白猫プロジェクト NEW WORLD'S ～12th Anniversary～",
     "date": "2026-09-25T15:00:00.000Z",
     "ticketUrl": "https://tiget.net/events/485958",
@@ -70,22 +86,6 @@
     "sourceUrl": "https://www.2083.jp/concert/20260925shimomura.html",
     "prefectures": ["東京"],
     "imageUrl": "https://www.2083.jp/concert/img/20260925shimomura_img.jpg"
-  },
-  {
-    "title": "UNDERTALE CONCERT ON 3 PIANOS",
-    "date": "2026-09-23T15:00:00.000Z",
-    "ticketUrl": "https://columbia.jp/undertale_3pianos/",
-    "sourceUrl": "https://www.2083.jp/concert/20260914undertale.html",
-    "prefectures": ["神奈川", "広島", "福島", "岩手", "京都"],
-    "imageUrl": "https://www.2083.jp/concert/img/20260914undertale_img.jpg"
-  },
-  {
-    "title": "モンスターハンター オーケストラコンサート ～狩猟音楽祭2026～",
-    "date": "2026-09-21T15:00:00.000Z",
-    "ticketUrl": "https://www.promax.co.jp/mhoc/2026/",
-    "sourceUrl": "https://www.2083.jp/concert/20260823monsterhunter.html",
-    "prefectures": ["兵庫", "福岡", "北海道"],
-    "imageUrl": "https://www.2083.jp/concert/img/20260823monsterhunter_img.jpg"
   },
   {
     "title": "DESTINY8 THE FIRST LIVE",
