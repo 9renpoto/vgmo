@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/preact-vite";
-import type { CardProps } from "./";
-import Card from "./";
+import type { CardProps } from "./index.tsx";
+import Card from "./index.tsx";
 
 const meta: Meta<typeof Card> = {
   component: Card,
