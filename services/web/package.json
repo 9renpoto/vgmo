@@ -17,7 +17,7 @@
     "@vgmo/types": "0.0.1",
     "@vgmo/ui": "0.0.1",
     "astro": "^7.3.5",
-    "preact": "^10.29.0"
+    "preact": "^11.0.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
