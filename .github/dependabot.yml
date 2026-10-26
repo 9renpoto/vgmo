@@ -26,7 +26,6 @@ updates:
         patterns:
           - "astro"
           - "@astrojs/*"
-          - "@codecov/astro-plugin"
       preact:
         patterns:
           - "preact"

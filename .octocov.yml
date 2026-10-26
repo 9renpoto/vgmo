@@ -1,0 +1,16 @@
+coverage:
+  paths:
+    - packages/ui/coverage/lcov.info
+    - services/web/coverage/lcov.info
+    - services/crawler/coverage/lcov.info
+  badge:
+    path: coverage/coverage.svg
+comment:
+  if: is_pull_request
+summary: {}
+report:
+  datastores:
+    - artifact://${GITHUB_REPOSITORY}
+diff:
+  datastores:
+    - artifact://${GITHUB_REPOSITORY}
