@@ -1,6 +1,6 @@
 # vgmo
 
-[![codecov](https://codecov.io/gh/9renpoto/vgmo/graph/badge.svg?token=k4zcp3DlWp)](https://codecov.io/gh/9renpoto/vgmo)
+[![Coverage](https://9renpoto.github.io/vgmo/coverage.svg)](https://github.com/9renpoto/vgmo/actions/workflows/node.js.yml)
 
 Monorepo managed with npm workspaces containing:
 - `packages/ui`: Preact UI component library with Storybook and tests
@@ -63,6 +63,15 @@ npx lefthook install
 - UI package: `npm test -w @vgmo/ui` (Storybook test runner + coverage)
 - Web service: `npm test -w @vgmo/web` (Node.js test runner)
 - Crawler service: `npm test -w @vgmo/crawler` (Node.js test runner; requires Node.js 22+ for `--experimental-strip-types`)
+
+Coverage is aggregated by octocov from the UI, web, and crawler LCOV reports. CI posts a pull request comment and job summary, and publishes the badge to GitHub Pages after successful main tests and quality checks. In repository **Settings → Pages**, set **Source** to **GitHub Actions**. The badge becomes available after the first successful main deployment. See [ADR 0001](docs/adr/0001-octocov-coverage.md).
+
+<details>
+<summary>日本語</summary>
+
+UI・Web・CrawlerのLCOVをoctocovで集計します。CIがPRコメントとジョブサマリーに結果を表示し、mainのテストと品質チェックの成功後にGitHub Pagesへバッジを公開します。リポジトリの **Settings → Pages** で **Source** を **GitHub Actions** に設定します。バッジはmainの初回デプロイ成功後に表示されます。
+
+</details>
 
 ## Linting & Formatting
 - [Biome](https://biomejs.dev/) is used for linting and formatting. Run `npx biome ci .` to check the entire project.

@@ -17,11 +17,7 @@ export default mergeConfig(
         provider: "v8",
         include: ["src/**/*.{ts,tsx}"],
         exclude: ["src/**/*.stories.{ts,tsx}"],
-        reporter: [
-          "text",
-          ["json", { file: "coverage-storybook.json" }],
-          "html",
-        ],
+        reporter: ["text", "lcov", "html"],
       },
       projects: [
         defineProject({
