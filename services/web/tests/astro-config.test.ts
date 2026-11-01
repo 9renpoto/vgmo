@@ -12,3 +12,7 @@ test("astro.config includes preact integration", () => {
   );
   assert.equal(hasPreact, true, "preact integration should be present");
 });
+
+test("astro.config sets the public site URL", () => {
+  assert.equal(config.site, "https://vgmo.9renpoto.win");
+});
