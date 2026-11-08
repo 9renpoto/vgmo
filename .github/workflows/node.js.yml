@@ -30,8 +30,8 @@ jobs:
           cache: "npm"
       - run: npm ci
 
-      - name: Test crawler branch push
-        run: node --test tests/crawler-push.test.mjs
+      - name: Test crawler workflow
+        run: node --test tests/crawler-*.test.mjs
 
       - name: Build
         run: npm run build
