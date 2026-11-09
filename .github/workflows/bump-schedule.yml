@@ -5,8 +5,10 @@ on:
     - cron: "15 3 * * TUE"
 
 jobs:
-  scheduled_bump:
+  scheduled_bump: # zizmor: ignore[self-repository] -- actionlint does not support the alternative syntax yet.
+    permissions:
+      contents: write
+      pull-requests: write
     uses: ./.github/workflows/bump.yml
-    secrets: inherit
     with:
       semver: minor
