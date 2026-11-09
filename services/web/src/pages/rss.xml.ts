@@ -5,11 +5,12 @@ import concerts from "../../public/data/concerts.json";
 const parseDate = (date: string) =>
   new Date(date.replace(/[年月日]/g, (match) => (match === "日" ? "" : "/")));
 
-export const GET = () =>
-  rss({
+export const GET = ({ site }: { site: URL | undefined }) => {
+  if (!site) throw new Error("Astro site URL is required");
+  return rss({
     title: "vgmo",
     description: "VGM-Orchestra はビデオゲーム音楽専門のオーケストラです。",
-    site: "https://vgmo.vercel.app",
+    site,
     items: concerts.map((concert: ConcertInfo) => ({
       link: concert.sourceUrl,
       title: concert.title,
@@ -18,3 +19,4 @@ export const GET = () =>
     })),
     customData: `<language>ja</language>`,
   });
+};

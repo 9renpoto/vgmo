@@ -24,7 +24,7 @@ test("rss.xml", () => {
     feedparser.on("readable", function () {
       const meta = this.meta;
       assert.strictEqual(meta.title, "vgmo");
-      assert.strictEqual(meta.link, "https://vgmo.vercel.app/");
+      assert.strictEqual(meta.link, "https://vgmo.pages.dev/");
 
       for (;;) {
         const item: FeedParser.Item | undefined = this.read();
