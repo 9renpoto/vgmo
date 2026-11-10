@@ -20,7 +20,7 @@
     "@storybook/addon-vitest": "^10.6.5",
     "@storybook/preact-vite": "^10.6.5",
     "@tailwindcss/vite": "^4.3.3",
-    "@vitest/browser-playwright": "^5.0.3",
+    "@vitest/browser-playwright": "^5.1.0",
     "@vitest/coverage-v8": "^5.0.4",
     "storybook": "^10.6.1",
     "tailwindcss": "^4.1.7",
