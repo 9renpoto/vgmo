@@ -29,6 +29,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm ci
+      - name: Verify Astro dependency tree
+        run: npm ls astro --workspace @vgmo/web
 
       - name: Test workflow scripts
         run: node --test tests/*.test.mjs
