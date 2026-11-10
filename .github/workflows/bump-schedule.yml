@@ -6,7 +6,9 @@ on:
 
 jobs:
   scheduled_bump:
-    uses: ./.github/workflows/bump.yml
-    secrets: inherit
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: $/.github/workflows/bump.yml
     with:
       semver: minor

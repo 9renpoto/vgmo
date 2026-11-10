@@ -18,6 +18,10 @@ updates:
     labels:
       - "Type: Maintenance"
     groups:
+      vitest:
+        pattern:
+          - "vitest"
+          - "@vitest/*"
       tailwind:
         patterns:
           - "tailwindcss"
