@@ -19,7 +19,7 @@ updates:
       - "Type: Maintenance"
     groups:
       vitest:
-        pattern:
+        patterns:
           - "vitest"
           - "@vitest/*"
       tailwind:
