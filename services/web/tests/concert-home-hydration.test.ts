@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { test } from "node:test";
 import { build, preview } from "astro";
 import { chromium } from "playwright";
@@ -23,7 +22,10 @@ const upcomingConcert = {
 };
 
 test("the home page retains the correct card details when a concert expires after the build", async (t) => {
-  const workDir = await mkdtemp(join(tmpdir(), "vgmo-home-test-"));
+  // Astro renames prerendered assets into outDir, which must be on the same filesystem.
+  const astroDir = resolve(".astro");
+  await mkdir(astroDir, { recursive: true });
+  const workDir = await mkdtemp(join(astroDir, "vgmo-home-test-"));
   t.after(() => rm(workDir, { recursive: true, force: true }));
 
   const fixturePath = join(workDir, "concerts.json");
