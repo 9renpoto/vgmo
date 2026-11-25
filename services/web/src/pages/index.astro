@@ -4,13 +4,12 @@ import MainLayout from "../layouts/MainLayout.astro";
 import { listConcerts } from "../utils/concerts";
 
 const concerts = await listConcerts({ includePast: true });
-const initialDayStart = new Date().setHours(0, 0, 0, 0);
 ---
 
 <MainLayout title="vgmo | ゲーム音楽オーケストラまとめ" showHeader={false}>
   <ConcertSearchPage
     client:load
     allConcerts={concerts}
-    initialDayStart={initialDayStart}
+    initialDayStart={new Date().setHours(0, 0, 0, 0)}
   />
 </MainLayout>
