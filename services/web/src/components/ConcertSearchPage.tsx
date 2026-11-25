@@ -1,11 +1,12 @@
 import type { CardProps } from "@vgmo/ui/src/Card";
 import Card from "@vgmo/ui/src/Card";
 import Header from "@vgmo/ui/src/Header";
-import { useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useState } from "preact/hooks";
 import type { ConcertWithMeta } from "../utils/concerts";
 
 type Props = {
   allConcerts: ConcertWithMeta[];
+  initialDayStart: number;
 };
 
 const toCardProps = (c: ConcertWithMeta): CardProps => ({
@@ -19,17 +20,24 @@ const toCardProps = (c: ConcertWithMeta): CardProps => ({
   prefectures: c.prefectures,
 });
 
-export default function ConcertSearchPage({ allConcerts }: Props) {
+export default function ConcertSearchPage({
+  allConcerts,
+  initialDayStart,
+}: Props) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => setHydrated(true), []);
 
   const filteredConcerts = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
     if (!q) {
-      // Default view: only future/today concerts
-      return allConcerts.filter((c) => new Date(c.date) >= today);
+      // Keep the initial list aligned with the static HTML during hydration.
+      const dayStart = hydrated
+        ? new Date().setHours(0, 0, 0, 0)
+        : initialDayStart;
+      return allConcerts.filter((c) => Date.parse(c.date) >= dayStart);
     }
 
     // Search across all concerts including past ones
@@ -40,7 +48,7 @@ export default function ConcertSearchPage({ allConcerts }: Props) {
       );
       return titleMatches || prefectureMatches;
     });
-  }, [allConcerts, searchQuery]);
+  }, [allConcerts, hydrated, initialDayStart, searchQuery]);
 
   return (
     <>

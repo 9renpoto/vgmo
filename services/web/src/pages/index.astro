@@ -7,5 +7,9 @@ const concerts = await listConcerts({ includePast: true });
 ---
 
 <MainLayout title="vgmo | ゲーム音楽オーケストラまとめ" showHeader={false}>
-  <ConcertSearchPage client:load allConcerts={concerts} />
+  <ConcertSearchPage
+    client:load
+    allConcerts={concerts}
+    initialDayStart={new Date().setHours(0, 0, 0, 0)}
+  />
 </MainLayout>
